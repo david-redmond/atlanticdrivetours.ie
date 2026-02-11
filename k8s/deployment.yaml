@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: john-hemp-website
+  labels:
+    app: john-hemp-website
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: john-hemp-website
+  template:
+    metadata:
+      labels:
+        app: john-hemp-website
+    spec:
+      containers:
+        - name: web
+          image: john-hemp-website:latest  # Replace with your registry/image:tag
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      # Uncomment if using a private registry
+      # imagePullSecrets:
+      #   - name: regcred

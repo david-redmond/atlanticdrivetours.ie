@@ -1,0 +1,28 @@
+# Optional: use if you want to expose the app via Ingress (requires an Ingress controller)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: john-hemp-website
+  labels:
+    app: john-hemp-website
+  # annotations for your ingress controller, e.g. nginx or cert-manager
+  # annotations:
+  #   cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx  # Change to your ingress class
+  rules:
+    - host: john-hemp.example.com  # Replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: john-hemp-website
+                port:
+                  number: 80
+  # Uncomment for TLS
+  # tls:
+  #   - hosts:
+  #       - john-hemp.example.com
+  #     secretName: john-hemp-website-tls

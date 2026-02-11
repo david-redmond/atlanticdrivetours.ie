@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+:root {
+  /* Deep evergreen brand (no pure black) */
+  --color-brand: #0F2A1D;
+  --color-brand-hover: #143826;
+  --color-ink: #0a1810;
+  --color-ink-muted: #143d20;
+  --color-subtle: #2d5c3a;
+  --color-line: #9fc4a8;
+  --color-ivory: #eef5ef;
+  --color-ivory-muted: #dcebdf;
+  --color-accent: #1b6b38;
+  --color-accent-soft: #4a9b5c;
+  /* Semantic theme (used by components) */
+  --primary: var(--color-brand);
+  --primary-dark: var(--color-brand-hover);
+  --muted: var(--color-ivory-muted);
+  --text-primary: var(--color-ink);
+  --text-secondary: var(--color-ink-muted);
+  --text-muted: var(--color-subtle);
+  --border: var(--color-line);
+  --secondary: var(--color-accent-soft);
+  --footer-text: var(--color-ink-muted);
+  /* Button radius (8–12px) */
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-btn: 10px;
+  /* Fonts (--font-roboto is set by next/font on body) */
+  --font-sans: var(--font-roboto, "Roboto"), "Helvetica Neue", Arial, sans-serif;
+  --font-serif: var(--font-roboto, "Roboto"), "Helvetica Neue", Arial, sans-serif;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-subtle: var(--color-subtle);
+  --color-line: var(--color-line);
+  --color-ivory: var(--color-ivory);
+  --color-ivory-muted: var(--color-ivory-muted);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-brand: var(--color-brand);
+  --color-brand-hover: var(--color-brand-hover);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  letter-spacing: 0.02em;
+}
+
+* {
+  border-color: var(--color-line);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger > * {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.stagger.reveal-visible > *,
+.reveal-visible .stagger > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger.reveal-visible > *:nth-child(1),
+.reveal-visible .stagger > *:nth-child(1) { transition-delay: 40ms; }
+.stagger.reveal-visible > *:nth-child(2),
+.reveal-visible .stagger > *:nth-child(2) { transition-delay: 80ms; }
+.stagger.reveal-visible > *:nth-child(3),
+.reveal-visible .stagger > *:nth-child(3) { transition-delay: 120ms; }
+.stagger.reveal-visible > *:nth-child(4),
+.reveal-visible .stagger > *:nth-child(4) { transition-delay: 160ms; }
+.stagger.reveal-visible > *:nth-child(5),
+.reveal-visible .stagger > *:nth-child(5) { transition-delay: 200ms; }
+.stagger.reveal-visible > *:nth-child(6),
+.reveal-visible .stagger > *:nth-child(6) { transition-delay: 240ms; }
+.stagger.reveal-visible > *:nth-child(7),
+.reveal-visible .stagger > *:nth-child(7) { transition-delay: 280ms; }
+.stagger.reveal-visible > *:nth-child(8),
+.reveal-visible .stagger > *:nth-child(8) { transition-delay: 320ms; }
+.stagger.reveal-visible > *:nth-child(9),
+.reveal-visible .stagger > *:nth-child(9) { transition-delay: 360ms; }
+.stagger.reveal-visible > *:nth-child(10),
+.reveal-visible .stagger > *:nth-child(10) { transition-delay: 400ms; }
+.stagger.reveal-visible > *:nth-child(11),
+.reveal-visible .stagger > *:nth-child(11) { transition-delay: 440ms; }
+.stagger.reveal-visible > *:nth-child(12),
+.reveal-visible .stagger > *:nth-child(12) { transition-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .stagger > * {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+.section-warm {
+  background: var(--color-ivory-muted);
+}
+
+.panel {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 40px rgba(10, 24, 16, 0.08);
+}
+
+.hero-panel {
+  border: 1px solid rgba(15, 42, 29, 0.12);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 18px 40px rgba(10, 24, 16, 0.06);
+}
+
+.accent-rule {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.accent-rule::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 1rem;
+  height: 1px;
+  background: var(--color-accent);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  border-radius: var(--radius-btn);
+  transition: all 150ms ease;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: #ffffff;
+  border: 1px solid var(--color-brand);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--color-brand-hover);
+  border-color: var(--color-brand-hover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.btn-outline {
+  border: 1px solid rgba(15, 42, 29, 0.4);
+  color: var(--color-ink);
+  background: transparent;
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: rgba(15, 42, 29, 0.06);
+  border-color: rgba(15, 42, 29, 0.5);
+  color: var(--color-ink);
+}
+
+.btn-outline:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(15, 42, 29, 0.4);
+  color: var(--color-ink-muted);
+  background: transparent;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: rgba(15, 42, 29, 0.06);
+  border-color: rgba(15, 42, 29, 0.4);
+  color: var(--color-ink);
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Cookie banner: reduced dominance */
+.cookie-banner {
+  background: #F5F6F4;
+  border: 1px solid rgba(15, 42, 29, 0.15);
+  box-shadow: 0 4px 16px rgba(10, 24, 16, 0.06);
+}
+
+.btn-cookie-reject {
+  background: transparent;
+  border: none;
+  color: var(--color-ink-muted);
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--radius-btn);
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.btn-cookie-reject:hover,
+.btn-cookie-reject:focus-visible {
+  color: var(--color-ink);
+  background: rgba(15, 42, 29, 0.06);
+}
+
+.btn-cookie-reject:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}

@@ -1,0 +1,311 @@
+{
+  "common": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact",
+    "experiences": "Experiences",
+    "reviews": "Reviews",
+    "learnMore": "Learn More",
+    "getInTouch": "Get in Touch",
+    "viewAll": "View All",
+    "getAQuote": "Get a Quote",
+    "readMore": "Read More",
+    "sendMessage": "Send Message",
+    "sending": "Sending...",
+    "companyName": "Atlantic Drive Tours"
+  },
+  "home": {
+    "title": "experience the real Ireland",
+    "subtitle": "Providing quality transportation and tour services across Ireland",
+    "viewServices": "Our Tours",
+    "contactUs": "Contact Us",
+    "whyChooseUs": "Why Choose Us",
+    "aboutTitle": "We are an Irish owned business that provides a variety of transportation services throughout the Emerald Isle.",
+    "aboutDescription1": "We offer a wide range of city and airport transfer services for up to 8 people.",
+    "aboutDescription2": "We understand the importance of punctuality and reliability when it comes to transportation and strive to deliver the best customer experience possible.",
+    "tagline": "Our people are what make us drive above the standard",
+    "qualityTitle": "Quality Tours",
+    "reliableService": {
+      "title": "Reliable Service",
+      "description": "Trusted by families and businesses across Ireland for dependable transportation and professional painting services."
+    },
+    "qualityWorkmanship": {
+      "title": "Quality Workmanship",
+      "description": "Our experienced team delivers exceptional results with attention to detail and premium materials."
+    },
+    "customerSatisfaction": {
+      "title": "Customer Satisfaction",
+      "description": "Your satisfaction is our priority. We work closely with you to ensure your needs are met."
+    },
+    "ourServices": "Our Services",
+    "readyToGetStarted": "Ready to Get Started?",
+    "readyToGetStartedDescription": "Contact us today to discuss your needs and get a free quote."
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "We offer a comprehensive range of transportation and tour services throughout Ireland.",
+    "needMoreInfo": "Need More Information?",
+    "needMoreInfoDescription": "Contact us today to discuss your specific requirements and get a personalized quote.",
+    "whatWeOffer": "What We Offer",
+    "viewAllServices": "View All Services",
+    "school-transport": {
+      "title": "School Transport",
+      "description": "Safe and reliable school transport services across Ireland.",
+      "fullDescription": "We provide safe, reliable, and comfortable school transport services throughout Ireland. Our fleet of modern vehicles is maintained to the highest standards, and our experienced drivers are fully licensed and background-checked. We ensure timely pickups and drop-offs, giving parents peace of mind.",
+      "features": [
+        "Fully licensed and insured vehicles",
+        "Background-checked drivers",
+        "GPS tracking for real-time updates",
+        "Regular safety inspections",
+        "Flexible scheduling options"
+      ]
+    },
+    "tourist-trips": {
+      "title": "Tourist Trips",
+      "description": "Explore the beautiful landscapes and attractions of Ireland.",
+      "fullDescription": "Discover the stunning beauty of Ireland with our guided tourist trips. From the dramatic cliffs of Moher to the vibrant streets of Dublin, we offer unforgettable journeys through Ireland's most iconic destinations. Our comfortable coaches and knowledgeable guides ensure a memorable experience.",
+      "features": [
+        "Comfortable air-conditioned coaches",
+        "Experienced tour guides",
+        "Customizable itineraries",
+        "Group and private tours available",
+        "Hotel and restaurant recommendations"
+      ]
+    },
+    "airport-transfers": {
+      "title": "Airport Transfers",
+      "description": "Reliable and comfortable airport transfer services to and from all major Irish airports.",
+      "fullDescription": "Start or end your journey in comfort with our professional airport transfer services. We provide punctual, reliable transfers to and from Dublin, Shannon, Cork, and Knock airports. Our experienced drivers monitor flight schedules to ensure timely pickups, and our modern vehicles accommodate up to 8 passengers with luggage.",
+      "features": [
+        "Flight monitoring for on-time pickups",
+        "Meet and greet service available",
+        "Vehicles for up to 8 passengers",
+        "Luggage space included",
+        "Fixed pricing with no hidden fees"
+      ]
+    },
+    "private-driver-hire": {
+      "title": "Private Driver Hire",
+      "description": "Professional chauffeur services for business, leisure, or special occasions.",
+      "fullDescription": "Enjoy the convenience and luxury of having your own private driver. Perfect for business meetings, special events, or exploring Ireland at your own pace. Our professional drivers are knowledgeable about Ireland's roads and destinations, ensuring a smooth and enjoyable journey. Available for hourly, daily, or multi-day hire.",
+      "features": [
+        "Professional licensed drivers",
+        "Flexible scheduling",
+        "Knowledge of local routes and destinations",
+        "Available for hourly or daily hire",
+        "Discrete and professional service"
+      ]
+    },
+    "corporate-transport": {
+      "title": "Corporate Transport",
+      "description": "Professional transportation solutions for businesses and corporate events.",
+      "fullDescription": "Reliable corporate transport services tailored to your business needs. Whether you need regular employee transport, client transfers, or transportation for corporate events, we provide professional, punctual service. Our fleet includes executive vehicles and larger coaches for group transport, all maintained to the highest standards.",
+      "features": [
+        "Executive vehicle options",
+        "Group transport available",
+        "Regular contract services",
+        "Professional and punctual service",
+        "Flexible scheduling to suit your business"
+      ]
+    },
+    "event-transport": {
+      "title": "Event Transport",
+      "description": "Transportation services for weddings, parties, and special events.",
+      "fullDescription": "Make your special day even more memorable with our event transport services. We provide elegant transportation for weddings, parties, corporate events, and celebrations. Our vehicles are perfect for bridal parties, guests, or group transportation. We work closely with event planners to ensure seamless coordination and timely arrivals.",
+      "features": [
+        "Wedding and party transport",
+        "Elegant vehicle options",
+        "Group transportation available",
+        "Coordination with event planners",
+        "Special occasion packages"
+      ]
+    }
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "Learn more about our business and what drives us",
+    "ourStory": "Our Story",
+    "story1": "With years of experience serving communities across Ireland, we have built a reputation for reliability, quality, and exceptional customer service. What started as a local transportation service has grown into a comprehensive tour and transport business offering a wide range of services throughout the Emerald Isle.",
+    "story2": "Our commitment to excellence is evident in every journey we undertake. Whether we're safely transporting children to school, taking tourists on memorable journeys through Ireland's beautiful landscapes, providing airport transfers, or offering private driver services, we approach each task with dedication and attention to detail.",
+    "ourMission": "Our Mission",
+    "missionDescription": "To provide safe, reliable, and high-quality services that exceed our customers' expectations while contributing positively to our local communities.",
+    "ourValues": "Our Values",
+    "valuesDescription": "Integrity, professionalism, and customer satisfaction are at the heart of everything we do. We believe in building lasting relationships based on trust and quality workmanship.",
+    "whatWeDo": "What We Do",
+    "transportationServices": {
+      "title": "Transportation Services",
+      "description": "From school transport to tourist trips, we provide safe and comfortable transportation solutions across Ireland. Our modern fleet and experienced drivers ensure a reliable service you can trust."
+    },
+    "tourServices": {
+      "title": "Tour & Transportation Services",
+      "description": "From guided tours to private transfers, we provide comprehensive transportation solutions throughout Ireland. Our experienced team ensures comfortable, reliable, and memorable journeys for all our clients."
+    },
+    "readyToWork": "Ready to Work With Us?",
+    "readyToWorkDescription": "Get in touch to discuss your needs and see how we can help."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with us today. We'd love to hear from you!",
+    "getInTouch": "Get in Touch",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "businessHours": "Business Hours",
+    "mondayFriday": "Monday - Friday: 9:00 AM - 6:00 PM",
+    "saturday": "Saturday: 10:00 AM - 4:00 PM",
+    "sunday": "Sunday: Closed",
+    "sendUsMessage": "Send us a Message",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your.email@example.com",
+    "phonePlaceholder": "+353 1 234 5678",
+    "serviceInterest": "Service Interest",
+    "selectService": "Select a service",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your project or inquiry...",
+    "required": "*",
+    "successMessage": "Thank you for your message! We'll get back to you soon.",
+    "errorMessage": "Something went wrong. Please try again later.",
+    "addressLine1": "123 Main Street",
+    "addressLine2": "Dublin, Ireland",
+    "addressLine3": "D01 1234"
+  },
+  "footer": {
+    "description": "Providing quality transportation and tour services across Ireland. From school transport to guided tours, airport transfers to private driver hire.",
+    "contactUs": "Contact us",
+    "location": "Ireland",
+    "phone": "+353 1 234 5678",
+    "email": "info@example.com",
+    "ourServices": "Our Services",
+    "quickLinks": "Quick Links",
+    "makeEnquiry": "Make an Enquiry",
+    "makePayment": "Make a Payment",
+    "credentials": "Credentials",
+    "privacyPolicy": "Privacy Policy",
+    "customerService": "Customer Service",
+    "testimonials": "Testimonials",
+    "termsConditions": "Terms & Conditions",
+    "sitemap": "Sitemap",
+    "locationMap": "Location Map",
+    "pricingNote": "PLEASE NOTE:",
+    "pricingDescription": "We prioritise transparency and simplicity in our pricing, guaranteeing no hidden or surprise fees- no extra charges for driver accommodation, meals, fuel surcharges, car park, or toll fees.",
+    "websiteBy": "Website design & development by:",
+    "followUs": "Follow Us",
+    "allRightsReserved": "All rights reserved."
+  },
+  "serviceDetails": {
+    "breadcrumbHome": "Home",
+    "breadcrumbServices": "Services"
+  },
+  "experiences": {
+    "title": "Our Experiences",
+    "subtitle": "Discover the beauty of Ireland with our carefully crafted tour experiences",
+    "bookNow": "Book Now",
+    "whyChoose": "Why Choose Our Experiences",
+    "comfortableVehicles": "Comfortable Vehicles",
+    "comfortableVehiclesDesc": "Travel in style with our modern, air-conditioned vehicles",
+    "experiencedGuides": "Experienced Guides",
+    "experiencedGuidesDesc": "Learn from knowledgeable local guides who know Ireland best",
+    "personalizedService": "Personalized Service",
+    "personalizedServiceDesc": "Tailored experiences to match your interests and schedule",
+    "readyToExplore": "Ready to Explore Ireland?",
+    "readyToExploreDesc": "Contact us today to book your unforgettable Irish experience",
+    "emerald": {
+      "title": "The Emerald Experience",
+      "description": "A comprehensive tour showcasing Ireland's most iconic landmarks and hidden gems. Experience the breathtaking beauty of the Emerald Isle with visits to historic castles, stunning coastlines, and charming villages.",
+      "duration": "7 Days",
+      "highlights": [
+        "Visit the Cliffs of Moher and Ring of Kerry",
+        "Explore historic Dublin and Galway",
+        "Experience traditional Irish music and culture",
+        "Stay in charming Irish accommodations"
+      ]
+    },
+    "shamrock": {
+      "title": "The Shamrock Experience",
+      "description": "A perfect introduction to Ireland's highlights. This tour combines the best of Irish history, culture, and natural beauty in a convenient package designed for first-time visitors.",
+      "duration": "5 Days",
+      "highlights": [
+        "Guided tours of Dublin and Cork",
+        "Visit to Blarney Castle",
+        "Scenic drives through Irish countryside",
+        "Traditional Irish pub experience"
+      ]
+    },
+    "harp": {
+      "title": "The Harp Experience",
+      "description": "An immersive cultural journey through Ireland's rich heritage. Discover ancient sites, medieval architecture, and the stories that shaped the nation.",
+      "duration": "4 Days",
+      "highlights": [
+        "Explore ancient Celtic sites",
+        "Visit medieval castles and abbeys",
+        "Learn about Irish history and folklore",
+        "Enjoy authentic Irish cuisine"
+      ]
+    },
+    "clover": {
+      "title": "The Clover Experience",
+      "description": "A luxury tour experience for those seeking the finest Ireland has to offer. Premium accommodations, exclusive access, and personalized service throughout your journey.",
+      "duration": "10 Days",
+      "highlights": [
+        "Luxury accommodations and dining",
+        "Private guided tours",
+        "Exclusive access to private estates",
+        "Personalized itinerary planning"
+      ]
+    }
+  },
+  "reviews": {
+    "title": "Customer Reviews",
+    "subtitle": "See what our customers have to say about their experiences with us",
+    "averageRating": "5.0",
+    "basedOnReviews": "Based on {{count}} customer reviews",
+    "shareExperience": "Share Your Experience",
+    "shareExperienceDesc": "We'd love to hear about your experience with us. Leave a review and help others discover the best of Ireland.",
+    "leaveReview": "Leave a Review",
+    "viewServices": "View Our Services",
+    "review1": {
+      "name": "Sarah Mitchell",
+      "location": "Dublin, Ireland",
+      "date": "2 weeks ago",
+      "service": "The Emerald Experience",
+      "comment": "Absolutely fantastic experience! Our guide was knowledgeable and friendly, and we saw so many beautiful places. The accommodations were excellent and the itinerary was perfectly planned. Highly recommend!"
+    },
+    "review2": {
+      "name": "Michael O'Brien",
+      "location": "Cork, Ireland",
+      "date": "1 month ago",
+      "service": "Airport Transfers",
+      "comment": "Professional, punctual, and reliable service. The driver was courteous and the vehicle was spotless. Made our trip stress-free from start to finish."
+    },
+    "review3": {
+      "name": "Emma Thompson",
+      "location": "London, UK",
+      "date": "3 weeks ago",
+      "service": "The Shamrock Experience",
+      "comment": "This was our first trip to Ireland and it exceeded all expectations! The tour was well-organized, the guide was amazing, and we fell in love with the country. Will definitely book again."
+    },
+    "review4": {
+      "name": "James Wilson",
+      "location": "Belfast, Northern Ireland",
+      "date": "1 week ago",
+      "service": "Private Driver Hire",
+      "comment": "Used their private driver service for a business trip. Excellent service, very professional, and the driver knew all the best routes. Will use again for future trips."
+    },
+    "review5": {
+      "name": "Lisa Anderson",
+      "location": "Galway, Ireland",
+      "date": "2 months ago",
+      "service": "The Harp Experience",
+      "comment": "A wonderful cultural journey through Ireland's history. The guide was passionate and knowledgeable, and we learned so much. The accommodations were charming and authentic."
+    },
+    "review6": {
+      "name": "David Murphy",
+      "location": "Limerick, Ireland",
+      "date": "3 weeks ago",
+      "service": "Golf Transfers",
+      "comment": "Perfect service for our golf trip. Punctual, comfortable vehicles, and the driver was very accommodating with our schedule. Made our golfing holiday seamless."
+    }
+  }
+}

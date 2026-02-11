@@ -1,0 +1,306 @@
+{
+  "common": {
+    "home": "Baile",
+    "services": "Seirbhísí",
+    "about": "Fúinn",
+    "contact": "Teagmháil",
+    "experiences": "Taithí",
+    "reviews": "Léirmheasanna",
+    "learnMore": "Tuilleadh Eolais",
+    "getInTouch": "Déan Teagmháil Linn",
+    "viewAll": "Féach ar Gach",
+    "getAQuote": "Faigh Meáchain",
+    "readMore": "Léigh Tuilleadh",
+    "sendMessage": "Seol Teachtaireacht",
+    "sending": "Á sheoladh...",
+    "companyName": "Atlantic Drive Tours"
+  },
+  "home": {
+    "title": "Fáilte go dtí ár Seirbhísí",
+    "subtitle": "Ag soláthar seirbhísí iompair agus turas ar ardchaighdeán ar fud na hÉireann",
+    "viewServices": "Féach ar ár Seirbhísí",
+    "contactUs": "Déan Teagmháil Linn",
+    "whyChooseUs": "Cén Fáth Muid a Roghnú",
+    "reliableService": {
+      "title": "Seirbhís Iontaofa",
+      "description": "Muinteartha ag teaghlaigh agus gnólachtaí ar fud na hÉireann le haghaidh seirbhísí iompair iontaofa agus seirbhísí péinteála gairmiúla."
+    },
+    "qualityWorkmanship": {
+      "title": "Saothar Ardchaighdeáin",
+      "description": "Soláthraíonn ár bhfoireann taithí torthaí eisceachtúla le aird ar mhionsonraí agus ábhair phréimheacha."
+    },
+    "customerSatisfaction": {
+      "title": "Sásamh an Chustaiméara",
+      "description": "Is é do shásamh ár bpríomhthosaíocht. Oibrímid go dlúth leat chun a chinntiú go gcomhlíontar do riachtanais."
+    },
+    "ourServices": "ár Seirbhísí",
+    "readyToGetStarted": "Réidh chun Tosú?",
+    "readyToGetStartedDescription": "Déan teagmháil linn inniu chun do riachtanais a phlé agus meáchain saor in aisce a fháil."
+  },
+  "services": {
+    "title": "ár Seirbhísí",
+    "subtitle": "Tairgimid raon cuimsitheach seirbhísí iompair agus turas ar fud na hÉireann.",
+    "needMoreInfo": "An bhfuil Tuilleadh Eolais de Dhíth?",
+    "needMoreInfoDescription": "Déan teagmháil linn inniu chun do riachtanais ar leith a phlé agus meáchain pearsantaithe a fháil.",
+    "whatWeOffer": "Cad a Thairgimid",
+    "viewAllServices": "Féach ar Gach Seirbhís",
+    "school-transport": {
+      "title": "Iompar Scoile",
+      "description": "Seirbhísí iompair scoile sábhailte agus iontaofa ar fud na hÉireann.",
+      "fullDescription": "Soláthraímid seirbhísí iompair scoile sábhailte, iontaofa agus compordacha ar fud na hÉireann. Tá ár bhflít feithiclí nua-aimseartha cothabháilte go hardchaighdeán, agus tá ár dtiománaithe taithí láncheadúnaithe agus seiceáilte cúlra. Cinntímid picéalacha agus titim amach in am, ag tabhairt suaimhneas intinne do thuismitheoirí.",
+      "features": [
+        "Feithiclí láncheadúnaithe agus árachas",
+        "Tiománaithe seiceáilte cúlra",
+        "Rianú GPS le nuashonruithe fíor-ama",
+        "Cigireachtaí sábhálachta rialta",
+        "Roghanna sceidealú solúbtha"
+      ]
+    },
+    "tourist-trips": {
+      "title": "Turais Turasóireachta",
+      "description": "Déan iniúchadh ar thírdhreacha álainn agus áiteanna taitneamhacha na hÉireann.",
+      "fullDescription": "Faigh amach áilleacht iontach na hÉireann lenár dturais turasóireachta treoraithe. Ó aillte drámata Moher go sráideanna beoga Bhaile Átha Cliath, tairgimid turais neamhdhearmadacha trí cheann scríbe is íocónacha na hÉireann. Cinntíonn ár gcóistí compordacha agus ár dtreoraithe eolacha taithí neamhdhearmadach.",
+      "features": [
+        "Cóistí compordacha aer-chóirithe",
+        "Treoraithe turas taithí",
+        "Cláir ama in-athraithe",
+        "Turais grúpa agus príobháideacha ar fáil",
+        "Moladh óstán agus bialann"
+      ]
+    },
+    "airport-transfers": {
+      "title": "Aistrithe Aerfoirt",
+      "description": "Seirbhísí aistrithe aerfoirt iontaofa agus compordacha go dtí agus ó gach príomh-aerfort Éireannach.",
+      "fullDescription": "Cuir tús nó deireadh le do thuras go compordach lenár seirbhísí aistrithe aerfoirt gairmiúla. Soláthraímid aistrithe in am, iontaofa go dtí agus ó aerfoirt Bhaile Átha Cliath, an tSionainn, Chorcaí, agus Chnoc. Monatóireann ár dtiománaithe taithí sceidil eitilte chun picéalacha in am a chinntiú, agus freastalaíonn ár bhfeithiclí nua-aimseartha ar suas le 8 bpassaí le bagáiste.",
+      "features": [
+        "Monatóireacht eitilte le haghaidh picéalacha in am",
+        "Seirbhís bualadh agus fáilte ar fáil",
+        "Feithiclí do suas le 8 bpassaí",
+        "Spás bagáiste san áireamh",
+        "Praghsáil shocraithe gan táillí folaithe"
+      ]
+    },
+    "private-driver-hire": {
+      "title": "Fostú Tiománaí Príobháideach",
+      "description": "Seirbhísí seafóid gairmiúla le haghaidh gnó, fóillíochta, nó ócáidí speisialta.",
+      "fullDescription": "Bain sult as an áise agus sócmhainn a bheith agat do thiománaí príobháideach féin. Foirfe le haghaidh cruinnithe gnó, ócáidí speisialta, nó chun Éire a fhiosrú ar do luas féin. Tá ár dtiománaithe gairmiúla eolach ar bhóithre agus cheann scríbe na hÉireann, ag cinntiú turais réidh agus taitneamhach. Ar fáil le haghaidh fostaithe uaireanta, laethúla, nó il-lá.",
+      "features": [
+        "Tiománaithe gairmiúla ceadúnaithe",
+        "Sceidealú solúbtha",
+        "Eolas ar bhealaí agus cheann scríbe áitiúla",
+        "Ar fáil le haghaidh fostaithe uaireanta nó laethúla",
+        "Seirbhís discréideach agus ghairmiúil"
+      ]
+    },
+    "corporate-transport": {
+      "title": "Iompar Corparáideach",
+      "description": "Réitigh iompair gairmiúla do ghnólachtaí agus ócáidí corparáideacha.",
+      "fullDescription": "Seirbhísí iompair corparáideacha iontaofa oiriúnaithe do do riachtanais gnó. Cibé acu go bhfuil iompar fostaí rialta, aistrithe cliant, nó iompar le haghaidh ócáidí corparáideacha de dhíth ort, soláthraímid seirbhís ghairmiúil, in am. Áiríonn ár bhflít feithiclí feidhmiúcháin agus cóistí níos mó le haghaidh iompair grúpa, gach ceann cothabháilte go hardchaighdeán.",
+      "features": [
+        "Roghanna feithiclí feidhmiúcháin",
+        "Iompar grúpa ar fáil",
+        "Seirbhísí conartha rialta",
+        "Seirbhís ghairmiúil agus in am",
+        "Sceidealú solúbtha chun teacht le do ghnó"
+      ]
+    },
+    "event-transport": {
+      "title": "Iompar Ócáide",
+      "description": "Seirbhísí iompair le haghaidh bainisí, cóisirí, agus ócáidí speisialta.",
+      "fullDescription": "Déan do lá speisialta níos cuimhneacháin fós lenár seirbhísí iompair ócáide. Soláthraímid iompar galánta le haghaidh bainisí, cóisirí, ócáidí corparáideacha, agus ceiliúradh. Tá ár bhfeithiclí foirfe le haghaidh cóisirí bainise, aíonna, nó iompair grúpa. Oibrímid go dlúth le pleanálaithe ócáidí chun comhordú gan strus agus teachtaí in am a chinntiú.",
+      "features": [
+        "Iompar bainise agus cóisire",
+        "Roghanna feithiclí galánta",
+        "Iompar grúpa ar fáil",
+        "Comhordú le pleanálaithe ócáidí",
+        "Pacáistí ócáide speisialta"
+      ]
+    }
+  },
+  "about": {
+    "title": "Fúinn",
+    "subtitle": "Foghlaim tuilleadh faoinár ngnó agus cad a spreagann muid",
+    "ourStory": "ár Scéal",
+    "story1": "Le blianta taithí ag freastal ar phobail ar fud na hÉireann, tá cáil tógtha againn as iontaofacht, caighdeán, agus seirbhís chustaiméara eisceachtúil. An rud a thosaigh mar sheirbhís iompair áitiúil, tá sé tar éis fás ina ghnó turas agus iompair cuimsitheach a thairgeann raon leathan seirbhísí ar fud an Oileáin Emerald.",
+    "story2": "Tá ár gcomhmitment don fheabhas le feiceáil i ngach turas a ghlacaimid. Cibé acu go bhfuil muid ag iompar leanaí go slán ar scoil, ag tabhairt turasóirí ar thurais chuimhneacháin trí thírdhreacha álainn na hÉireann, ag soláthar aistrithe aerfoirt, nó ag tairiscint seirbhísí tiománaí príobháideach, déanaimid gach tasc le tiomantas agus aird ar mhionsonraí.",
+    "ourMission": "ár Misean",
+    "missionDescription": "Seirbhísí sábhailte, iontaofa agus ar ardchaighdeán a sholáthar a sháraíonn ionchais ár gcustaiméirí agus ag cur go dearfach lenár bpobail áitiúla.",
+    "ourValues": "ár Luachanna",
+    "valuesDescription": "Tá ionracas, gairmiúlacht agus sásamh an chustaiméara i gcroílár gach rud a dhéanaimid. Creidimid i gcaidrimh buana a thógáil bunaithe ar iontaofacht agus saothar ardchaighdeáin.",
+    "whatWeDo": "Cad a Dhéanaimid",
+    "transportationServices": {
+      "title": "Seirbhísí Iompair",
+      "description": "Ó iompar scoile go turais turasóireachta, soláthraímid réitigh iompair sábhailte agus compordacha ar fud na hÉireann. Cinntíonn ár bhflít nua-aimseartha agus ár dtiománaithe taithí seirbhís iontaofa ar féidir leat muinín a bheith agat aisti."
+    },
+    "tourServices": {
+      "title": "Seirbhísí Turas & Iompair",
+      "description": "Ó thurais treoraithe go haistrithe príobháideacha, soláthraímid réitigh iompair cuimsitheacha ar fud na hÉireann. Cinntíonn ár bhfoireann taithí turais chompordacha, iontaofa agus cuimhneacháin do gach ceann dár gcliaint."
+    },
+    "readyToWork": "Réidh chun Oibriú Linn?",
+    "readyToWorkDescription": "Déan teagmháil linn chun do riachtanais a phlé agus féach conas is féidir linn cabhrú."
+  },
+  "contact": {
+    "title": "Déan Teagmháil Linn",
+    "subtitle": "Déan teagmháil linn inniu. Ba bhreá linn cloisint uait!",
+    "getInTouch": "Déan Teagmháil",
+    "email": "Ríomhphost",
+    "phone": "Fón",
+    "address": "Seoladh",
+    "businessHours": "Uaireanta Gnó",
+    "mondayFriday": "Luan - Aoine: 9:00 - 18:00",
+    "saturday": "Satharn: 10:00 - 16:00",
+    "sunday": "Dé Domhnaigh: Dúnta",
+    "sendUsMessage": "Seol Teachtaireacht Chugainn",
+    "name": "Ainm",
+    "namePlaceholder": "D'ainm",
+    "emailPlaceholder": "do.ríomhphost@sampla.com",
+    "phonePlaceholder": "+353 1 234 5678",
+    "serviceInterest": "Suim i Seirbhís",
+    "selectService": "Roghnaigh seirbhís",
+    "message": "Teachtaireacht",
+    "messagePlaceholder": "Inis dúinn faoi do thionscadal nó do cheist...",
+    "required": "*",
+    "successMessage": "Go raibh maith agat as do theachtaireacht! Beidh muid ag teacht ar ais chugat go luath.",
+    "errorMessage": "Tharla rud éigin mícheart. Déan iarracht arís níos déanaí le do thoil.",
+    "addressLine1": "123 Sráid Phríomh",
+    "addressLine2": "Baile Átha Cliath, Éire",
+    "addressLine3": "D01 1234"
+  },
+  "footer": {
+    "description": "Ag soláthar seirbhísí iompair agus turas ar ardchaighdeán ar fud na hÉireann. Ó iompar scoile go turais treoraithe, aistrithe aerfoirt go fostú tiománaí príobháideach.",
+    "contactUs": "Déan teagmháil linn",
+    "location": "Éire",
+    "phone": "+353 1 234 5678",
+    "email": "info@example.com",
+    "ourServices": "Ár Seirbhísí",
+    "quickLinks": "Naisc Tapa",
+    "makeEnquiry": "Déan Fiosrúchán",
+    "makePayment": "Déan Íocaíocht",
+    "credentials": "Teidil",
+    "privacyPolicy": "Polasaí Príobháideachta",
+    "customerService": "Seirbhís do Chustaiméirí",
+    "testimonials": "Teistiméireachtaí",
+    "termsConditions": "Téarmaí agus Coinníollacha",
+    "sitemap": "Léarscáil an tSuímh",
+    "locationMap": "Léarscáil Suíomh",
+    "pricingNote": "TABHAIR FAOI DEARA:",
+    "pricingDescription": "Tugaimid tosaíocht do thrédhearcacht agus simplíocht inár bpraghsáil, ag ráthaíocht nach mbeidh aon táillí folaithe nó iontas ann - gan aon mhuirir bhreise ar lóistín tiománaí, béilí, muirir bhreosla, páirc charranna, nó táillí tollbhealaigh.",
+    "websiteBy": "Dearadh agus forbairt láithreán gréasáin:",
+    "followUs": "Lean Muid",
+    "allRightsReserved": "Gach ceart ar cosaint."
+  },
+  "serviceDetails": {
+    "breadcrumbHome": "Baile",
+    "breadcrumbServices": "Seirbhísí"
+  },
+  "experiences": {
+    "title": "Ár dTaithí",
+    "subtitle": "Faigh amach áilleacht na hÉireann lenár dtaithí turas cúramach",
+    "bookNow": "Cuir in áirithe Anois",
+    "whyChoose": "Cén Fáth ár dTaithí a Roghnú",
+    "comfortableVehicles": "Feithiclí Compordacha",
+    "comfortableVehiclesDesc": "Taisteal go stílúil lenár bhfeithiclí nua-aimseartha aer-chóirithe",
+    "experiencedGuides": "Treoraithe Taithí",
+    "experiencedGuidesDesc": "Foghlaim ó threoraithe áitiúla eolacha a bhfuil eolas acu ar Éirinn",
+    "personalizedService": "Seirbhís Pearsantaithe",
+    "personalizedServiceDesc": "Taithí oiriúnaithe chun teacht le do chuid suimeanna agus do sceideal",
+    "readyToExplore": "Réidh chun Éire a Fhiosrú?",
+    "readyToExploreDesc": "Déan teagmháil linn inniu chun do thaithí Éireannach neamhdhearmadach a chur in áirithe",
+    "emerald": {
+      "title": "An Taithí Emerald",
+      "description": "Turas cuimsitheach a thaispeánann na sainchomharthaí is íocónacha agus na seoda folaithe in Éirinn. Bíodh taithí agat ar áilleacht neamhchreidte an Oileáin Emerald le cuairteanna ar chaisleáin stairiúla, cóstaí iontacha, agus sráidbhailte mealltacha.",
+      "duration": "7 Lá",
+      "highlights": [
+        "Cuairt ar Aillte an Mhothair agus Fáinne Chiarraí",
+        "Déan iniúchadh ar Bhaile Átha Cliath agus Gaillimh stairiúla",
+        "Taithí ar cheol agus ar chultúr traidisiúnta na hÉireann",
+        "Fan i lóistín mealltach Éireannach"
+      ]
+    },
+    "shamrock": {
+      "title": "An Taithí Shamrock",
+      "description": "Réamhchur foirfe ar bhuaicphointí na hÉireann. Comhcheanglaíonn an turas seo an chuid is fearr de stair, cultúr agus áilleacht nádúrtha na hÉireann i bpacáiste áisiúil atá deartha do chuairteoirí den chéad uair.",
+      "duration": "5 Lá",
+      "highlights": [
+        "Turais treoraithe de Bhaile Átha Cliath agus Corcaigh",
+        "Cuairt ar Chaisleán Blarney",
+        "Tiomáintí radharcacha trí thuath na hÉireann",
+        "Taithí pub traidisiúnta Éireannach"
+      ]
+    },
+    "harp": {
+      "title": "An Taithí Harp",
+      "description": "Turas cultúrtha tumtha trí oidhreacht shaibhir na hÉireann. Faigh amach láithreacha ársa, ailtireacht mheánaoiseach, agus na scéalta a mhúnlaigh an náisiún.",
+      "duration": "4 Lá",
+      "highlights": [
+        "Déan iniúchadh ar láithreacha Ceilteacha ársa",
+        "Cuairt ar chaisleáin agus mainistreacha meánaoiseacha",
+        "Foghlaim faoi stair agus béaloideas na hÉireann",
+        "Bain taitneamh as bia Éireannach barántúil"
+      ]
+    },
+    "clover": {
+      "title": "An Taithí Clover",
+      "description": "Taithí turas sócmhainne do dhaoine atá ag lorg an rud is fearr a thairgeann Éire. Lóistín príomhchaighdeán, rochtain eisiach, agus seirbhís pearsantaithe ar feadh do thurais.",
+      "duration": "10 Lá",
+      "highlights": [
+        "Lóistín agus béile sócmhainne",
+        "Turais treoraithe príobháideacha",
+        "Rochtain eisiach ar eastáit phríobháideacha",
+        "Pleanáil cláir ama pearsantaithe"
+      ]
+    }
+  },
+  "reviews": {
+    "title": "Léirmheasanna Custaiméara",
+    "subtitle": "Féach cad a deir ár gcustaiméirí faoina dtaithí linn",
+    "averageRating": "5.0",
+    "basedOnReviews": "Bunaithe ar {{count}} léirmheas custaiméara",
+    "shareExperience": "Roinn do Thaithí",
+    "shareExperienceDesc": "Ba bhreá linn cloisint faoi do thaithí linn. Fág léirmheas agus cabhraigh le daoine eile an chuid is fearr d'Éirinn a fháil amach.",
+    "leaveReview": "Fág Léirmheas",
+    "viewServices": "Féach ar ár Seirbhísí",
+    "review1": {
+      "name": "Sarah Mitchell",
+      "location": "Baile Átha Cliath, Éire",
+      "date": "2 seachtaine ó shin",
+      "service": "An Taithí Emerald",
+      "comment": "Taithí thar barr! Bhí ár dtreoraí eolach agus cairdiúil, agus chonaiceamar go leor áiteanna álainn. Bhí na lóistín den scoth agus bhí an clár ama pleanáilte go foirfe. Molaim go hard!"
+    },
+    "review2": {
+      "name": "Michael O'Brien",
+      "location": "Corcaigh, Éire",
+      "date": "1 mhí ó shin",
+      "service": "Aistrithe Aerfoirt",
+      "comment": "Seirbhís ghairmiúil, in am agus iontaofa. Bhí an tiománaí cuibheasach agus bhí an fheithicil gan smál. Rinne sé ár dturas gan strus ó thús go deireadh."
+    },
+    "review3": {
+      "name": "Emma Thompson",
+      "location": "Londain, an Ríocht Aontaithe",
+      "date": "3 seachtaine ó shin",
+      "service": "An Taithí Shamrock",
+      "comment": "Ba é seo ár gcéad turas go hÉirinn agus sháraigh sé gach ionchais! Bhí an turas eagraithe go maith, bhí an treoraí iontach, agus thit muid i ngrá leis an tír. Cuirfidh muid in áirithe arís cinnte."
+    },
+    "review4": {
+      "name": "James Wilson",
+      "location": "Béal Feirste, Tuaisceart Éireann",
+      "date": "1 seachtain ó shin",
+      "service": "Fostú Tiománaí Príobháideach",
+      "comment": "D'úsáid muid a seirbhís tiománaí príobháideach le haghaidh turas gnó. Seirbhís den scoth, an-ghairmiúil, agus bhí eolas ag an tiománaí ar na bealaí is fearr. Úsáidfidh muid arís le haghaidh turais amach anseo."
+    },
+    "review5": {
+      "name": "Lisa Anderson",
+      "location": "Gaillimh, Éire",
+      "date": "2 mhí ó shin",
+      "service": "An Taithí Harp",
+      "comment": "Turas cultúrtha iontach trí stair na hÉireann. Bhí an treoraí paiseanta agus eolach, agus d'fhoghlaim muid go leor. Bhí na lóistín mealltach agus barántúil."
+    },
+    "review6": {
+      "name": "David Murphy",
+      "location": "Luimneach, Éire",
+      "date": "3 seachtaine ó shin",
+      "service": "Aistrithe Galf",
+      "comment": "Seirbhís foirfe dár dturas galf. In am, feithiclí compordacha, agus bhí an tiománaí an-acomóideach lenár sceideal. Rinne sé ár laethanta saoire galf gan strus."
+    }
+  }
+}
