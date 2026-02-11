@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
 import AnalyticsListener from "@/components/AnalyticsListener";
 import CookiePreferencesLink from "@/components/CookiePreferencesLink";
+import { TranslationProvider } from "@/contexts/TranslationContext";
 import {
   baseUrl,
   companyName,
@@ -62,8 +64,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${roboto.className} antialiased`}>
-        <AnalyticsListener />
-        <div className="min-h-screen bg-ivory">
+        <TranslationProvider>
+          <Suspense fallback={null}>
+            <AnalyticsListener />
+          </Suspense>
+          <div className="min-h-screen bg-ivory">
           <header className="bg-ivory">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
               <Link href="/" className="flex shrink-0">
@@ -144,7 +149,8 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
-        <CookieBanner />
+          <CookieBanner />
+        </TranslationProvider>
       </body>
     </html>
   );

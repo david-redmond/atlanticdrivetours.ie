@@ -1,5 +1,5 @@
-# Use a lightweight Node.js image as base
-FROM node:20-alpine
+# Use a lightweight Node.js image as base (bookworm-slim if alpine pull fails due to DNS/registry)
+FROM node:20-bookworm-slim
 
 # Set the working directory in the container
 WORKDIR /usr/src

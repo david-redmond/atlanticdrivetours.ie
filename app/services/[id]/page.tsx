@@ -1,18 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { getServices, serviceIds, ServiceId } from '@/data/services';
 
-interface ServiceDetailsPageProps {
-  params: { id: string };
-}
-
-export default function ServiceDetailsPage({
-  params,
-}: ServiceDetailsPageProps) {
+export default function ServiceDetailsPage() {
   const { t, locale } = useTranslation();
-  const { id } = params;
+  const params = useParams();
+  const id = typeof params?.id === 'string' ? params.id : '';
   
   const services = getServices(locale);
   const service = services.find((s) => s.id === id);

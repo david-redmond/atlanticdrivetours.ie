@@ -14,9 +14,13 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 export function TranslationProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(() => {
     if (typeof window === 'undefined') return defaultLocale;
-    const savedLocale = localStorage.getItem('locale') as Locale | null;
-    if (savedLocale && (savedLocale === 'en' || savedLocale === 'ga')) {
-      return savedLocale;
+    try {
+      const savedLocale = localStorage.getItem('locale') as Locale | null;
+      if (savedLocale && (savedLocale === 'en' || savedLocale === 'ga')) {
+        return savedLocale;
+      }
+    } catch {
+      // localStorage unavailable (e.g. private mode)
     }
     return defaultLocale;
   });
@@ -24,7 +28,11 @@ export function TranslationProvider({ children }: { children: React.ReactNode })
   // Save locale to localStorage when it changes
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale);
-    localStorage.setItem('locale', newLocale);
+    try {
+      localStorage.setItem('locale', newLocale);
+    } catch {
+      // localStorage unavailable
+    }
   };
 
   const translate = (key: string, params?: TranslationParams): string => {
