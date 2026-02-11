@@ -13,15 +13,16 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 type ConsentState = "granted" | "denied" | null;
 
+function getInitialConsent(): ConsentState {
+  if (typeof window === "undefined") return null;
+  return getStoredConsent();
+}
+
 export default function CookieBanner() {
-  const [consent, setConsent] = useState<ConsentState>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [consent, setConsent] = useState<ConsentState>(getInitialConsent);
+  const [isOpen, setIsOpen] = useState(() => getInitialConsent() === null);
 
   useEffect(() => {
-    const stored = getStoredConsent();
-    setConsent(stored);
-    setIsOpen(stored === null);
-
     const handlePreferences = () => {
       clearStoredConsent();
       setConsent(null);

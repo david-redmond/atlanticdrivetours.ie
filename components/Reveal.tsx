@@ -7,19 +7,18 @@ type RevealProps = {
   className?: string;
 };
 
+function getInitialVisible(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export default function Reveal({ children, className }: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(getInitialVisible);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) {
-      setVisible(true);
-      return;
-    }
+    if (getInitialVisible()) return;
 
     const node = ref.current;
     if (!node) return;

@@ -29,7 +29,7 @@ export default function GalleryPage() {
           </h1>
           <p className="mt-4 text-sm text-neutral-700">
             A glimpse of the routes and regions we cover. Expect a calm, refined travel
-            experience with Ireland's best scenery at its heart.
+            experience with Ireland&apos;s best scenery at its heart.
           </p>
         </div>
       </Reveal>
