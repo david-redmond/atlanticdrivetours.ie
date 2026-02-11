@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Roboto } from "next/font/google";
 import "./globals.css";
@@ -65,8 +66,15 @@ export default function RootLayout({
         <div className="min-h-screen bg-ivory">
           <header className="bg-ivory">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-              <Link href="/" className="text-lg font-semibold uppercase tracking-[0.2em]">
-                {companyName}
+              <Link href="/" className="flex shrink-0">
+                <Image
+                  src="/logo.png"
+                  alt={companyName}
+                  width={260}
+                  height={73}
+                  className="h-[62px] w-auto object-contain md:h-[73px]"
+                  priority
+                />
               </Link>
               <nav className="hidden items-center gap-8 text-sm uppercase tracking-widest md:flex">
                 {navLinks.map((link) => (
