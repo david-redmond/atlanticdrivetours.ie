@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useTranslation } from '@/contexts/TranslationContext';
-import { getServices } from '@/data/services';
+import { allTours } from '@/data/tours';
+import { phone, serviceArea } from '@/lib/constants';
+import SocialLinks from '@/components/SocialLinks';
 
 export default function Footer() {
-  const { t, locale } = useTranslation();
-  const services = getServices(locale);
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-white text-[var(--footer-text)] border-t border-[var(--border)]">
@@ -17,29 +18,30 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4 text-[var(--text-primary)]">
               {t('footer.contactUs')}
             </h3>
-            <div className="space-y-2 text-[var(--text-secondary)] text-sm">
+            <div className="space-y-4 text-[var(--text-secondary)] text-sm">
               <p>
                 <strong>{t('common.companyName')}</strong>
                 <br />
-                {t('footer.location')}
+                {serviceArea}
               </p>
               <p>
-                <strong>Call:</strong>{' '}
                 <a
-                  href="tel:+353123456789"
-                  className="text-[var(--primary)] hover:underline"
+                  href={`tel:${phone.replace(/\s/g, '')}`}
+                  className="text-[#0F2A1D] hover:text-[#143826] transition-colors"
                 >
-                  {t('footer.phone')}
+                  {phone}
                 </a>
                 <br />
-                <strong>Email:</strong>{' '}
                 <a
                   href="mailto:info@example.com"
-                  className="text-[var(--primary)] hover:underline"
+                  className="text-[#0F2A1D] hover:text-[#143826] transition-colors"
                 >
                   {t('footer.email')}
                 </a>
               </p>
+              <div className="pt-1">
+                <SocialLinks />
+              </div>
             </div>
           </div>
 
@@ -49,13 +51,13 @@ export default function Footer() {
               {t('footer.ourServices')}
             </h4>
             <div className="space-y-2 text-sm">
-              {services.slice(0, 6).map((service) => (
+              {allTours.slice(0, 6).map((tour) => (
                 <Link
-                  key={service.id}
-                  href={`/services/${service.id}`}
+                  key={tour.slug}
+                  href={`/tours/${tour.slug}`}
                   className="block text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
                 >
-                  {service.title}
+                  {tour.title}
                 </Link>
               ))}
             </div>
@@ -68,7 +70,7 @@ export default function Footer() {
             </h4>
             <div className="space-y-2 text-sm">
               <Link
-                href="/contact"
+                href="/reservation"
                 className="block text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
               >
                 {t('footer.makeEnquiry')}
@@ -86,7 +88,7 @@ export default function Footer() {
                 {t('footer.credentials')}
               </Link>
               <Link
-                href="/contact"
+                href="/privacy"
                 className="block text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
               >
                 {t('footer.privacyPolicy')}
@@ -107,7 +109,7 @@ export default function Footer() {
                 {t('footer.testimonials')}
               </Link>
               <Link
-                href="/about"
+                href="/terms"
                 className="block text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors"
               >
                 {t('footer.termsConditions')}

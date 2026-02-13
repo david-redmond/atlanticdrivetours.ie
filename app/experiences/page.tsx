@@ -116,7 +116,7 @@ export default function ExperiencesPage() {
                   ))}
                 </ul>
                 <Link
-                  href="/contact"
+                  href="/reservation"
                   className="inline-block w-full text-center bg-[var(--primary)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[var(--primary-dark)] transition-colors"
                 >
                   {t('experiences.bookNow')}

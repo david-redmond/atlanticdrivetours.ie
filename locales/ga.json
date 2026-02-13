@@ -6,6 +6,8 @@
     "contact": "Teagmháil",
     "experiences": "Taithí",
     "reviews": "Léirmheasanna",
+    "dayTours": "Turais Lae",
+    "tours": "Turais",
     "learnMore": "Tuilleadh Eolais",
     "getInTouch": "Déan Teagmháil Linn",
     "viewAll": "Féach ar Gach",
@@ -18,7 +20,7 @@
   "home": {
     "title": "Fáilte go dtí ár Seirbhísí",
     "subtitle": "Ag soláthar seirbhísí iompair agus turas ar ardchaighdeán ar fud na hÉireann",
-    "viewServices": "Féach ar ár Seirbhísí",
+    "viewServices": "Féach ar Thurais",
     "contactUs": "Déan Teagmháil Linn",
     "whyChooseUs": "Cén Fáth Muid a Roghnú",
     "reliableService": {
@@ -33,7 +35,7 @@
       "title": "Sásamh an Chustaiméara",
       "description": "Is é do shásamh ár bpríomhthosaíocht. Oibrímid go dlúth leat chun a chinntiú go gcomhlíontar do riachtanais."
     },
-    "ourServices": "ár Seirbhísí",
+    "ourServices": "Ár dTurais",
     "readyToGetStarted": "Réidh chun Tosú?",
     "readyToGetStartedDescription": "Déan teagmháil linn inniu chun do riachtanais a phlé agus meáchain saor in aisce a fháil."
   },
@@ -44,6 +46,7 @@
     "needMoreInfoDescription": "Déan teagmháil linn inniu chun do riachtanais ar leith a phlé agus meáchain pearsantaithe a fháil.",
     "whatWeOffer": "Cad a Thairgimid",
     "viewAllServices": "Féach ar Gach Seirbhís",
+    "viewAllDayTours": "Féach ar Gach Turas",
     "school-transport": {
       "title": "Iompar Scoile",
       "description": "Seirbhísí iompair scoile sábhailte agus iontaofa ar fud na hÉireann.",
@@ -154,7 +157,7 @@
     "name": "Ainm",
     "namePlaceholder": "D'ainm",
     "emailPlaceholder": "do.ríomhphost@sampla.com",
-    "phonePlaceholder": "+353 1 234 5678",
+    "phonePlaceholder": "+353 87 986 3470",
     "serviceInterest": "Suim i Seirbhís",
     "selectService": "Roghnaigh seirbhís",
     "message": "Teachtaireacht",
@@ -170,9 +173,9 @@
     "description": "Ag soláthar seirbhísí iompair agus turas ar ardchaighdeán ar fud na hÉireann. Ó iompar scoile go turais treoraithe, aistrithe aerfoirt go fostú tiománaí príobháideach.",
     "contactUs": "Déan teagmháil linn",
     "location": "Éire",
-    "phone": "+353 1 234 5678",
+    "phone": "+353 87 986 3470",
     "email": "info@example.com",
-    "ourServices": "Ár Seirbhísí",
+    "ourServices": "Ár dTurais",
     "quickLinks": "Naisc Tapa",
     "makeEnquiry": "Déan Fiosrúchán",
     "makePayment": "Déan Íocaíocht",
@@ -191,7 +194,9 @@
   },
   "serviceDetails": {
     "breadcrumbHome": "Baile",
-    "breadcrumbServices": "Seirbhísí"
+    "breadcrumbServices": "Seirbhísí",
+    "breadcrumbDayTours": "Turais",
+    "notFound": "Turas gan aimsiú"
   },
   "experiences": {
     "title": "Ár dTaithí",
@@ -259,7 +264,7 @@
     "shareExperience": "Roinn do Thaithí",
     "shareExperienceDesc": "Ba bhreá linn cloisint faoi do thaithí linn. Fág léirmheas agus cabhraigh le daoine eile an chuid is fearr d'Éirinn a fháil amach.",
     "leaveReview": "Fág Léirmheas",
-    "viewServices": "Féach ar ár Seirbhísí",
+    "viewServices": "Féach ar Thurais",
     "review1": {
       "name": "Sarah Mitchell",
       "location": "Baile Átha Cliath, Éire",

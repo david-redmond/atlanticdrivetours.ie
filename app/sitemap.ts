@@ -5,8 +5,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/gallery",
-    "/services",
+    "/tours",
+    "/tours/cliffs-of-moher-bunratty",
     "/contact",
+    "/reservation",
     "/thank-you",
     "/privacy",
     "/terms",

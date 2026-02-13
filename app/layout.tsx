@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Roboto } from "next/font/google";
@@ -7,15 +6,14 @@ import "./globals.css";
 import CookieBanner from "@/components/CookieBanner";
 import AnalyticsListener from "@/components/AnalyticsListener";
 import CookiePreferencesLink from "@/components/CookiePreferencesLink";
+import SiteHeader from "@/components/SiteHeader";
+import SocialLinks from "@/components/SocialLinks";
 import { TranslationProvider } from "@/contexts/TranslationContext";
 import {
   baseUrl,
   companyName,
-  navLinks,
   phone,
   serviceArea,
-  whatsappNumber,
-  whatsappPrefill,
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -51,11 +49,6 @@ const roboto = Roboto({
   variable: "--font-roboto",
 });
 
-const whatsappLink = `https://wa.me/${whatsappNumber.replace(
-  /\D/g,
-  ""
-)}?text=${encodeURIComponent(whatsappPrefill)}`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,63 +62,41 @@ export default function RootLayout({
             <AnalyticsListener />
           </Suspense>
           <div className="min-h-screen bg-ivory">
-          <header className="bg-ivory">
-            <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-              <Link href="/" className="flex shrink-0">
-                <Image
-                  src="/logo.png"
-                  alt={companyName}
-                  width={260}
-                  height={73}
-                  className="h-[62px] w-auto object-contain md:h-[73px]"
-                  priority
-                />
-              </Link>
-              <nav className="hidden items-center gap-8 text-sm uppercase tracking-widest md:flex">
-                {navLinks.map((link) => (
-                  <Link key={link.href} href={link.href} className="hover:text-ink-muted">
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-              <Link href="/contact" className="btn btn-primary hidden md:inline-flex">
-                Request availability
-              </Link>
-            </div>
-          </header>
+          <SiteHeader />
 
           <main>{children}</main>
 
           <footer className="bg-ivory-muted">
             <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 md:grid-cols-3">
-              <div className="space-y-3 text-sm">
+              <div className="space-y-4 text-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-accent">
                   {companyName}
                 </p>
                 <p className="text-sm text-neutral-700">{serviceArea}</p>
-                <p className="text-sm text-neutral-700">Phone: {phone}</p>
-                <a
-                  className="text-sm text-neutral-700 underline"
-                  href={`tel:${phone.replace(/\s/g, "")}`}
-                >
-                  Call
-                </a>
-                <a className="text-sm text-neutral-700 underline" href={whatsappLink}>
-                  WhatsApp
-                </a>
+                <p className="text-sm text-neutral-700">
+                  <a
+                    href={`tel:${phone.replace(/\s/g, "")}`}
+                    className="text-[#0F2A1D] hover:text-[#143826] transition-colors"
+                  >
+                    {phone}
+                  </a>
+                </p>
+                <div className="pt-1">
+                  <SocialLinks />
+                </div>
               </div>
               <div className="space-y-3 text-sm">
                 <p className="text-xs uppercase tracking-[0.2em] text-accent">
                   Company
                 </p>
-                <Link href="/services" className="block text-neutral-700">
-                  Services
+                <Link href="/tours" className="block text-neutral-700">
+                  Tours
                 </Link>
                 <Link href="/gallery" className="block text-neutral-700">
                   Gallery
                 </Link>
-                <Link href="/contact" className="block text-neutral-700">
-                  Request Availability
+                <Link href="/reservation" className="block text-neutral-700">
+                  Book now free
                 </Link>
               </div>
               <div className="space-y-3 text-sm">

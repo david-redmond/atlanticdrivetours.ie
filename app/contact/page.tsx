@@ -1,25 +1,19 @@
 import type { Metadata } from "next";
-import EnquiryForm from "@/components/EnquiryForm";
+import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
-import { baseUrl, phone, serviceArea, whatsappNumber, whatsappPrefill } from "@/lib/constants";
+import { baseUrl, serviceArea } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Request Availability",
-  description: "Enquire about private tours and executive transport across Ireland.",
+  title: "Contact",
+  description: `Get in touch with Atlantic Drive Tours. ${serviceArea}. We'd love to hear from you.`,
   alternates: { canonical: `${baseUrl}/contact` },
   openGraph: {
-    title: "Request Availability",
-    description:
-      "Enquire about private tours and executive transport across Ireland.",
+    title: "Contact",
+    description: `Get in touch with Atlantic Drive Tours. ${serviceArea}.`,
     url: `${baseUrl}/contact`,
     type: "website",
   },
 };
-
-const whatsappLink = `https://wa.me/${whatsappNumber.replace(
-  /\D/g,
-  ""
-)}?text=${encodeURIComponent(whatsappPrefill)}`;
 
 export default function ContactPage() {
   return (
@@ -28,27 +22,18 @@ export default function ContactPage() {
         <Reveal>
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
-              Request Availability
+              Get in touch
             </p>
-            <h1 className="mt-4 text-3xl md:text-4xl">Plan your journey.</h1>
+            <h1 className="mt-4 text-3xl md:text-4xl">Contact us</h1>
             <p className="mt-4 text-sm text-neutral-700">
-              Nationwide coverage across Ireland. Share your dates and preferences
-              and we will reply with availability.
+              Have a question or want to say hello? Send us a message and
+              we&apos;ll get back to you. {serviceArea}.
             </p>
-            <div className="mt-8 space-y-2 text-sm text-neutral-700">
-              <p>{serviceArea}</p>
-              <a className="block underline" href={`tel:${phone.replace(/\s/g, "")}`}>
-                Call {phone}
-              </a>
-              <a className="block underline" href={whatsappLink}>
-                WhatsApp
-              </a>
-            </div>
           </div>
         </Reveal>
         <Reveal>
           <div className="panel p-8">
-            <EnquiryForm />
+            <ContactForm />
           </div>
         </Reveal>
       </div>

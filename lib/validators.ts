@@ -25,6 +25,7 @@ export const enquirySchema = z
       errorMap: () => ({ message: "You must consent to be contacted to continue." }),
     }),
     companyWebsite: z.string().optional(),
+    tour: z.string().optional(),
   })
   .refine(
     (data) => {

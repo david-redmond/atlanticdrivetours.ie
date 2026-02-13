@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { getServices, serviceIds, ServiceId } from '@/data/services';
 
-export default function ServiceDetailsPage() {
+export default function DayTourDetailsPage() {
   const { t, locale } = useTranslation();
   const params = useParams();
   const id = typeof params?.id === 'string' ? params.id : '';
@@ -18,9 +18,9 @@ export default function ServiceDetailsPage() {
     return (
       <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-4xl text-center">
-          <h1 className="text-4xl font-bold mb-4">Service Not Found</h1>
-          <Link href="/services" className="text-[var(--primary)] hover:underline">
-            View All Services
+          <h1 className="text-4xl font-bold mb-4">{t('serviceDetails.notFound')}</h1>
+          <Link href="/day-tours" className="text-[var(--primary)] hover:underline">
+            {t('services.viewAllDayTours')}
           </Link>
         </div>
       </div>
@@ -40,8 +40,8 @@ export default function ServiceDetailsPage() {
             </li>
             <li>/</li>
             <li>
-              <Link href="/services" className="hover:text-[var(--primary)]">
-                {t('serviceDetails.breadcrumbServices')}
+              <Link href="/day-tours" className="hover:text-[var(--primary)]">
+                {t('serviceDetails.breadcrumbDayTours')}
               </Link>
             </li>
             <li>/</li>
@@ -92,16 +92,16 @@ export default function ServiceDetailsPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 pt-8 border-t border-[var(--border)]">
             <Link
-              href="/contact"
+              href="/reservation"
               className="flex-1 text-center bg-[var(--primary)] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[var(--primary-dark)] transition-colors"
             >
               {t('common.getAQuote')}
             </Link>
             <Link
-              href="/services"
+              href="/day-tours"
               className="flex-1 text-center border-2 border-[var(--primary)] text-[var(--primary)] px-8 py-3 rounded-lg font-semibold hover:bg-[var(--primary)] hover:text-white transition-colors"
             >
-              {t('services.viewAllServices')}
+              {t('services.viewAllDayTours')}
             </Link>
           </div>
         </div>

@@ -1,6 +1,13 @@
 "use client";
 
-import { useMemo, useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import { useRouter } from "next/navigation";
 import { enquirySchema, type EnquiryInput } from "@/lib/validators";
 import { trackEvent } from "@/lib/analytics";
@@ -52,16 +59,56 @@ const initialFormState = {
   message: "",
   consent: false,
   companyWebsite: "",
+  tour: "",
 };
 
 const fieldClass =
-  "w-full rounded-md border border-[var(--color-line)] bg-white px-4 py-3 text-sm text-ink focus:border-[var(--color-brand)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)]";
+  "w-full rounded-md border border-[var(--color-line)] bg-white px-4 py-3 text-sm text-ink focus:border-[var(--color-brand)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)] min-h-[44px]";
+const labelClass = "mb-2 block text-sm font-medium text-ink";
+const sectionTitleClass =
+  "text-sm font-medium uppercase tracking-wider text-neutral-500 mb-4";
 
-export default function EnquiryForm() {
+const FORM_ID = "enquiry-form";
+const SUBMIT_BUTTON_ID = "enquiry-submit";
+
+type EnquiryFormProps = {
+  initialTour?: string;
+};
+
+export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
   const router = useRouter();
   const [formState, setFormState] = useState(initialFormState);
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const tourInputRef = useRef<HTMLInputElement>(null);
+  const submitRef = useRef<HTMLButtonElement>(null);
+  const [stickyBarVisible, setStickyBarVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof initialTour === "string" && initialTour.trim()) {
+      setFormState((prev) => ({ ...prev, tour: initialTour.trim() }));
+    }
+  }, [initialTour]);
+
+  useEffect(() => {
+    if (!mounted || typeof window === "undefined") return;
+    const el = document.getElementById(SUBMIT_BUTTON_ID);
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        setStickyBarVisible(e ? !e.isIntersecting : false);
+      },
+      { root: null, rootMargin: "0px", threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [mounted]);
 
   const handleChange = (
     e: ChangeEvent<
@@ -113,6 +160,23 @@ export default function EnquiryForm() {
         if (field) nextErrors[field] = err.message;
       });
       setErrors(nextErrors);
+      // Scroll first invalid field into view (map schema 'country' to id 'countrySelect' or 'country')
+      const firstField = Object.keys(nextErrors).find((k) => k !== "form");
+      if (firstField) {
+        const id =
+          firstField === "country"
+            ? formState.countrySelect === "Other"
+              ? "country"
+              : "countrySelect"
+            : firstField;
+        setTimeout(() => {
+          const el = document.getElementById(String(id));
+          el?.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (el && "focus" in el && typeof (el as HTMLInputElement).focus === "function") {
+            (el as HTMLInputElement).focus({ preventScroll: true });
+          }
+        }, 80);
+      }
       return;
     }
 
@@ -155,326 +219,441 @@ export default function EnquiryForm() {
     }
   };
 
-  return (
-    <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-      {errors.form && (
-        <p className="text-sm text-red-600" role="alert">
-          {errors.form}
-        </p>
-      )}
+  const focusTourField = () => {
+    tourInputRef.current?.focus({ preventScroll: false });
+  };
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink" htmlFor="name">
-            Name
-          </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            className={fieldClass}
-            value={formState.name}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          />
-          {errors.name && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.name}</p>
-          )}
-        </div>
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink" htmlFor="email">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            className={fieldClass}
-            value={formState.email}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          />
-          {errors.email && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.email}</p>
-          )}
-        </div>
-        <div>
-          <label
-            className="mb-2 block text-sm font-medium text-ink"
-            htmlFor="phoneOrWhatsapp"
-          >
-            Phone / WhatsApp
-          </label>
-          <input
-            id="phoneOrWhatsapp"
-            name="phoneOrWhatsapp"
-            type="tel"
-            autoComplete="tel"
-            className={fieldClass}
-            value={formState.phoneOrWhatsapp}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          />
-          {errors.phoneOrWhatsapp && (
-            <p className="mt-2 text-xs text-red-600" role="alert">
-              {errors.phoneOrWhatsapp}
+  return (
+    <>
+      <form
+        id={FORM_ID}
+        className="space-y-8 pb-24 md:pb-0"
+        onSubmit={handleSubmit}
+        noValidate
+        autoComplete="on"
+      >
+        {errors.form && (
+          <p className="text-sm text-red-600" role="alert">
+            {errors.form}
+          </p>
+        )}
+
+        {initialTour && formState.tour && (
+          <div className="rounded-lg border border-[var(--color-line)] bg-neutral-50/80 px-4 py-3 text-sm">
+            <p className="text-ink">
+              You&apos;re booking: <strong>{formState.tour}</strong>
             </p>
-          )}
-        </div>
+            <button
+              type="button"
+              onClick={focusTourField}
+              className="mt-2 text-sm text-[var(--color-brand)] underline underline-offset-2 hover:no-underline"
+            >
+              Edit
+            </button>
+          </div>
+        )}
+
+        {/* Section A: Your details */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-ink" htmlFor="countrySelect">
-            Country
-          </label>
-          <select
-            id="countrySelect"
-            name="countrySelect"
-            className={fieldClass}
-            value={
-              countryOptions.includes(formState.country)
-                ? formState.country
-                : formState.countrySelect || (formState.country ? "Other" : "")
-            }
-            onChange={(e) => {
-              const v = e.target.value;
-              setFormState((prev) => ({
-                ...prev,
-                countrySelect: v,
-                country: v === "Other" ? prev.country : v,
-              }));
-            }}
-            required
-            aria-required="true"
-          >
-            <option value="">Select country</option>
-            {countryOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {(formState.countrySelect === "Other" ||
-            (formState.country && !countryOptions.includes(formState.country))) && (
-            <>
-              <label className="mb-2 mt-3 block text-sm font-medium text-ink" htmlFor="country">
-                Country (other)
+          <h2 className={sectionTitleClass}>Your details</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label className={labelClass} htmlFor="name">
+                Name
               </label>
               <input
-                id="country"
-                name="country"
+                id="name"
+                name="name"
                 type="text"
-                autoComplete="country-name"
+                autoComplete="name"
                 className={fieldClass}
-                value={formState.country}
+                value={formState.name}
                 onChange={handleChange}
-                required={Boolean(
-                  formState.countrySelect === "Other" ||
-                    (formState.country && !countryOptions.includes(formState.country))
-                )}
+                required
+                aria-required="true"
               />
-            </>
-          )}
-          {errors.country && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.country}</p>
-          )}
+              {errors.name && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.name}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className={labelClass} htmlFor="email">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                className={fieldClass}
+                value={formState.email}
+                onChange={handleChange}
+                required
+                aria-required="true"
+              />
+              {errors.email && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.email}
+                </p>
+              )}
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass} htmlFor="phoneOrWhatsapp">
+                Phone / WhatsApp
+              </label>
+              <input
+                id="phoneOrWhatsapp"
+                name="phoneOrWhatsapp"
+                type="tel"
+                autoComplete="tel"
+                className={fieldClass}
+                value={formState.phoneOrWhatsapp}
+                onChange={handleChange}
+                required
+                aria-required="true"
+              />
+              {errors.phoneOrWhatsapp && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.phoneOrWhatsapp}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
-        <div>
-          <label
-            className="mb-2 block text-sm font-medium text-ink"
-            htmlFor="serviceType"
-          >
-            Service Type
-          </label>
-          <select
-            id="serviceType"
-            name="serviceType"
-            className={fieldClass}
-            value={formState.serviceType}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          >
-            {serviceOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {errors.serviceType && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.serviceType}</p>
-          )}
-        </div>
-        <div>
-          <label
-            className="mb-2 block text-sm font-medium text-ink"
-            htmlFor="groupSize"
-          >
-            Group Size
-          </label>
-          <select
-            id="groupSize"
-            name="groupSize"
-            className={fieldClass}
-            value={formState.groupSize}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          >
-            {groupSizeOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {errors.groupSize && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.groupSize}</p>
-          )}
-        </div>
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink" htmlFor="startDate">
-            Start date
-          </label>
-          <input
-            id="startDate"
-            name="startDate"
-            type="date"
-            className={fieldClass}
-            value={formState.startDate}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          />
-          {errors.startDate && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.startDate}</p>
-          )}
-        </div>
-        <div>
-          <label className="mb-2 block text-sm font-medium text-ink" htmlFor="endDate">
-            End date
-          </label>
-          <input
-            id="endDate"
-            name="endDate"
-            type="date"
-            className={fieldClass}
-            value={formState.endDate}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          />
-          {errors.endDate && (
-            <p className="mt-2 text-xs text-red-600" role="alert">{errors.endDate}</p>
-          )}
-        </div>
-        <div className="md:col-span-2">
-          <label
-            className="mb-2 block text-sm font-medium text-ink"
-            htmlFor="pickupLocation"
-          >
-            Pickup Location
-          </label>
-          <input
-            id="pickupLocation"
-            name="pickupLocation"
-            type="text"
-            autoComplete="street-address"
-            className={fieldClass}
-            value={formState.pickupLocation}
-            onChange={handleChange}
-            required
-            aria-required="true"
-          />
-          {errors.pickupLocation && (
-            <p className="mt-2 text-xs text-red-600" role="alert">
-              {errors.pickupLocation}
-            </p>
-          )}
-        </div>
-      </div>
 
-      {isExecutive && (
+        {/* Section B: Trip basics */}
         <div>
-          <label
-            className="mb-2 block text-sm font-medium text-ink"
-            htmlFor="companyWebsite"
-          >
-            Company website
+          <h2 className={sectionTitleClass}>Trip basics</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div className="sm:col-span-2">
+              <label className={labelClass} htmlFor="tour">
+                Tour
+              </label>
+              <input
+                ref={tourInputRef}
+                id="tour"
+                name="tour"
+                type="text"
+                className={fieldClass}
+                value={formState.tour}
+                onChange={handleChange}
+                placeholder="e.g. Private Cliffs of Moher + Bunratty Castle Day Tour"
+                aria-label="Tour or experience you're interested in (optional)"
+              />
+              <p className="mt-1 text-xs text-ink-muted">
+                Optional – pre-filled if you came from a tour page.
+              </p>
+            </div>
+            <div>
+              <label className={labelClass} htmlFor="groupSize">
+                Group size
+              </label>
+              <select
+                id="groupSize"
+                name="groupSize"
+                className={fieldClass}
+                value={formState.groupSize}
+                onChange={handleChange}
+                required
+                aria-required="true"
+              >
+                {groupSizeOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {errors.groupSize && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.groupSize}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className={labelClass} htmlFor="countrySelect">
+                Country
+              </label>
+              <select
+                id="countrySelect"
+                name="countrySelect"
+                className={fieldClass}
+                value={
+                  countryOptions.includes(formState.country)
+                    ? formState.country
+                    : formState.countrySelect ||
+                      (formState.country ? "Other" : "")
+                }
+                onChange={(e) => {
+                  const v = e.target.value;
+                  setFormState((prev) => ({
+                    ...prev,
+                    countrySelect: v,
+                    country: v === "Other" ? prev.country : v,
+                  }));
+                }}
+                required
+                aria-required="true"
+                autoComplete="country-name"
+              >
+                <option value="">Select country</option>
+                {countryOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {(formState.countrySelect === "Other" ||
+                (formState.country &&
+                  !countryOptions.includes(formState.country))) && (
+                <>
+                  <label
+                    className="mb-2 mt-3 block text-sm font-medium text-ink"
+                    htmlFor="country"
+                  >
+                    Country (other)
+                  </label>
+                  <input
+                    id="country"
+                    name="country"
+                    type="text"
+                    autoComplete="country-name"
+                    className={fieldClass}
+                    value={formState.country}
+                    onChange={handleChange}
+                    required={Boolean(
+                      formState.countrySelect === "Other" ||
+                        (formState.country &&
+                          !countryOptions.includes(formState.country))
+                    )}
+                  />
+                </>
+              )}
+              {errors.country && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.country}
+                </p>
+              )}
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass} htmlFor="serviceType">
+                Service type
+              </label>
+              <select
+                id="serviceType"
+                name="serviceType"
+                className={fieldClass}
+                value={formState.serviceType}
+                onChange={handleChange}
+                required
+                aria-required="true"
+              >
+                {serviceOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {errors.serviceType && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.serviceType}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Section C: Dates & pickup */}
+        <div>
+          <h2 className={sectionTitleClass}>Dates & pickup</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            <div>
+              <label className={labelClass} htmlFor="startDate">
+                Start date
+              </label>
+              <input
+                id="startDate"
+                name="startDate"
+                type="date"
+                className={fieldClass}
+                value={formState.startDate}
+                onChange={handleChange}
+                required
+                aria-required="true"
+              />
+              {errors.startDate && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.startDate}
+                </p>
+              )}
+            </div>
+            <div>
+              <label className={labelClass} htmlFor="endDate">
+                End date
+              </label>
+              <input
+                id="endDate"
+                name="endDate"
+                type="date"
+                className={fieldClass}
+                value={formState.endDate}
+                onChange={handleChange}
+                required
+                aria-required="true"
+              />
+              {errors.endDate && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.endDate}
+                </p>
+              )}
+            </div>
+            <div className="sm:col-span-2">
+              <label className={labelClass} htmlFor="pickupLocation">
+                Pickup location
+              </label>
+              <input
+                id="pickupLocation"
+                name="pickupLocation"
+                type="text"
+                autoComplete="street-address"
+                className={fieldClass}
+                value={formState.pickupLocation}
+                onChange={handleChange}
+                required
+                aria-required="true"
+                placeholder="e.g. Hotel name, address, or port"
+              />
+              {errors.pickupLocation && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.pickupLocation}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {isExecutive && (
+          <div>
+            <label
+              className={labelClass}
+              htmlFor="companyWebsite"
+            >
+              Company website
+            </label>
+            <input
+              id="companyWebsite"
+              name="companyWebsite"
+              type="url"
+              autoComplete="url"
+              className={fieldClass}
+              value={formState.companyWebsite}
+              onChange={handleChange}
+              required={isExecutive}
+              aria-required={isExecutive}
+              placeholder="https://"
+            />
+            {errors.companyWebsite && (
+              <p className="mt-2 text-xs text-red-600" role="alert">
+                {errors.companyWebsite}
+              </p>
+            )}
+          </div>
+        )}
+
+        <div>
+          <label className={labelClass} htmlFor="message">
+            Notes
           </label>
-          <input
-            id="companyWebsite"
-            name="companyWebsite"
-            type="url"
-            autoComplete="url"
+          <textarea
+            id="message"
+            name="message"
+            rows={4}
             className={fieldClass}
-            value={formState.companyWebsite}
+            value={formState.message}
             onChange={handleChange}
-            required={isExecutive}
-            aria-required={isExecutive}
-            placeholder="https://"
+            required
+            aria-required="true"
+            placeholder="e.g. dietary needs, accessibility, or special requests"
           />
-          {errors.companyWebsite && (
+          {errors.message && (
             <p className="mt-2 text-xs text-red-600" role="alert">
-              {errors.companyWebsite}
+              {errors.message}
             </p>
           )}
+        </div>
+
+        <div>
+          <div className="flex items-start gap-3">
+            <input
+              id="consent"
+              type="checkbox"
+              name="consent"
+              checked={formState.consent}
+              onChange={handleChange}
+              className="mt-1 h-5 w-5 shrink-0 rounded border-[var(--color-line)] text-[var(--color-brand)] focus:ring-[var(--color-brand)]"
+              required
+              aria-required="true"
+              aria-describedby="consent-desc"
+              aria-invalid={Boolean(errors.consent)}
+            />
+            <label id="consent-desc" className="text-sm text-ink" htmlFor="consent">
+              I consent to Atlantic Drive Tours contacting me about this
+              enquiry. My details will not be used for marketing or shared with
+              third parties.
+            </label>
+          </div>
+          {errors.consent && (
+            <p className="mt-2 text-xs text-red-600" role="alert">
+              {errors.consent}
+            </p>
+          )}
+        </div>
+
+        <div className="space-y-3 pt-2">
+          <p className="text-sm text-neutral-600">
+            No payment today. We&apos;ll confirm availability and send a
+            tailored plan.
+          </p>
+          <button
+            ref={submitRef}
+            id={SUBMIT_BUTTON_ID}
+            type="submit"
+            className="btn btn-primary w-full min-h-[48px] disabled:cursor-not-allowed disabled:opacity-60"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting…" : "Book now free"}
+          </button>
+          <p className="text-center text-xs text-ink-muted">
+            We reply within 24 hours. No obligation. No spam.
+          </p>
+        </div>
+      </form>
+
+      {/* Mobile-only sticky submit bar when main button is off-screen */}
+      {mounted && (
+        <div
+          className="fixed bottom-0 left-0 right-0 z-30 p-4 md:hidden transition-[transform,opacity,visibility] duration-300 ease-out"
+          aria-hidden={!stickyBarVisible}
+          style={{
+            opacity: stickyBarVisible ? 1 : 0,
+            visibility: stickyBarVisible ? "visible" : "hidden",
+            pointerEvents: stickyBarVisible ? "auto" : "none",
+            transform: stickyBarVisible ? "translateY(0)" : "translateY(100%)",
+          }}
+        >
+          <div className="mx-auto max-w-md rounded-xl bg-white/95 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] backdrop-blur-sm border border-[var(--color-line)] p-3">
+            <button
+              type="submit"
+              form={FORM_ID}
+              className="btn btn-primary w-full min-h-[48px] disabled:cursor-not-allowed disabled:opacity-60"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Submitting…" : "Book now free"}
+            </button>
+          </div>
         </div>
       )}
-
-      <div>
-        <label className="mb-2 block text-sm font-medium text-ink" htmlFor="message">
-          Tell us about your plans
-        </label>
-        <textarea
-          id="message"
-          name="message"
-          rows={5}
-          className={fieldClass}
-          value={formState.message}
-          onChange={handleChange}
-          required
-          aria-required="true"
-        />
-        {errors.message && (
-          <p className="mt-2 text-xs text-red-600" role="alert">{errors.message}</p>
-        )}
-      </div>
-
-      <div>
-        <div className="flex items-start gap-3">
-          <input
-            id="consent"
-            type="checkbox"
-            name="consent"
-            checked={formState.consent}
-            onChange={handleChange}
-            className="mt-1 h-4 w-4 rounded border-[var(--color-line)] text-[var(--color-brand)] focus:ring-[var(--color-brand)]"
-            required
-            aria-required="true"
-            aria-describedby="consent-desc"
-          />
-          <label id="consent-desc" className="text-sm text-ink" htmlFor="consent">
-            I consent to Atlantic Drive Tours contacting me about this enquiry. My details will not be used for marketing or shared with third parties.
-          </label>
-        </div>
-        {errors.consent && (
-          <p className="mt-2 text-xs text-red-600" role="alert">{errors.consent}</p>
-        )}
-      </div>
-
-      <button
-        type="submit"
-        className="btn btn-primary w-full disabled:cursor-not-allowed disabled:opacity-60"
-        disabled={isSubmitting || !parsed.success}
-      >
-        {isSubmitting ? "Submitting..." : "Request availability"}
-      </button>
-      <p className="text-center text-xs text-ink-muted">
-        We reply within 24 hours. No obligation. No spam.
-      </p>
-    </form>
+    </>
   );
 }

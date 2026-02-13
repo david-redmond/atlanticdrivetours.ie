@@ -82,7 +82,7 @@ export default function HomePage() {
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a href="#enquiry" className="btn btn-primary">
-                  Request availability
+                  Book now free
                 </a>
                 <a href={whatsappLink} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
                   WhatsApp
@@ -106,7 +106,7 @@ export default function HomePage() {
         <Reveal>
           <div className="mb-10">
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
-              Services
+              Tours
             </p>
             <h2 className="mt-4 text-2xl md:text-3xl">Private travel, precisely delivered.</h2>
           </div>
@@ -114,7 +114,7 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-2">
           {[
             {
-              title: "Private Ireland Tours (day tours + multi-day)",
+              title: "Private Ireland Tours (tours + multi-day)",
               benefit: "Curated routes with a calm, unhurried pace.",
             },
             {
@@ -263,7 +263,7 @@ export default function HomePage() {
           <Reveal>
             <div>
               <p className="text-xs uppercase tracking-[0.3em] text-accent">
-                Request availability
+                Book now free
               </p>
               <h2 className="mt-4 text-2xl md:text-3xl accent-rule">
                 Tell us about your plans.

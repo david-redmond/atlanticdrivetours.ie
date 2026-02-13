@@ -6,6 +6,8 @@
     "contact": "Contact",
     "experiences": "Experiences",
     "reviews": "Reviews",
+    "dayTours": "Day Tours",
+    "tours": "Tours",
     "learnMore": "Learn More",
     "getInTouch": "Get in Touch",
     "viewAll": "View All",
@@ -38,7 +40,7 @@
       "title": "Customer Satisfaction",
       "description": "Your satisfaction is our priority. We work closely with you to ensure your needs are met."
     },
-    "ourServices": "Our Services",
+    "ourServices": "Our Tours",
     "readyToGetStarted": "Ready to Get Started?",
     "readyToGetStartedDescription": "Contact us today to discuss your needs and get a free quote."
   },
@@ -49,6 +51,7 @@
     "needMoreInfoDescription": "Contact us today to discuss your specific requirements and get a personalized quote.",
     "whatWeOffer": "What We Offer",
     "viewAllServices": "View All Services",
+    "viewAllDayTours": "View All Tours",
     "school-transport": {
       "title": "School Transport",
       "description": "Safe and reliable school transport services across Ireland.",
@@ -159,7 +162,7 @@
     "name": "Name",
     "namePlaceholder": "Your name",
     "emailPlaceholder": "your.email@example.com",
-    "phonePlaceholder": "+353 1 234 5678",
+    "phonePlaceholder": "+353 87 986 3470",
     "serviceInterest": "Service Interest",
     "selectService": "Select a service",
     "message": "Message",
@@ -175,9 +178,9 @@
     "description": "Providing quality transportation and tour services across Ireland. From school transport to guided tours, airport transfers to private driver hire.",
     "contactUs": "Contact us",
     "location": "Ireland",
-    "phone": "+353 1 234 5678",
+    "phone": "+353 87 986 3470",
     "email": "info@example.com",
-    "ourServices": "Our Services",
+    "ourServices": "Our Tours",
     "quickLinks": "Quick Links",
     "makeEnquiry": "Make an Enquiry",
     "makePayment": "Make a Payment",
@@ -196,7 +199,9 @@
   },
   "serviceDetails": {
     "breadcrumbHome": "Home",
-    "breadcrumbServices": "Services"
+    "breadcrumbServices": "Services",
+    "breadcrumbDayTours": "Tours",
+    "notFound": "Tour not found"
   },
   "experiences": {
     "title": "Our Experiences",
@@ -264,7 +269,7 @@
     "shareExperience": "Share Your Experience",
     "shareExperienceDesc": "We'd love to hear about your experience with us. Leave a review and help others discover the best of Ireland.",
     "leaveReview": "Leave a Review",
-    "viewServices": "View Our Services",
+    "viewServices": "View Tours",
     "review1": {
       "name": "Sarah Mitchell",
       "location": "Dublin, Ireland",

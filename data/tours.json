@@ -1,0 +1,115 @@
+[
+  {
+    "slug": "cliffs-of-moher-bunratty",
+    "title": "Private Cliffs of Moher + Bunratty Castle Day Tour",
+    "shortDescription": "Premium private day tour with door-to-door pickup, all entry tickets and lunch included. Cliffs of Moher, O'Brien's Tower, Bunratty Castle & Folk Park, and coastal stops.",
+    "description": "A premium, approachable private day tour with your own driver-guide. Door-to-door pickup, all entry tickets included, and lunch at a local spot. Experience the Cliffs of Moher, O'Brien's Tower, Bunratty Castle & Folk Park, and coastal scenery at your pace.",
+    "duration": "Full day (approx. 9–10 hours)",
+    "durationHours": 10,
+    "startingFrom": "€500",
+    "includes": [
+      "Private luxury vehicle with professional driver-guide",
+      "Door-to-door pickup and drop-off (hotel, port, or airport by arrangement)",
+      "All entry tickets: Cliffs of Moher Experience (visitor centre + paths)",
+      "All entry tickets: Bunratty Castle & Folk Park",
+      "Lunch at a local restaurant or pub (1 main course + non-alcoholic drink; alcohol available as optional add-on)",
+      "Bottled water in vehicle",
+      "Wi‑Fi on board"
+    ],
+    "highlights": [
+      "Cliffs of Moher Experience — paved paths and Atlantic viewpoints along one of Ireland's most iconic coastlines",
+      "O'Brien's Tower viewpoint — optional visit for panoramic views (included in Cliffs ticket)",
+      "Bunratty Castle & Folk Park — medieval castle and living village; explore at your own pace",
+      "Coastal scenery via Lahinch / Liscannor Bay — time permitting, with photo stops",
+      "Local lunch stop — a small local restaurant or pub for a relaxed meal"
+    ],
+    "stories": [
+      {
+        "title": "O'Brien's Tower",
+        "text": "O'Brien's Tower was built in 1835 by Cornelius O'Brien, a local MP who wanted to impress visitors — and perhaps a certain woman he was courting. Today it still marks the highest point of the cliffs and the best spot to watch the Atlantic roll in."
+      },
+      {
+        "title": "The Burren & the coast",
+        "text": "The Burren's limestone landscape has been called a place where the veil between worlds is thin. Old stories speak of the sí and of winter fires that never quite go out; we leave the clichés behind and keep the sense of something older than the roads."
+      },
+      {
+        "title": "Bunratty Castle",
+        "text": "Bunratty Castle saw sieges, clan battles, and the rise and fall of the O'Brien dynasty. What you walk through today is the 15th-century version, restored so you can touch the same stone that held off raiders and welcomed chieftains."
+      },
+      {
+        "title": "Liscannor",
+        "text": "Liscannor village, just along the coast, takes its name from the old Irish for 'the hollow of the sea.' Fishermen and storytellers have lived here for centuries; your driver might point out the harbour where the currachs still go out when the weather allows."
+      }
+    ],
+    "itinerary": [
+      { "time": "Pickup", "label": "Pickup at your location", "description": "Hotel, port, or airport (as arranged)" },
+      { "time": "Morning", "label": "Cliffs of Moher", "description": "Visitor centre, coastal paths, O'Brien's Tower. Time to walk and take in the views." },
+      { "time": "Midday", "label": "Bunratty Castle & Folk Park", "description": "Explore the castle and folk park at your pace." },
+      { "time": "Lunch", "label": "Local lunch", "description": "Lunch at a local restaurant or pub (main + soft drink included)." },
+      { "time": "Afternoon", "label": "Coastal stop(s)", "description": "Lahinch / Liscannor Bay or similar, time permitting." },
+      { "time": "Return", "label": "Drop-off", "description": "Return to your pickup point." }
+    ],
+    "whatToBring": [
+      "Layers — weather can change quickly on the coast",
+      "Rain jacket or waterproof layer",
+      "Comfortable walking shoes"
+    ],
+    "faqs": [
+      {
+        "question": "How long is the tour?",
+        "answer": "Approximately 9–10 hours from pickup to drop-off, depending on your location and pace. We keep the day relaxed so you can enjoy each stop."
+      },
+      {
+        "question": "Where do you pick up?",
+        "answer": "We offer door-to-door pickup from hotels, cruise ports, and airports in the region (e.g. Shannon, Limerick, Galway, Ennis). Tell us your location when you request a quote."
+      },
+      {
+        "question": "What group size is it for?",
+        "answer": "This is a private tour for your party only. We typically accommodate up to 7–8 guests in one vehicle; larger groups can be arranged with advance notice."
+      },
+      {
+        "question": "Is it accessible for reduced mobility?",
+        "answer": "The Cliffs of Moher have paved paths and accessible areas; some sections are steep. Bunratty Castle has uneven surfaces and steps. We can tailor the day and discuss options when you enquire."
+      },
+      {
+        "question": "What if the weather is bad?",
+        "answer": "We run in all weather. The Cliffs can be dramatic in wind and rain. We recommend layers and a rain jacket. If conditions are unsafe, we'll adjust the itinerary and keep you informed."
+      },
+      {
+        "question": "Is it suitable for children?",
+        "answer": "Yes. Bunratty Folk Park is especially family-friendly. The Cliffs have safe, paved paths; we'll keep a sensible distance from the edge. Let us know ages and we can suggest pacing."
+      },
+      {
+        "question": "What is your cancellation policy?",
+        "answer": "Details are confirmed at booking. We generally ask for notice for cancellations and may offer alternatives where possible. Ask when you request a quote."
+      },
+      {
+        "question": "Can you accommodate dietary requirements?",
+        "answer": "Yes. Tell us any dietary needs when you book and we'll choose a lunch stop that can accommodate you."
+      },
+      {
+        "question": "Can we add extra stops or change the route?",
+        "answer": "Yes. This is your private tour. We can add or swap stops where timing allows — just tell us your preferences when you enquire."
+      },
+      {
+        "question": "We're on a cruise — can you work around ship times?",
+        "answer": "Yes. Share your ship's arrival and departure times and we'll plan pickup and return to fit. We monitor port schedules to get you back on time."
+      }
+    ],
+    "images": [
+      { "src": "/images/tours/cliffs-of-moher-bunratty/cliffs-hero.jpg", "alt": "Cliffs of Moher from the coastal path", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/tours/cliffs-of-moher-bunratty/cliffs-view.jpg", "alt": "Atlantic view from the Cliffs of Moher", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/tours/cliffs-of-moher-bunratty/bunratty-castle.jpg", "alt": "Bunratty Castle exterior", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/tours/cliffs-of-moher-bunratty/bunratty-grounds.jpg", "alt": "Bunratty Folk Park grounds", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/tours/cliffs-of-moher-bunratty/lahinch-sunset.jpg", "alt": "Lahinch Bay coastal scenery", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/tours/cliffs-of-moher-bunratty/durty-nellys.jpg", "alt": "Historic pub near Bunratty", "credit": "Atlantic Drive Tours" }
+    ],
+    "testimonials": [
+      { "name": "Sarah & James", "location": "London, UK", "quote": "Everything was included — tickets, lunch, even the weather held. Our driver knew the best spots and we never felt rushed.", "date": "October 2024" },
+      { "name": "The Miller family", "location": "California, USA", "quote": "Perfect for our family of five. The kids loved Bunratty and we loved the Cliffs. Lunch was at a proper local pub.", "date": "August 2024" },
+      { "name": "David K.", "location": "Dublin", "quote": "Booked for visiting clients. Professional, punctual, and the all-inclusive aspect made it stress-free. Highly recommend.", "date": "September 2024" },
+      { "name": "Emma W.", "location": "Australia", "quote": "Door-to-door from our hotel, tickets sorted, great lunch. Exactly the kind of relaxed but premium day we wanted.", "date": "July 2024" },
+      { "name": "Michael & Linda", "location": "Canada", "quote": "The Cliffs were spectacular and Bunratty was a lovely surprise. Having lunch included meant we could just enjoy the day.", "date": "June 2024" }
+    ]
+  }
+]

@@ -13,20 +13,23 @@ const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
 
 type ConsentState = "granted" | "denied" | null;
 
-function getInitialConsent(): ConsentState {
-  if (typeof window === "undefined") return null;
-  return getStoredConsent();
-}
-
 export default function CookieBanner() {
-  const [consent, setConsent] = useState<ConsentState>(getInitialConsent);
-  const [isOpen, setIsOpen] = useState(() => getInitialConsent() === null);
+  // Start with null so server and client match (no hydration mismatch).
+  const [consent, setConsent] = useState<ConsentState>(null);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    const stored = getStoredConsent();
+    setConsent(stored);
+    setHasMounted(true);
+  }, []);
+
+  const isOpen = hasMounted && consent === null;
 
   useEffect(() => {
     const handlePreferences = () => {
       clearStoredConsent();
       setConsent(null);
-      setIsOpen(true);
     };
 
     window.addEventListener("cookie-preferences", handlePreferences);
@@ -38,13 +41,11 @@ export default function CookieBanner() {
   const acceptCookies = () => {
     setStoredConsent("granted");
     setConsent("granted");
-    setIsOpen(false);
   };
 
   const rejectCookies = () => {
     setStoredConsent("denied");
     setConsent("denied");
-    setIsOpen(false);
   };
 
   return (

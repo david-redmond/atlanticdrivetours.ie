@@ -158,7 +158,7 @@ export default function ReviewsPage() {
               {t('reviews.leaveReview')}
             </Link>
             <Link
-              href="/services"
+              href="/tours"
               className="inline-block bg-transparent border-2 border-[var(--primary)] text-[var(--primary)] px-8 py-3 rounded-lg font-semibold hover:bg-[var(--primary)] hover:text-white transition-colors"
             >
               {t('reviews.viewServices')}

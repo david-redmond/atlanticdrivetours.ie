@@ -4,13 +4,13 @@ import Reveal from "@/components/Reveal";
 import { baseUrl } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Services",
-  description: "Private tours and premium transport services across Ireland.",
-  alternates: { canonical: `${baseUrl}/services` },
+  title: "Day Tours",
+  description: "Private day tours and premium transport services across Ireland.",
+  alternates: { canonical: `${baseUrl}/day-tours` },
   openGraph: {
-    title: "Services",
-    description: "Private tours and premium transport services across Ireland.",
-    url: `${baseUrl}/services`,
+    title: "Day Tours",
+    description: "Private day tours and premium transport services across Ireland.",
+    url: `${baseUrl}/day-tours`,
     type: "website",
   },
 };
@@ -58,13 +58,13 @@ const sections = [
   },
 ];
 
-export default function ServicesPage() {
+export default function DayToursPage() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
       <Reveal>
         <div className="max-w-3xl">
           <p className="text-xs uppercase tracking-[0.3em] text-accent">
-            Services
+            Day Tours
           </p>
           <h1 className="mt-4 text-3xl md:text-4xl">
             Refined travel services for discerning guests.
@@ -72,6 +72,11 @@ export default function ServicesPage() {
           <p className="mt-4 text-sm text-neutral-700">
             We provide calm, reliable transport and private tours across Ireland. Each
             itinerary is shaped around your dates, interests, and pace.
+          </p>
+          <p className="mt-4 text-sm text-neutral-700">
+            <Link href="/tours" className="text-[var(--color-accent)] hover:underline">
+              View our featured day tours
+            </Link> — including Cliffs of Moher & Bunratty Castle (tickets and lunch included).
           </p>
         </div>
       </Reveal>
@@ -98,15 +103,15 @@ export default function ServicesPage() {
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-accent">
-              Request Availability
+              Book now free
             </p>
             <p className="mt-3 text-lg">
               Share your dates and service needs. We will respond quickly with
               availability.
             </p>
           </div>
-          <Link href="/contact" className="btn btn-outline">
-            Request Availability
+          <Link href="/reservation" className="btn btn-outline">
+            Book now free
           </Link>
         </div>
         </div>

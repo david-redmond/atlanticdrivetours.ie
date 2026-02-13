@@ -74,9 +74,9 @@ export default function Header() {
             <Image
               src="/images/logo.png"
               alt="Atlantic Drive Tours"
-              width={240}
-              height={80}
-              className="h-16 md:h-20 w-auto object-contain transition-all duration-300"
+              width={360}
+              height={120}
+              className="h-24 md:h-[7.5rem] w-auto object-contain transition-all duration-300"
               priority
             />
           </Link>
@@ -84,16 +84,10 @@ export default function Header() {
           {/* Desktop Navigation - Center */}
           <div className="hidden lg:flex items-center space-x-1 flex-1 justify-center">
             <Link
-              href="/"
+              href="/tours"
               className="px-4 py-2 text-[var(--text-primary)] hover:text-[var(--primary)] hover:bg-[var(--muted)] transition-all font-medium text-sm uppercase tracking-wide rounded-md"
             >
-              {t('common.home')}
-            </Link>
-            <Link
-              href="/services"
-              className="px-4 py-2 text-[var(--text-primary)] hover:text-[var(--primary)] hover:bg-[var(--muted)] transition-all font-medium text-sm uppercase tracking-wide rounded-md"
-            >
-              {t('common.services')}
+              {t('common.tours')}
             </Link>
             <Link
               href="/about"
@@ -178,18 +172,11 @@ export default function Header() {
           <div className="lg:hidden pb-4 border-t border-[var(--border)]">
             <div className="flex flex-col space-y-1 pt-4">
               <Link
-                href="/"
+                href="/tours"
                 className="px-4 py-2 text-[var(--text-primary)] hover:text-[var(--primary)] hover:bg-[var(--muted)] transition-colors font-medium rounded-md"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {t('common.home')}
-              </Link>
-              <Link
-                href="/services"
-                className="px-4 py-2 text-[var(--text-primary)] hover:text-[var(--primary)] hover:bg-[var(--muted)] transition-colors font-medium rounded-md"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {t('common.services')}
+                {t('common.tours')}
               </Link>
               <Link
                 href="/about"
