@@ -17,6 +17,10 @@ export function getTourWhatsAppMessage(tourTitle: string): string {
   return `Hi Atlantic Drive Tours, I am looking for more information about ${tourTitle}. My dates are: `;
 }
 
+/** Pre-filled WhatsApp message for the Transfers page "Get more info" CTA. */
+export const getTransfersWhatsAppMessage =
+  "Hi Atlantic Drive Tours, I am looking for more information about transfers. My dates are: ";
+
 /** Social links for footer. Update with real URLs when available. */
 export const socialLinks = {
   facebook: "https://www.facebook.com/atlanticdrivetours",
@@ -26,6 +30,7 @@ export const socialLinks = {
 
 export const navLinks = [
   { href: "/tours", label: "Tours" },
+  { href: "/transfers", label: "Transfers" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ];

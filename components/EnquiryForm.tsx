@@ -71,13 +71,31 @@ const sectionTitleClass =
 const FORM_ID = "enquiry-form";
 const SUBMIT_BUTTON_ID = "enquiry-submit";
 
+function isValidServiceType(
+  value: string
+): value is EnquiryInput["serviceType"] {
+  return serviceOptions.includes(value as EnquiryInput["serviceType"]);
+}
+
 type EnquiryFormProps = {
   initialTour?: string;
+  initialService?: string;
 };
 
-export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
+export default function EnquiryForm({
+  initialTour,
+  initialService,
+}: EnquiryFormProps) {
   const router = useRouter();
-  const [formState, setFormState] = useState(initialFormState);
+  const resolvedInitialService =
+    initialService && isValidServiceType(initialService)
+      ? (initialService as EnquiryInput["serviceType"])
+      : undefined;
+  const [formState, setFormState] = useState(() => ({
+    ...initialFormState,
+    serviceType: resolvedInitialService ?? initialFormState.serviceType,
+  }));
+  const [servicePrefilledFromParam] = useState(Boolean(resolvedInitialService));
   const [errors, setErrors] = useState<Errors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const tourInputRef = useRef<HTMLInputElement>(null);
@@ -86,12 +104,15 @@ export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => setMounted(true));
   }, []);
 
   useEffect(() => {
     if (typeof initialTour === "string" && initialTour.trim()) {
-      setFormState((prev) => ({ ...prev, tour: initialTour.trim() }));
+      const tour = initialTour.trim();
+      queueMicrotask(() =>
+        setFormState((prev) => ({ ...prev, tour }))
+      );
     }
   }, [initialTour]);
 
@@ -139,11 +160,6 @@ export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
       dates: undefined,
     }),
     [formState, resolvedCountry]
-  );
-
-  const parsed = useMemo(
-    () => enquirySchema.safeParse(payloadForValidation),
-    [payloadForValidation]
   );
 
   const isExecutive = formState.serviceType === "Executive / Corporate";
@@ -238,7 +254,7 @@ export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
           </p>
         )}
 
-        {initialTour && formState.tour && (
+        {formState.serviceType === "Private Tour" && formState.tour && (
           <div className="rounded-lg border border-[var(--color-line)] bg-neutral-50/80 px-4 py-3 text-sm">
             <p className="text-ink">
               You&apos;re booking: <strong>{formState.tour}</strong>
@@ -323,28 +339,39 @@ export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
           </div>
         </div>
 
-        {/* Section B: Trip basics */}
+        {/* Section B: Trip basics — order: Service type, Group size, Country, Tour (only when Private Tour) */}
         <div>
           <h2 className={sectionTitleClass}>Trip basics</h2>
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="sm:col-span-2">
-              <label className={labelClass} htmlFor="tour">
-                Tour
+              <label className={labelClass} htmlFor="serviceType">
+                Service type
               </label>
-              <input
-                ref={tourInputRef}
-                id="tour"
-                name="tour"
-                type="text"
+              <select
+                id="serviceType"
+                name="serviceType"
                 className={fieldClass}
-                value={formState.tour}
+                value={formState.serviceType}
                 onChange={handleChange}
-                placeholder="e.g. Private Cliffs of Moher + Bunratty Castle Day Tour"
-                aria-label="Tour or experience you're interested in (optional)"
-              />
-              <p className="mt-1 text-xs text-ink-muted">
-                Optional – pre-filled if you came from a tour page.
-              </p>
+                required
+                aria-required="true"
+              >
+                {serviceOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+              {servicePrefilledFromParam && (
+                <p className="mt-1.5 text-xs text-ink-muted">
+                  Pre-selected based on what you clicked.
+                </p>
+              )}
+              {errors.serviceType && (
+                <p className="mt-2 text-xs text-red-600" role="alert">
+                  {errors.serviceType}
+                </p>
+              )}
             </div>
             <div>
               <label className={labelClass} htmlFor="groupSize">
@@ -436,31 +463,27 @@ export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
                 </p>
               )}
             </div>
-            <div className="sm:col-span-2">
-              <label className={labelClass} htmlFor="serviceType">
-                Service type
-              </label>
-              <select
-                id="serviceType"
-                name="serviceType"
-                className={fieldClass}
-                value={formState.serviceType}
-                onChange={handleChange}
-                required
-                aria-required="true"
-              >
-                {serviceOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-              {errors.serviceType && (
-                <p className="mt-2 text-xs text-red-600" role="alert">
-                  {errors.serviceType}
+            {formState.serviceType === "Private Tour" && (
+              <div className="sm:col-span-2">
+                <label className={labelClass} htmlFor="tour">
+                  Tour
+                </label>
+                <input
+                  ref={tourInputRef}
+                  id="tour"
+                  name="tour"
+                  type="text"
+                  className={fieldClass}
+                  value={formState.tour}
+                  onChange={handleChange}
+                  placeholder="e.g. Private Cliffs of Moher + Bunratty Castle Day Tour"
+                  aria-label="Tour or experience you're interested in (optional)"
+                />
+                <p className="mt-1 text-xs text-ink-muted">
+                  Optional – pre-filled if you came from a tour page.
                 </p>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -611,10 +634,17 @@ export default function EnquiryForm({ initialTour }: EnquiryFormProps) {
         </div>
 
         <div className="space-y-3 pt-2">
-          <p className="text-sm text-neutral-600">
-            No payment today. We&apos;ll confirm availability and send a
-            tailored plan.
+          <p className="text-sm text-[var(--text-secondary)]">
+            No payment today. We reply within 24 hours with availability and a tailored plan.
           </p>
+          <p className="text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]">
+            What happens next
+          </p>
+          <ol className="space-y-1 text-xs text-[var(--text-secondary)]" aria-label="What happens next">
+            <li>1. Send enquiry</li>
+            <li>2. We confirm availability</li>
+            <li>3. You receive a tailored plan</li>
+          </ol>
           <button
             ref={submitRef}
             id={SUBMIT_BUTTON_ID}

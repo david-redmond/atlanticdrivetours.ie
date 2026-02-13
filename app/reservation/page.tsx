@@ -31,7 +31,7 @@ function buildWhatsAppLink(tourName?: string): string {
 }
 
 type ReservationPageProps = {
-  searchParams: Promise<{ tour?: string }> | { tour?: string };
+  searchParams: Promise<{ tour?: string; service?: string }> | { tour?: string; service?: string };
 };
 
 export default async function ReservationPage({
@@ -42,6 +42,10 @@ export default async function ReservationPage({
   const initialTour =
     typeof params.tour === "string" && params.tour.length > 0
       ? params.tour
+      : undefined;
+  const initialService =
+    typeof params.service === "string" && params.service.length > 0
+      ? params.service
       : undefined;
 
   const whatsappLink = buildWhatsAppLink(initialTour);
@@ -75,7 +79,7 @@ export default async function ReservationPage({
         </Reveal>
         <Reveal>
           <div className="panel p-8">
-            <EnquiryForm initialTour={initialTour} />
+            <EnquiryForm initialTour={initialTour} initialService={initialService} />
           </div>
         </Reveal>
       </div>

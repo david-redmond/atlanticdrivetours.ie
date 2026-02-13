@@ -259,31 +259,36 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* Storyteller Time — only when tour has stories */}
+          {/* Storyteller Time — distinct inset “nugget” after Highlights, before Sample itinerary */}
           {tour.stories && tour.stories.length > 0 && (
             <Reveal>
               <section
-                className="mb-12 md:mb-20 -rotate-[0.3deg] rounded-xl border-2 border-dashed border-[var(--color-line)] px-5 py-6 md:px-10 md:py-10 shadow-[0_2px_12px_rgba(15,42,29,0.06)]"
-                style={{ backgroundColor: "#f5f0e8" }}
+                className="relative mt-10 mb-10 md:mt-12 md:mb-12 rounded-2xl border border-black/10 bg-[#FBF7EE] p-6 shadow-sm md:p-8 rotate-[0.2deg]"
                 aria-labelledby="storyteller-time-heading"
               >
                 <h2
                   id="storyteller-time-heading"
-                  className="flex items-center gap-2 text-xl font-semibold text-[var(--text-primary)] mb-4 md:mb-6"
+                  className="font-serif flex items-center gap-2 text-2xl font-semibold text-[var(--text-primary)] mb-2"
                 >
                   <BookIcon />
                   Storyteller Time
                 </h2>
-                <div className="space-y-6 md:space-y-8">
+                <p className="mb-5 text-sm text-[var(--text-secondary)] font-serif md:mb-6">
+                  A few local stories to bring the route to life.
+                </p>
+                <div className="space-y-5">
                   {tour.stories.map((story, i) => (
-                    <article key={i} className="leading-relaxed">
+                    <article
+                      key={i}
+                      className={i > 0 ? "border-t border-black/10 pt-5" : "border-t-0"}
+                    >
                       {story.title && (
-                        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wider text-[var(--color-accent)]">
+                        <h3 className="mb-1.5 font-semibold text-[var(--text-primary)]">
                           {story.title}
                         </h3>
                       )}
                       <p
-                        className="text-[var(--text-secondary)] text-[1.0625rem] leading-[1.7]"
+                        className="text-[var(--text-secondary)] text-[1.0625rem] leading-[1.7] font-serif"
                         style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
                       >
                         {story.text}

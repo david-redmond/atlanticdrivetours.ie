@@ -20,8 +20,10 @@ export default function CookieBanner() {
 
   useEffect(() => {
     const stored = getStoredConsent();
-    setConsent(stored);
-    setHasMounted(true);
+    queueMicrotask(() => {
+      setConsent(stored);
+      setHasMounted(true);
+    });
   }, []);
 
   const isOpen = hasMounted && consent === null;

@@ -18,6 +18,9 @@ import {
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  icons: {
+    icon: "/favicon.ico",
+  },
   title: {
     default: "Atlantic Drive Tours",
     template: "%s | Atlantic Drive Tours",
@@ -89,13 +92,16 @@ export default function RootLayout({
                 <p className="text-xs uppercase tracking-[0.2em] text-accent">
                   Company
                 </p>
-                <Link href="/tours" className="block text-neutral-700">
+                <Link href="/tours" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
                   Tours
                 </Link>
-                <Link href="/gallery" className="block text-neutral-700">
+                <Link href="/transfers" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
+                  Transfers
+                </Link>
+                <Link href="/gallery" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
                   Gallery
                 </Link>
-                <Link href="/reservation" className="block text-neutral-700">
+                <Link href="/reservation" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
                   Book now free
                 </Link>
               </div>

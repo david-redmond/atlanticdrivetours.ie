@@ -17,7 +17,7 @@ export default function StickyTourCta({ tourTitle }: { tourTitle: string }) {
   const contactUrl = `/reservation?tour=${encodeURIComponent(tourTitle)}`;
 
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => setMounted(true));
   }, []);
 
   useEffect(() => {
