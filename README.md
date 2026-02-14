@@ -160,13 +160,20 @@ Update social media links in `components/Footer.tsx`. The footer includes:
 
 Simply update the `href` values in the `socialLinks` array.
 
-## Contact Form
+## Contact and Enquiry Forms (Email)
 
-The contact form on `/contact` is currently set up with client-side handling. To integrate with a backend:
+The contact form (`/contact`) and reservation enquiry form (`/reservation`) send emails via [Resend](https://resend.com). The APIs are `app/api/contact/route.ts` and `app/api/enquiry/route.ts`.
 
-1. Update the `handleSubmit` function in `app/contact/page.tsx`
-2. Add your API endpoint
-3. Handle form submission and validation
+To send real emails (instead of the dev fallback that only logs to the console):
+
+1. Sign up at [resend.com](https://resend.com) and create an API key.
+2. Copy `.env.example` to `.env.local` and set:
+   - `RESEND_API_KEY` – your Resend API key
+   - `EMAIL_TO` – address that receives enquiries and contact messages
+   - `EMAIL_FROM` – sender address (must be a [verified domain](https://resend.com/docs/dashboard/domains/introduction) or use Resend’s sandbox, e.g. `onboarding@resend.dev`)
+3. Restart the dev server after changing `.env.local`.
+
+In production (e.g. Vercel), set the same variables in the host’s environment.
 
 ## Technologies Used
 
