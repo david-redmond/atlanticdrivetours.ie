@@ -64,12 +64,16 @@ export default function CookieBanner() {
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);} 
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
                 gtag('consent', 'default', { analytics_storage: 'denied' });
                 gtag('consent', 'update', { analytics_storage: 'granted' });
                 gtag('js', new Date());
                 gtag('config', '${GA_ID}', { anonymize_ip: true, send_page_view: false });
               `,
+            }}
+            onLoad={() => {
+              window.dispatchEvent(new Event("ga-ready"));
             }}
           />
         </>
