@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import type { TourImage } from "@/data/tours";
 
 type TourGalleryProps = {
@@ -11,9 +11,19 @@ type TourGalleryProps = {
 
 export default function TourGallery({ images, className = "" }: TourGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
 
-  const open = useCallback((index: number) => setLightboxIndex(index), []);
-  const close = useCallback(() => setLightboxIndex(null), []);
+  const open = useCallback((index: number, trigger: HTMLButtonElement | null) => {
+    lastTriggerRef.current = trigger;
+    setLightboxIndex(index);
+  }, []);
+  const close = useCallback(() => {
+    setLightboxIndex(null);
+    queueMicrotask(() => {
+      lastTriggerRef.current?.focus();
+    });
+  }, []);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
@@ -22,6 +32,7 @@ export default function TourGallery({ images, className = "" }: TourGalleryProps
     };
     window.addEventListener("keydown", handleEscape);
     document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
     return () => {
       window.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
@@ -37,7 +48,7 @@ export default function TourGallery({ images, className = "" }: TourGalleryProps
           <button
             key={`${img.src}-${index}`}
             type="button"
-            onClick={() => open(index)}
+            onClick={(e) => open(index, e.currentTarget)}
             className="relative aspect-[4/3] rounded-lg overflow-hidden bg-[var(--color-ivory-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--color-accent)] focus:ring-offset-2"
           >
             <Image
@@ -65,9 +76,10 @@ export default function TourGallery({ images, className = "" }: TourGalleryProps
           onClick={close}
         >
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={close}
-            className="absolute top-4 right-4 text-white/90 hover:text-white text-2xl leading-none"
+            className="absolute top-4 right-4 rounded-sm text-white/90 hover:text-white text-2xl leading-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/50"
             aria-label="Close"
           >
             ×

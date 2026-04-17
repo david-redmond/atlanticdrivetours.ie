@@ -257,6 +257,9 @@ export async function POST(req: NextRequest) {
 
     emailLog.sendStart("enquiry");
 
+    const toAddress = emailTo as string;
+    const fromAddress = emailFrom as string;
+
     const html = buildEnquiryEmailHtml({
       name,
       email,
@@ -275,8 +278,8 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(resendApiKey);
     const result = await resend.emails.send({
-      from: emailFrom,
-      to: emailTo,
+      from: fromAddress,
+      to: toAddress,
       subject: `Enquiry: ${serviceType} — ${name.trim()} — Atlantic Drive Tours`,
       text: [
         `Name: ${name}`,

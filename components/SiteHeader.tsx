@@ -77,7 +77,7 @@ export default function SiteHeader() {
         role="region"
         aria-label="Mobile navigation"
         className={`overflow-hidden transition-[max-height,opacity] duration-200 ease-out md:hidden ${
-          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          menuOpen ? "max-h-[min(32rem,85vh)] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <nav className="border-t border-[var(--color-line)] bg-ivory px-6 py-4">

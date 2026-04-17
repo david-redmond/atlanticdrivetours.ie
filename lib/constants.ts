@@ -32,5 +32,8 @@ export const navLinks = [
   { href: "/tours", label: "Tours" },
   { href: "/transfers", label: "Transfers" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/reviews", label: "Reviews" },
+  { href: "/experiences", label: "Experiences" },
   { href: "/contact", label: "Contact" },
 ];

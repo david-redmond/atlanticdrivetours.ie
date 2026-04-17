@@ -11,6 +11,7 @@ import {
   companyName,
   phone,
   serviceArea,
+  socialLinks,
   whatsappNumber,
   whatsappPrefill,
 } from "@/lib/constants";
@@ -49,7 +50,7 @@ const structuredData = {
     "Executive transport",
     "Cruise ship transfers",
   ],
-  sameAs: [],
+  sameAs: [socialLinks.facebook, socialLinks.instagram],
 };
 
 function WhatsAppIcon({ className }: { className?: string }) {

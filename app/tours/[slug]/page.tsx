@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import StickyTourCta from "@/components/StickyTourCta";
 import TourGallery from "@/components/TourGallery";
@@ -10,37 +11,59 @@ import {
   getTourWhatsAppMessage,
   whatsappNumber,
 } from "@/lib/constants";
-import { getTourBySlug, type TourData } from "@/data/tours";
+import { getTourBySlug, getTourSlugs, type TourData } from "@/data/tours";
 
-const slug = "cliffs-of-moher-bunratty";
+export function generateStaticParams() {
+  return getTourSlugs().map((slug) => ({ slug }));
+}
 
-const tourForMeta = getTourBySlug(slug);
-const ogImage = tourForMeta?.images[0]
-  ? `${baseUrl}${tourForMeta.images[0].src}`
-  : `${baseUrl}/images/Cliffs-of-Moher-1.jpg`;
+type PageProps = { params: Promise<{ slug: string }> };
 
-export const metadata: Metadata = {
-  title: "Private Cliffs of Moher & Bunratty Castle Day Tour | Atlantic Drive Tours",
-  description:
-    "Premium, approachable private day tour with driver-guide, door-to-door pickup, ALL tickets included (Cliffs of Moher + Bunratty Castle & Folk Park), lunch included at a local spot.",
-  alternates: { canonical: `${baseUrl}/tours/${slug}` },
-  openGraph: {
-    title: "Private Cliffs of Moher & Bunratty Castle Day Tour | Atlantic Drive Tours",
-    description:
-      "Premium private day tour with driver-guide, door-to-door pickup, all tickets and lunch included.",
-    url: `${baseUrl}/tours/${slug}`,
-    type: "website",
-    images: [
-      { url: ogImage, width: 1200, height: 630, alt: tourForMeta?.title ?? "Cliffs of Moher & Bunratty Castle Day Tour" },
-      ...(tourForMeta?.images.slice(1, 4) ?? []).map((img) => ({
-        url: `${baseUrl}${img.src}`,
-        width: 1200,
-        height: 630,
-        alt: img.alt,
-      })),
-    ],
-  },
-};
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const tour = getTourBySlug(slug);
+  if (!tour) {
+    return { title: "Tour" };
+  }
+
+  const ogImage = tour.images[0]
+    ? `${baseUrl}${tour.images[0].src}`
+    : `${baseUrl}/images/Cliffs-of-Moher-1.jpg`;
+
+  return {
+    title: tour.title,
+    description: tour.shortDescription,
+    alternates: { canonical: `${baseUrl}/tours/${slug}` },
+    openGraph: {
+      title: `${tour.title} | Atlantic Drive Tours`,
+      description: tour.shortDescription,
+      url: `${baseUrl}/tours/${slug}`,
+      type: "website",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: tour.images[0]?.alt ?? tour.title,
+        },
+        ...(tour.images.slice(1, 4) ?? []).map((img) => ({
+          url: `${baseUrl}${img.src}`,
+          width: 1200,
+          height: 630,
+          alt: img.alt,
+        })),
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${tour.title} | Atlantic Drive Tours`,
+      description: tour.shortDescription,
+      images: [ogImage],
+    },
+  };
+}
 
 function buildContactUrl(tourTitle: string) {
   return `/reservation?tour=${encodeURIComponent(tourTitle)}`;
@@ -129,9 +152,10 @@ const BookIcon = () => (
   </svg>
 );
 
-export default function CliffsOfMoherBunrattyTourPage() {
+export default async function TourDetailPage({ params }: PageProps) {
+  const { slug } = await params;
   const tour = getTourBySlug(slug);
-  if (!tour) throw new Error(`Tour not found: ${slug}`);
+  if (!tour) notFound();
 
   const contactUrl = buildContactUrl(tour.title);
   const whatsappLink = buildWhatsAppLink(tour.title);
@@ -148,12 +172,11 @@ export default function CliffsOfMoherBunrattyTourPage() {
       <JsonLd tour={tour} />
       <StickyTourCta tourTitle={tour.title} />
       <article className="min-h-screen">
-        {/* Hero */}
         <section className="relative">
           <div className="relative h-[60vh] min-h-[400px] w-full">
             <Image
               src={tour.images[0]?.src ?? "/images/Cliffs-of-Moher-1.jpg"}
-              alt={tour.images[0]?.alt ?? "Cliffs of Moher"}
+              alt={tour.images[0]?.alt ?? tour.title}
               fill
               priority
               className="object-cover"
@@ -211,7 +234,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
         </section>
 
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-10 md:py-24">
-          {/* Overview */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule">
@@ -229,7 +251,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* Gallery */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -239,7 +260,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* Highlights */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -259,7 +279,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* Storyteller Time — distinct inset “nugget” after Highlights, before Sample itinerary */}
           {tour.stories && tour.stories.length > 0 && (
             <Reveal>
               <section
@@ -300,7 +319,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </Reveal>
           )}
 
-          {/* Sample itinerary */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -334,7 +352,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* What's included */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -354,7 +371,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* What to bring */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -371,7 +387,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* FAQs */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -392,7 +407,6 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* Testimonials */}
           <Reveal>
             <section className="mb-12 md:mb-20">
               <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
@@ -418,9 +432,11 @@ export default function CliffsOfMoherBunrattyTourPage() {
             </section>
           </Reveal>
 
-          {/* Final CTA */}
           <Reveal>
-            <section id="tour-bottom-cta" className="section-warm rounded-xl px-5 py-8 md:px-10 md:py-12 border border-[var(--color-line)]">
+            <section
+              id="tour-bottom-cta"
+              className="section-warm rounded-xl px-5 py-8 md:px-10 md:py-12 border border-[var(--color-line)]"
+            >
               <h2 className="text-xl font-semibold text-[var(--text-primary)]">
                 Tell us your date, pickup location, group size, and interests
               </h2>

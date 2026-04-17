@@ -27,9 +27,6 @@ export const metadata: Metadata = {
   },
   description:
     "Premium private tours and executive transport across Ireland for international guests.",
-  alternates: {
-    canonical: baseUrl,
-  },
   openGraph: {
     title: "Atlantic Drive Tours",
     description:
@@ -65,9 +62,15 @@ export default function RootLayout({
             <AnalyticsListener />
           </Suspense>
           <div className="min-h-screen bg-ivory">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:shadow focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]"
+          >
+            Skip to main content
+          </a>
           <SiteHeader />
 
-          <main>{children}</main>
+          <main id="main-content">{children}</main>
 
           <footer className="bg-ivory-muted">
             <div className="mx-auto grid max-w-6xl gap-10 px-6 py-12 md:grid-cols-3">
@@ -100,6 +103,15 @@ export default function RootLayout({
                 </Link>
                 <Link href="/gallery" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
                   Gallery
+                </Link>
+                <Link href="/about" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
+                  About
+                </Link>
+                <Link href="/reviews" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
+                  Reviews
+                </Link>
+                <Link href="/experiences" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
+                  Experiences
                 </Link>
                 <Link href="/reservation" className="block text-neutral-700 hover:text-[var(--color-brand)] transition-colors">
                   Book now free
