@@ -6,6 +6,7 @@ import { baseUrl, phone, whatsappNumber, whatsappPrefill } from "@/lib/constants
 export const metadata: Metadata = {
   title: "Thank You",
   description: "We have received your enquiry.",
+  robots: { index: false, follow: true },
   alternates: { canonical: `${baseUrl}/thank-you` },
   openGraph: {
     title: "Thank You",
