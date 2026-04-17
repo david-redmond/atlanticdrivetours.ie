@@ -28,7 +28,7 @@ Copy [`.env.example`](.env.example) to `.env.local` and set:
 
 Restart the dev server after changing `.env.local`.
 
-For **Docker** images, pass `NEXT_PUBLIC_GA_ID` at **build** time (it is inlined when `next build` runs), for example: `docker build --build-arg NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX -t your-image .`
+For **Docker**, the image is **multi-stage**: the build stage runs `npm ci` (including devDependencies) and `next build`; the final image only contains the Next **standalone** server and static assets, and runs `node server.js` on **port 3000**. Pass GA at build time, for example: `docker build --build-arg NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX -t your-image .`
 
 ## Content
 
