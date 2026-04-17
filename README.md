@@ -6,7 +6,7 @@ Marketing site for **Atlantic Drive Tours**: private day tours, transfers, galle
 
 - Tour listing and **dynamic tour pages** from [`data/tours.json`](data/tours.json) (`/tours/[slug]`)
 - Contact and reservation forms with **[Resend](https://resend.com)** email APIs
-- Optional **GA4** after cookie consent (`NEXT_PUBLIC_GA_ID`)
+- Optional **GA4** after cookie consent (`GA_MEASUREMENT_ID` at runtime, or `NEXT_PUBLIC_GA_ID` for build/dev)
 - SEO: per-page metadata, [`app/sitemap.ts`](app/sitemap.ts), [`app/robots.ts`](app/robots.ts)
 - Legacy URLs `/day-tours` redirect to `/tours` ([`next.config.ts`](next.config.ts))
 
@@ -24,11 +24,12 @@ Open [http://localhost:3000](http://localhost:3000).
 Copy [`.env.example`](.env.example) to `.env.local` and set:
 
 - `RESEND_API_KEY`, `EMAIL_TO`, `EMAIL_FROM` — for live email (see Resend docs for verified sender domain)
-- `NEXT_PUBLIC_GA_ID` — optional GA4 measurement ID
+- `GA_MEASUREMENT_ID` — optional GA4 ID (recommended for Docker Compose: set under `environment`, no rebuild)
+- `NEXT_PUBLIC_GA_ID` — optional; same ID for local `next dev` or if you inject GA at **image build** time
 
 Restart the dev server after changing `.env.local`.
 
-For **Docker**, the image is **multi-stage**: the build stage runs `npm ci` (including devDependencies) and `next build`; the final image only contains the Next **standalone** server and static assets, and runs `node server.js` on **port 3000**. Pass GA at build time, for example: `docker build --build-arg NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX -t your-image .`
+For **Docker**, the image is **multi-stage** and listens on **port 3000** inside the container (`node server.js`). Map the host port explicitly, e.g. `ports: ["3300:3000"]`. Set **`GA_MEASUREMENT_ID`** (not `NEXT_PUBLIC_GA_ID`) in Compose so GA works **without** rebuilding the image. Optional build-time GA: `docker build --build-arg NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX -t your-image .`
 
 ## Content
 

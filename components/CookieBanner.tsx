@@ -9,11 +9,14 @@ import {
   setStoredConsent,
 } from "@/lib/analytics";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "";
-
 type ConsentState = "granted" | "denied" | null;
 
-export default function CookieBanner() {
+type Props = {
+  /** GA4 measurement ID from the server layout (`GA_MEASUREMENT_ID` or build-time `NEXT_PUBLIC_GA_ID`). */
+  gaId: string;
+};
+
+export default function CookieBanner({ gaId: GA_ID }: Props) {
   // Start with null so server and client match (no hydration mismatch).
   const [consent, setConsent] = useState<ConsentState>(null);
   const [hasMounted, setHasMounted] = useState(false);

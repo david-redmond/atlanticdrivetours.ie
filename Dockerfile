@@ -24,6 +24,7 @@ ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
 # Same keys as `.env.example` — override via compose / k8s / `docker run -e`
+ENV GA_MEASUREMENT_ID=""
 ENV RESEND_API_KEY=""
 ENV EMAIL_FROM=""
 ENV EMAIL_TO=""

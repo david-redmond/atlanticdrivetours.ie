@@ -15,6 +15,10 @@ import {
   phone,
   serviceArea,
 } from "@/lib/constants";
+import { getGaMeasurementId } from "@/lib/ga-config";
+
+/** Read GA (and other server env) on each request so Docker Compose `environment` works. */
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -54,6 +58,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const gaMeasurementId = getGaMeasurementId();
+
   return (
     <html lang="en">
       <body className={`${roboto.variable} ${roboto.className} antialiased`}>
@@ -138,7 +144,7 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
-          <CookieBanner />
+          <CookieBanner gaId={gaMeasurementId} />
         </TranslationProvider>
       </body>
     </html>
