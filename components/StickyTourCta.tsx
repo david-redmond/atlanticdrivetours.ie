@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const HERO_CTA_ID = "tour-hero-cta";
 const BOTTOM_CTA_ID = "tour-bottom-cta";
@@ -79,6 +80,9 @@ export default function StickyTourCta({ tourTitle }: { tourTitle: string }) {
         <Link
           href={contactUrl}
           tabIndex={show ? 0 : -1}
+          onClick={() =>
+            trackEvent("cta_click", { location: "sticky", tour: tourTitle })
+          }
           className="inline-block rounded-xl bg-[var(--color-brand)] text-white px-5 py-3 text-sm font-medium shadow-[0_4px_14px_rgba(15,42,29,0.2)] hover:bg-[var(--color-brand-hover)] focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand)] transition-colors"
           aria-label="Book now for free – go to contact form"
         >

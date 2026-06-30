@@ -11,12 +11,14 @@ import {
 import { useRouter } from "next/navigation";
 import { enquirySchema, type EnquiryInput } from "@/lib/validators";
 import { trackEvent } from "@/lib/analytics";
+import { getStoredAttribution } from "@/lib/attribution";
 
 const serviceOptions: EnquiryInput["serviceType"][] = [
   "Private Tour",
   "Multi-day Tour",
   "Golf Transfers",
   "Airport Transfer",
+  "Cruise Transfer",
   "Executive / Corporate",
 ];
 
@@ -26,6 +28,23 @@ const groupSizeOptions: EnquiryInput["groupSize"][] = [
   "7–12",
   "13–24",
   "25+",
+];
+
+const dateFlexibilityOptions = [
+  "My dates are fixed",
+  "Flexible by a few days",
+  "Flexible by a week or more",
+  "Not sure yet",
+];
+
+const preferredContactOptions = ["Email", "WhatsApp", "Phone call", "Any"];
+
+const addOnOptions = [
+  "Airport transfer",
+  "Extra day / second region",
+  "Golf day",
+  "Restaurant recommendations",
+  "Child seats",
 ];
 
 const countryOptions = [
@@ -55,8 +74,11 @@ const initialFormState = {
   groupSize: "1–2" as EnquiryInput["groupSize"],
   startDate: "",
   endDate: "",
+  dateFlexibility: "",
+  preferredContact: "",
   pickupLocation: "",
   message: "",
+  addOns: [] as string[],
   consent: false,
   companyWebsite: "",
   tour: "",
@@ -100,6 +122,7 @@ export default function EnquiryForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const tourInputRef = useRef<HTMLInputElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
+  const startedRef = useRef(false);
   const [stickyBarVisible, setStickyBarVisible] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -136,6 +159,10 @@ export default function EnquiryForm({
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent("enquiry_started", { method: "enquiry_form" });
+    }
     const target = e.target;
     const name = target.name;
     const value =
@@ -145,6 +172,19 @@ export default function EnquiryForm({
     setFormState((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const toggleAddOn = (value: string) => {
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent("enquiry_started", { method: "enquiry_form" });
+    }
+    setFormState((prev) => ({
+      ...prev,
+      addOns: prev.addOns.includes(value)
+        ? prev.addOns.filter((a) => a !== value)
+        : [...prev.addOns, value],
     }));
   };
 
@@ -163,6 +203,7 @@ export default function EnquiryForm({
   );
 
   const isExecutive = formState.serviceType === "Executive / Corporate";
+  const isMultiDay = formState.serviceType === "Multi-day Tour";
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -198,9 +239,13 @@ export default function EnquiryForm({
 
     setIsSubmitting(true);
 
+    const endDate = (result.data.endDate ?? "").trim();
     const body = {
       ...result.data,
-      dates: `${result.data.startDate} – ${result.data.endDate}`,
+      ...getStoredAttribution(),
+      dates: endDate
+        ? `${result.data.startDate} – ${endDate}`
+        : result.data.startDate,
     };
 
     try {
@@ -221,6 +266,11 @@ export default function EnquiryForm({
       }
 
       trackEvent("enquiry_submitted", {
+        method: "enquiry_form",
+        service_type: result.data.serviceType,
+      });
+      // GA4 recommended lead event for conversion tracking.
+      trackEvent("generate_lead", {
         method: "enquiry_form",
         service_type: result.data.serviceType,
       });
@@ -253,6 +303,16 @@ export default function EnquiryForm({
             {errors.form}
           </p>
         )}
+
+        {/* Screen-reader status: announces validation errors after a failed submit. */}
+        <p className="sr-only" role="status" aria-live="polite">
+          {(() => {
+            const count = Object.keys(errors).filter((k) => k !== "form").length;
+            return count > 0
+              ? `There ${count === 1 ? "is" : "are"} ${count} field${count === 1 ? "" : "s"} that need your attention. Please review the highlighted fields below.`
+              : "";
+          })()}
+        </p>
 
         {formState.serviceType === "Private Tour" && formState.tour && (
           <div className="rounded-lg border border-[var(--color-line)] bg-neutral-50/80 px-4 py-3 text-sm">
@@ -493,7 +553,7 @@ export default function EnquiryForm({
           <div className="grid gap-6 sm:grid-cols-2">
             <div>
               <label className={labelClass} htmlFor="startDate">
-                Start date
+                {isMultiDay ? "Start date" : "Preferred date"}
               </label>
               <input
                 id="startDate"
@@ -511,25 +571,65 @@ export default function EnquiryForm({
                 </p>
               )}
             </div>
+            {isMultiDay && (
+              <div>
+                <label className={labelClass} htmlFor="endDate">
+                  End date
+                </label>
+                <input
+                  id="endDate"
+                  name="endDate"
+                  type="date"
+                  className={fieldClass}
+                  value={formState.endDate}
+                  onChange={handleChange}
+                  required={isMultiDay}
+                  aria-required={isMultiDay}
+                />
+                {errors.endDate && (
+                  <p className="mt-2 text-xs text-red-600" role="alert">
+                    {errors.endDate}
+                  </p>
+                )}
+              </div>
+            )}
             <div>
-              <label className={labelClass} htmlFor="endDate">
-                End date
+              <label className={labelClass} htmlFor="dateFlexibility">
+                Date flexibility <span className="text-ink-muted font-normal">(optional)</span>
               </label>
-              <input
-                id="endDate"
-                name="endDate"
-                type="date"
+              <select
+                id="dateFlexibility"
+                name="dateFlexibility"
                 className={fieldClass}
-                value={formState.endDate}
+                value={formState.dateFlexibility}
                 onChange={handleChange}
-                required
-                aria-required="true"
-              />
-              {errors.endDate && (
-                <p className="mt-2 text-xs text-red-600" role="alert">
-                  {errors.endDate}
-                </p>
-              )}
+              >
+                <option value="">Select…</option>
+                {dateFlexibilityOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className={labelClass} htmlFor="preferredContact">
+                Preferred contact <span className="text-ink-muted font-normal">(optional)</span>
+              </label>
+              <select
+                id="preferredContact"
+                name="preferredContact"
+                className={fieldClass}
+                value={formState.preferredContact}
+                onChange={handleChange}
+              >
+                <option value="">Select…</option>
+                {preferredContactOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="sm:col-span-2">
               <label className={labelClass} htmlFor="pickupLocation">
@@ -586,7 +686,7 @@ export default function EnquiryForm({
 
         <div>
           <label className={labelClass} htmlFor="message">
-            Notes
+            Notes <span className="text-ink-muted font-normal">(optional)</span>
           </label>
           <textarea
             id="message"
@@ -595,9 +695,7 @@ export default function EnquiryForm({
             className={fieldClass}
             value={formState.message}
             onChange={handleChange}
-            required
-            aria-required="true"
-            placeholder="e.g. dietary needs, accessibility, or special requests"
+            placeholder="e.g. interests, dietary needs, accessibility, or special requests"
           />
           {errors.message && (
             <p className="mt-2 text-xs text-red-600" role="alert">
@@ -605,6 +703,41 @@ export default function EnquiryForm({
             </p>
           )}
         </div>
+
+        <fieldset>
+          <legend className={labelClass}>
+            Add to your trip{" "}
+            <span className="text-ink-muted font-normal">(optional)</span>
+          </legend>
+          <p className="mb-3 text-xs text-ink-muted">
+            Tick anything you&apos;d like us to include in your quote — no
+            commitment.
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {addOnOptions.map((option) => {
+              const id = `addon-${option.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+              const checked = formState.addOns.includes(option);
+              return (
+                <label
+                  key={option}
+                  htmlFor={id}
+                  className="flex cursor-pointer items-center gap-3 rounded-md border border-[var(--color-line)] bg-white px-3 py-2.5 text-sm text-ink transition hover:border-[var(--color-brand)]"
+                >
+                  <input
+                    id={id}
+                    type="checkbox"
+                    name="addOns"
+                    value={option}
+                    checked={checked}
+                    onChange={() => toggleAddOn(option)}
+                    className="h-5 w-5 shrink-0 rounded border-[var(--color-line)] text-[var(--color-brand)] focus:ring-[var(--color-brand)]"
+                  />
+                  <span>{option}</span>
+                </label>
+              );
+            })}
+          </div>
+        </fieldset>
 
         <div>
           <div className="flex items-start gap-3">

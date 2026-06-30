@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Script from "next/script";
 import {
   CONSENT_KEY,
@@ -30,6 +30,37 @@ export default function CookieBanner({ gaId: GA_ID }: Props) {
   }, []);
 
   const isOpen = hasMounted && consent === null;
+  const bannerRef = useRef<HTMLDivElement>(null);
+  const acceptButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Focus management + focus trap while the consent dialog is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const node = bannerRef.current;
+    if (!node) return;
+
+    acceptButtonRef.current?.focus();
+
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const focusables = node.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])'
+      );
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    node.addEventListener("keydown", handleKey);
+    return () => node.removeEventListener("keydown", handleKey);
+  }, [isOpen]);
 
   useEffect(() => {
     const handlePreferences = () => {
@@ -84,6 +115,7 @@ export default function CookieBanner({ gaId: GA_ID }: Props) {
 
       {isOpen && (
         <div
+          ref={bannerRef}
           className="cookie-banner fixed bottom-4 left-1/2 z-40 w-[92%] max-w-2xl -translate-x-1/2 rounded-lg border px-4 py-3 sm:py-4 shadow-sm"
           role="dialog"
           aria-modal="true"
@@ -103,6 +135,7 @@ export default function CookieBanner({ gaId: GA_ID }: Props) {
             </div>
             <div className="flex flex-col gap-2 sm:flex-row sm:shrink-0">
               <button
+                ref={acceptButtonRef}
                 type="button"
                 onClick={acceptCookies}
                 className="btn btn-primary text-sm py-2.5"

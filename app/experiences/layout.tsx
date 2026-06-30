@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import { baseUrl } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Experiences",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Curated Irish Experiences | Atlantic Drive Tours",
   description:
-    "Multi-day and curated travel experiences in Ireland with Atlantic Drive Tours.",
-  alternates: { canonical: `${baseUrl}/experiences` },
-  openGraph: {
-    title: "Experiences | Atlantic Drive Tours",
-    description:
-      "Multi-day and curated travel experiences in Ireland with Atlantic Drive Tours.",
-    url: `${baseUrl}/experiences`,
-    type: "website",
-  },
-};
+    "Curated private experiences across the south-west of Ireland — the Wild Atlantic Way, the Ring of Kerry, Cork's harbour towns and tailored multi-day journeys.",
+  path: "/experiences",
+  image: "/images/ring-of-kerry.jpg",
+});
 
 export default function ExperiencesLayout({
   children,

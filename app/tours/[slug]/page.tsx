@@ -5,6 +5,9 @@ import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import StickyTourCta from "@/components/StickyTourCta";
 import TourGallery from "@/components/TourGallery";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/JsonLd";
+import TrackView from "@/components/TrackView";
+import TrackedLink from "@/components/TrackedLink";
 import {
   baseUrl,
   companyName,
@@ -12,6 +15,9 @@ import {
   whatsappNumber,
 } from "@/lib/constants";
 import { getTourBySlug, getTourSlugs, type TourData } from "@/data/tours";
+import { getCounty } from "@/data/locations";
+import { getGuide } from "@/data/guides";
+import { getPillar } from "@/data/pillars";
 
 export function generateStaticParams() {
   return getTourSlugs().map((slug) => ({ slug }));
@@ -93,23 +99,23 @@ function JsonLd({ tour }: { tour: TourData }) {
       "@type": "ItemList",
       itemListElement: itemList,
     },
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      priceSpecification: tour.startingFrom
-        ? { "@type": "PriceSpecification", price: "0", valueAddedTaxIncluded: true }
-        : undefined,
-    },
     areaServed: { "@type": "Country", name: "Ireland" },
     provider: {
       "@type": "LocalBusiness",
       name: companyName,
       url: baseUrl,
     },
-    additionalType: "https://schema.org/Product",
     additionalProperty: [
-      { "@type": "PropertyValue", name: "includesTickets", value: true },
-      { "@type": "PropertyValue", name: "includesLunch", value: true },
+      {
+        "@type": "PropertyValue",
+        name: "includesTickets",
+        value: tour.ticketsIncluded ?? false,
+      },
+      {
+        "@type": "PropertyValue",
+        name: "includesLunch",
+        value: tour.lunchIncluded ?? false,
+      },
     ],
   };
 
@@ -160,16 +166,61 @@ export default async function TourDetailPage({ params }: PageProps) {
   const contactUrl = buildContactUrl(tour.title);
   const whatsappLink = buildWhatsAppLink(tour.title);
 
+  const includesTickets = tour.ticketsIncluded ?? false;
+  const includesLunch = tour.lunchIncluded ?? false;
+
   const badges = [
     "Private",
-    "Tickets Included",
-    "Lunch Included",
+    ...(includesTickets ? ["Tickets included"] : []),
+    ...(includesLunch ? ["Lunch included"] : []),
     "Door-to-door",
   ];
 
+  const inclusionPhrase =
+    includesTickets && includesLunch
+      ? ", all entry tickets included, and lunch at a local spot"
+      : includesTickets
+        ? " and all entry tickets included"
+        : includesLunch
+          ? " and lunch at a local spot"
+          : ", planned and tailored around you";
+
+  const heroSummary = `A premium, approachable private day tour with your own driver-guide. Door-to-door pickup${inclusionPhrase} — so you can relax and enjoy the day.`;
+
+  const overflowHandled =
+    includesTickets && includesLunch
+      ? "tickets, lunch, and the route"
+      : includesTickets
+        ? "tickets and the route"
+        : includesLunch
+          ? "lunch and the route"
+          : "the planning, driving, and route";
+
+  const relatedCounties = (tour.relatedCountySlugs ?? [])
+    .map((slug) => getCounty(slug))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c));
+  const relatedPillars = (tour.relatedPillarSlugs ?? [])
+    .map((slug) => getPillar(slug))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const relatedGuides = (tour.relatedGuideSlugs ?? [])
+    .map((slug) => getGuide(slug))
+    .filter((g): g is NonNullable<typeof g> => Boolean(g));
+  const hasKeepExploring =
+    relatedCounties.length > 0 ||
+    relatedPillars.length > 0 ||
+    relatedGuides.length > 0;
+
   return (
     <>
+      <TrackView event="tour_view" params={{ tour: tour.slug }} />
       <JsonLd tour={tour} />
+      <BreadcrumbJsonLd
+        crumbs={[
+          { name: "Tours", path: "/tours" },
+          { name: tour.title, path: `/tours/${tour.slug}` },
+        ]}
+      />
+      <FaqJsonLd faqs={tour.faqs} />
       <StickyTourCta tourTitle={tour.title} />
       <article className="min-h-screen">
         <section className="relative">
@@ -194,10 +245,7 @@ export default async function TourDetailPage({ params }: PageProps) {
                   {tour.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base text-ink-muted">
-                  A premium, approachable private day tour with your own
-                  driver-guide. Door-to-door pickup, all entry tickets included,
-                  and lunch at a local spot — so you can relax and enjoy the
-                  day.
+                  {heroSummary}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {badges.map((b) => (
@@ -210,23 +258,28 @@ export default async function TourDetailPage({ params }: PageProps) {
                   ))}
                 </div>
                 <div className="mt-8 flex flex-wrap gap-4">
-                  <Link
+                  <TrackedLink
                     href={contactUrl}
+                    event="cta_click"
+                    eventParams={{ location: "tour_hero", tour: tour.slug }}
                     className="btn btn-primary"
-                    aria-label="Book now for free – go to contact form"
+                    ariaLabel="Book now free – go to reservation form"
                   >
-                    Book now for free
-                  </Link>
-                  <a
+                    Book now free
+                  </TrackedLink>
+                  <TrackedLink
                     href={whatsappLink}
+                    external
+                    event="whatsapp_click"
+                    eventParams={{ location: "tour_hero", tour: tour.slug }}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline inline-flex items-center gap-2"
-                    aria-label="Get more info on WhatsApp"
+                    ariaLabel="Get more info on WhatsApp"
                   >
                     <WhatsAppIcon />
                     Get more info
-                  </a>
+                  </TrackedLink>
                 </div>
               </div>
             </Reveal>
@@ -245,8 +298,8 @@ export default async function TourDetailPage({ params }: PageProps) {
               <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
                 This tour is ideal for couples, families, small groups, and
                 executive travellers who want a single day packed with iconic
-                sights and zero hassle — we handle tickets, lunch, and the
-                route so you can focus on the experience.
+                sights and zero hassle — we handle {overflowHandled} so you can
+                focus on the experience.
               </p>
             </section>
           </Reveal>
@@ -433,6 +486,99 @@ export default async function TourDetailPage({ params }: PageProps) {
           </Reveal>
 
           <Reveal>
+            <section className="mb-12 md:mb-20">
+              <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
+                Extend your trip
+              </h2>
+              <p className="mb-6 text-[var(--text-secondary)]">
+                Many guests pair this day with a transfer or an extra region.
+                Add any of these when you enquire and we&apos;ll build it into
+                one tailored quote.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-3">
+                <TrackedLink
+                  href="/reservation?service=Airport%20Transfer"
+                  event="cta_click"
+                  eventParams={{ location: "tour_extend", option: "airport_transfer", tour: tour.slug }}
+                  className="group block rounded-xl border border-[var(--color-line)] bg-white p-5 transition hover:border-[var(--color-accent)] hover:shadow-md"
+                >
+                  <span className="block font-medium text-[var(--text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                    Add an airport transfer
+                  </span>
+                  <span className="mt-2 block text-sm text-[var(--text-secondary)]">
+                    Shannon, Cork or Kerry — meet &amp; greet, luggage space.
+                  </span>
+                </TrackedLink>
+                <TrackedLink
+                  href="/reservation?service=Multi-day%20Tour"
+                  event="cta_click"
+                  eventParams={{ location: "tour_extend", option: "multi_day", tour: tour.slug }}
+                  className="group block rounded-xl border border-[var(--color-line)] bg-white p-5 transition hover:border-[var(--color-accent)] hover:shadow-md"
+                >
+                  <span className="block font-medium text-[var(--text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                    Make it multi-day
+                  </span>
+                  <span className="mt-2 block text-sm text-[var(--text-secondary)]">
+                    Add a second region for a tailored multi-day journey.
+                  </span>
+                </TrackedLink>
+                <TrackedLink
+                  href="/reservation?service=Golf%20Transfers"
+                  event="cta_click"
+                  eventParams={{ location: "tour_extend", option: "golf_day", tour: tour.slug }}
+                  className="group block rounded-xl border border-[var(--color-line)] bg-white p-5 transition hover:border-[var(--color-accent)] hover:shadow-md"
+                >
+                  <span className="block font-medium text-[var(--text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                    Add a golf day
+                  </span>
+                  <span className="mt-2 block text-sm text-[var(--text-secondary)]">
+                    Tee-time scheduling and room for the clubs.
+                  </span>
+                </TrackedLink>
+              </div>
+            </section>
+          </Reveal>
+
+          {hasKeepExploring && (
+            <Reveal>
+              <section className="mb-12 md:mb-20">
+                <h2 className="text-2xl font-semibold text-[var(--text-primary)] accent-rule mb-4 md:mb-6">
+                  Keep exploring
+                </h2>
+                <div className="flex flex-wrap gap-3">
+                  {relatedCounties.map((county) => (
+                    <Link
+                      key={`county-${county.slug}`}
+                      href={`/ireland/${county.slug}`}
+                      className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2"
+                    >
+                      Tours in County {county.name}
+                    </Link>
+                  ))}
+                  {relatedPillars.map((pillar) => (
+                    <Link
+                      key={`pillar-${pillar.slug}`}
+                      href={`/${pillar.slug}`}
+                      className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2"
+                    >
+                      {pillar.title}
+                    </Link>
+                  ))}
+                  {relatedGuides.map((guide) => (
+                    <Link
+                      key={`guide-${guide.slug}`}
+                      href={`/guides/${guide.slug}`}
+                      className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--color-accent)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2"
+                    >
+                      Guide: {guide.title}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            </Reveal>
+          )}
+
+          <Reveal>
             <section
               id="tour-bottom-cta"
               className="section-warm rounded-xl px-5 py-8 md:px-10 md:py-12 border border-[var(--color-line)]"
@@ -445,23 +591,28 @@ export default async function TourDetailPage({ params }: PageProps) {
                 obligation.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <Link
+                <TrackedLink
                   href={contactUrl}
+                  event="cta_click"
+                  eventParams={{ location: "tour_bottom", tour: tour.slug }}
                   className="btn btn-primary"
-                  aria-label="Book now for free – go to contact form"
+                  ariaLabel="Book now free – go to reservation form"
                 >
-                  Book now for free
-                </Link>
-                <a
+                  Book now free
+                </TrackedLink>
+                <TrackedLink
                   href={whatsappLink}
+                  external
+                  event="whatsapp_click"
+                  eventParams={{ location: "tour_bottom", tour: tour.slug }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline inline-flex items-center gap-2"
-                  aria-label="Get more info on WhatsApp"
+                  ariaLabel="Get more info on WhatsApp"
                 >
                   <WhatsAppIcon />
                   Get more info
-                </a>
+                </TrackedLink>
               </div>
             </section>
           </Reveal>

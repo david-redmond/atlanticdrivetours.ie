@@ -67,7 +67,7 @@
     "tourist-trips": {
       "title": "Tourist Trips",
       "description": "Explore the beautiful landscapes and attractions of Ireland.",
-      "fullDescription": "Discover the stunning beauty of Ireland with our guided tourist trips. From the dramatic cliffs of Moher to the vibrant streets of Dublin, we offer unforgettable journeys through Ireland's most iconic destinations. Our comfortable coaches and knowledgeable guides ensure a memorable experience.",
+      "fullDescription": "Discover the stunning beauty of Ireland with our guided tourist trips. From the dramatic cliffs of Moher to the vibrant streets of Galway, we offer unforgettable journeys through Ireland's most iconic destinations. Our comfortable vehicles and knowledgeable guides ensure a memorable experience.",
       "features": [
         "Comfortable air-conditioned coaches",
         "Experienced tour guides",
@@ -79,7 +79,7 @@
     "airport-transfers": {
       "title": "Airport Transfers",
       "description": "Reliable and comfortable airport transfer services to and from all major Irish airports.",
-      "fullDescription": "Start or end your journey in comfort with our professional airport transfer services. We provide punctual, reliable transfers to and from Dublin, Shannon, Cork, and Knock airports. Our experienced drivers monitor flight schedules to ensure timely pickups, and our modern vehicles accommodate up to 8 passengers with luggage.",
+      "fullDescription": "Start or end your journey in comfort with our professional airport transfer services. We provide punctual, reliable transfers to and from Shannon, Cork, Kerry, and Knock airports. Our experienced drivers monitor flight schedules to ensure timely pickups, and our modern vehicles accommodate up to 8 passengers with luggage.",
       "features": [
         "Flight monitoring for on-time pickups",
         "Meet and greet service available",
@@ -170,9 +170,9 @@
     "required": "*",
     "successMessage": "Thank you for your message! We'll get back to you soon.",
     "errorMessage": "Something went wrong. Please try again later.",
-    "addressLine1": "123 Main Street",
-    "addressLine2": "Dublin, Ireland",
-    "addressLine3": "D01 1234"
+    "addressLine1": "Cork, Ireland",
+    "addressLine2": "Serving Cork, Kerry, Clare, Limerick & Galway",
+    "addressLine3": ""
   },
   "footer": {
     "description": "Providing quality transportation and tour services across Ireland. From school transport to guided tours, airport transfers to private driver hire.",
@@ -222,7 +222,7 @@
       "duration": "7 Days",
       "highlights": [
         "Visit the Cliffs of Moher and Ring of Kerry",
-        "Explore historic Dublin and Galway",
+        "Explore historic Cork and Galway",
         "Experience traditional Irish music and culture",
         "Stay in charming Irish accommodations"
       ]
@@ -232,7 +232,7 @@
       "description": "A perfect introduction to Ireland's highlights. This tour combines the best of Irish history, culture, and natural beauty in a convenient package designed for first-time visitors.",
       "duration": "5 Days",
       "highlights": [
-        "Guided tours of Dublin and Cork",
+        "Guided tours of Cork and Killarney",
         "Visit to Blarney Castle",
         "Scenic drives through Irish countryside",
         "Traditional Irish pub experience"
@@ -272,7 +272,7 @@
     "viewServices": "View Tours",
     "review1": {
       "name": "Sarah Mitchell",
-      "location": "Dublin, Ireland",
+      "location": "Cork, Ireland",
       "date": "2 weeks ago",
       "service": "The Emerald Experience",
       "comment": "Absolutely fantastic experience! Our guide was knowledgeable and friendly, and we saw so many beautiful places. The accommodations were excellent and the itinerary was perfectly planned. Highly recommend!"

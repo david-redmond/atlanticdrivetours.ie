@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import EnquiryForm from "@/components/EnquiryForm";
+import TrackedLink from "@/components/TrackedLink";
 import Reveal from "@/components/Reveal";
 import {
   baseUrl,
@@ -11,12 +12,12 @@ import {
 export const metadata: Metadata = {
   title: "Book now free",
   description:
-    "No payment today. Enquire about private tours and executive transport across Ireland. We'll confirm availability and send a tailored plan.",
+    "No payment today. Enquire about private tours and executive transport in the south-west of Ireland. We'll confirm availability and send a tailored plan.",
   alternates: { canonical: `${baseUrl}/reservation` },
   openGraph: {
     title: "Book now free",
     description:
-      "No payment today. Enquire about private tours and executive transport across Ireland.",
+      "No payment today. Enquire about private tours and executive transport in the south-west of Ireland.",
     url: `${baseUrl}/reservation`,
     type: "website",
   },
@@ -64,16 +65,19 @@ export default async function ReservationPage({
               confirm availability and send a tailored plan. {serviceArea}.
             </p>
             <p className="mt-4">
-              <a
+              <TrackedLink
                 href={whatsappLink}
+                external
+                event="whatsapp_click"
+                eventParams={{ location: "reservation" }}
                 className="inline-flex items-center gap-2 text-sm text-neutral-600 underline decoration-neutral-300 underline-offset-2 hover:text-[var(--color-brand)] hover:decoration-[var(--color-brand)] transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Get more info on WhatsApp"
+                ariaLabel="Get more info on WhatsApp"
               >
                 <WhatsAppIcon className="h-4 w-4 shrink-0" />
                 Get more info
-              </a>
+              </TrackedLink>
             </p>
           </div>
         </Reveal>

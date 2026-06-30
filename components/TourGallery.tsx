@@ -27,14 +27,22 @@ export default function TourGallery({ images, className = "" }: TourGalleryProps
 
   useEffect(() => {
     if (lightboxIndex === null) return;
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
+      // Trap focus: the only control is the close button, so keep focus on it.
+      if (e.key === "Tab") {
+        e.preventDefault();
+        closeButtonRef.current?.focus();
+      }
     };
-    window.addEventListener("keydown", handleEscape);
+    window.addEventListener("keydown", handleKey);
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
     };
   }, [lightboxIndex, close]);

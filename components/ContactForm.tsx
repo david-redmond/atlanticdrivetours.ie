@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useRef, useState, type ChangeEvent, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { trackEvent } from "@/lib/analytics";
 
 const fieldClass =
   "w-full rounded-md border border-[var(--color-line)] bg-white px-4 py-3 text-sm text-ink focus:border-[var(--color-brand)] focus:outline-none focus:ring-1 focus:ring-[var(--color-brand)] min-h-[44px]";
@@ -25,11 +26,16 @@ export default function ContactForm() {
   const [form, setForm] = useState<FormState>(initial);
   const [errors, setErrors] = useState<Partial<FormState> & { form?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const startedRef = useRef(false);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+    if (!startedRef.current) {
+      startedRef.current = true;
+      trackEvent("enquiry_started", { form: "contact" });
+    }
     setForm((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormState]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -72,6 +78,7 @@ export default function ContactForm() {
         return;
       }
 
+      trackEvent("generate_lead", { form: "contact" });
       router.push("/thank-you");
     } catch {
       setErrors({ form: "Something went wrong. Please try again." });

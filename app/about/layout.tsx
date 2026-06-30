@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { baseUrl } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About",
+export const metadata: Metadata = buildPageMetadata({
+  title: "About Your Driver-Guide | Atlantic Drive Tours",
   description:
-    "Learn about Atlantic Drive Tours — private tours and executive transport across Ireland.",
-  alternates: { canonical: `${baseUrl}/about` },
-  openGraph: {
-    title: "About | Atlantic Drive Tours",
-    description:
-      "Learn about Atlantic Drive Tours — private tours and executive transport across Ireland.",
-    url: `${baseUrl}/about`,
-    type: "website",
-  },
-};
+    "Meet the owner-operated team behind Atlantic Drive Tours — licensed, local driver-guides offering private tours and executive transfers across the south-west of Ireland.",
+  path: "/about",
+});
 
 export default function AboutLayout({
   children,

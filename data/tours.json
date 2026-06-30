@@ -1,12 +1,16 @@
 [
   {
     "slug": "cliffs-of-moher-bunratty",
+    "relatedCountySlugs": ["clare"],
+    "relatedGuideSlugs": ["how-to-visit-cliffs-of-moher"],
+    "relatedPillarSlugs": ["wild-atlantic-way"],
     "title": "Private Cliffs of Moher + Bunratty Castle Day Tour",
     "shortDescription": "Premium private day tour with door-to-door pickup, all entry tickets and lunch included. Cliffs of Moher, O'Brien's Tower, Bunratty Castle & Folk Park, and coastal stops.",
     "description": "A premium, approachable private day tour with your own driver-guide. Door-to-door pickup, all entry tickets included, and lunch at a local spot. Experience the Cliffs of Moher, O'Brien's Tower, Bunratty Castle & Folk Park, and coastal scenery at your pace.",
     "duration": "Full day (approx. 9–10 hours)",
     "durationHours": 10,
-    "startingFrom": "€500",
+    "ticketsIncluded": true,
+    "lunchIncluded": true,
     "includes": [
       "Private luxury vehicle with professional driver-guide",
       "Door-to-door pickup and drop-off (hotel, port, or airport by arrangement)",
@@ -107,9 +111,284 @@
     "testimonials": [
       { "name": "Sarah & James", "location": "London, UK", "quote": "Everything was included — tickets, lunch, even the weather held. Our driver knew the best spots and we never felt rushed.", "date": "October 2024" },
       { "name": "The Miller family", "location": "California, USA", "quote": "Perfect for our family of five. The kids loved Bunratty and we loved the Cliffs. Lunch was at a proper local pub.", "date": "August 2024" },
-      { "name": "David K.", "location": "Dublin", "quote": "Booked for visiting clients. Professional, punctual, and the all-inclusive aspect made it stress-free. Highly recommend.", "date": "September 2024" },
+      { "name": "David K.", "location": "Cork, Ireland", "quote": "Booked for visiting clients. Professional, punctual, and the all-inclusive aspect made it stress-free. Highly recommend.", "date": "September 2024" },
       { "name": "Emma W.", "location": "Australia", "quote": "Door-to-door from our hotel, tickets sorted, great lunch. Exactly the kind of relaxed but premium day we wanted.", "date": "July 2024" },
       { "name": "Michael & Linda", "location": "Canada", "quote": "The Cliffs were spectacular and Bunratty was a lovely surprise. Having lunch included meant we could just enjoy the day.", "date": "June 2024" }
+    ]
+  },
+  {
+    "slug": "ring-of-kerry-private-tour",
+    "relatedCountySlugs": ["kerry"],
+    "relatedGuideSlugs": ["ring-of-kerry-vs-dingle"],
+    "relatedPillarSlugs": ["wild-atlantic-way"],
+    "title": "Private Ring of Kerry Tour from Killarney",
+    "shortDescription": "Full-day private Ring of Kerry tour with your own driver-guide. Kerry Cliffs, Killarney National Park, Ladies View, Sneem and more — your pace, your group only.",
+    "description": "See the Ring of Kerry the way it should be seen — privately, unhurried, and with a local driver-guide who knows where the light falls and where the coaches don't go. We loop the Iveragh Peninsula at your pace, stopping for the Kerry Cliffs, Killarney National Park, mountain passes and harbour villages, with a relaxed local lunch along the way.",
+    "duration": "Full day (approx. 9–10 hours)",
+    "durationHours": 9,
+    "ticketsIncluded": false,
+    "lunchIncluded": false,
+    "includes": [
+      "Private luxury vehicle with professional driver-guide",
+      "Door-to-door pickup and drop-off in Killarney and surrounds",
+      "Flexible, tailored routing of the Iveragh Peninsula",
+      "Local lunch stop (own account, recommendations provided)",
+      "Bottled water in vehicle",
+      "Wi‑Fi on board"
+    ],
+    "highlights": [
+      "Kerry Cliffs — dramatic Atlantic sea cliffs with views to the Skellig islands",
+      "Killarney National Park — Ladies View, Torc Waterfall and lakeland scenery",
+      "Moll's Gap and the mountain passes of the Iveragh Peninsula",
+      "Sneem and Waterville — colourful harbour villages for photos and a break",
+      "Optional Skellig Ring detour, weather and time permitting"
+    ],
+    "stories": [
+      {
+        "title": "The Skelligs",
+        "text": "Off the Iveragh coast rise the Skellig islands, where monks built beehive cells in the 6th century — and where a certain Jedi found refuge centuries later. On a clear day your driver will pull in so you can see them break the horizon."
+      },
+      {
+        "title": "Ladies View",
+        "text": "Ladies View earned its name when Queen Victoria's ladies-in-waiting stopped here in 1861 and declared it the finest sight in the kingdom. It still stops people in their tracks today."
+      }
+    ],
+    "itinerary": [
+      { "time": "Pickup", "label": "Pickup in Killarney", "description": "Hotel, guesthouse or B&B (other pickups by arrangement)." },
+      { "time": "Morning", "label": "Killarney National Park", "description": "Ladies View and Torc Waterfall, then west along the ring." },
+      { "time": "Midday", "label": "Kerry Cliffs & Skellig coast", "description": "Atlantic cliffs and viewpoints toward the Skelligs." },
+      { "time": "Lunch", "label": "Village lunch", "description": "A relaxed stop in Waterville or Sneem." },
+      { "time": "Afternoon", "label": "Moll's Gap & mountain passes", "description": "Scenic high passes and photo stops on the return." },
+      { "time": "Return", "label": "Drop-off", "description": "Back to your Killarney accommodation." }
+    ],
+    "whatToBring": [
+      "Layers — mountain and coastal weather changes fast",
+      "Rain jacket or waterproof layer",
+      "Comfortable walking shoes",
+      "Camera"
+    ],
+    "faqs": [
+      { "question": "Where does the Ring of Kerry tour start?", "answer": "We pick you up door-to-door in Killarney (hotels, guesthouses, B&Bs). Pickups from Kerry Airport, Tralee or elsewhere can be arranged — tell us when you enquire." },
+      { "question": "How long is the day?", "answer": "Approximately 9–10 hours, kept relaxed. Because it's private, we adjust the pace and stops to suit you." },
+      { "question": "Can we add the Skellig Ring or Dingle?", "answer": "Yes. The Skellig Ring is a popular add-on, weather and time permitting. Dingle is best as its own day — ask us about combining over two days." },
+      { "question": "Is it suitable for older travellers or families?", "answer": "Yes. Walking is optional at most stops and we tailor the day to your comfort. Child seats are available on request." },
+      { "question": "Do you avoid the tour buses?", "answer": "As a private driver-guide we time stops and use local knowledge to sidestep the worst of the coach crowds wherever we can." },
+      { "question": "We're on a cruise from Cobh — can you do the Ring of Kerry?", "answer": "It's a long day from Cobh; we'll be honest about timing and suggest the best option for your shore window. Share your ship times and we'll advise." }
+    ],
+    "images": [
+      { "src": "/images/ring-of-kerry.jpg", "alt": "Ring of Kerry coastal and mountain scenery, County Kerry", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/02.jpg", "alt": "Wild Atlantic Way landscape on the Iveragh Peninsula", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/03.jpg", "alt": "Kerry mountain pass on a private Ring of Kerry tour", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/04.jpg", "alt": "Harbour village on the Ring of Kerry", "credit": "Atlantic Drive Tours" }
+    ],
+    "testimonials": [
+      { "name": "The Andersons", "location": "Texas, USA", "quote": "Our driver knew exactly when to stop to beat the buses. The Kerry Cliffs were unreal and we never felt rushed.", "date": "September 2024" },
+      { "name": "Grace & Tom", "location": "United Kingdom", "quote": "A perfect private day around the ring. Ladies View, a lovely lunch in Sneem, and great stories the whole way.", "date": "July 2024" }
+    ]
+  },
+  {
+    "slug": "dingle-peninsula-private-tour",
+    "relatedCountySlugs": ["kerry"],
+    "relatedGuideSlugs": ["ring-of-kerry-vs-dingle"],
+    "relatedPillarSlugs": ["wild-atlantic-way"],
+    "title": "Private Dingle Peninsula & Slea Head Tour",
+    "shortDescription": "Private Dingle Peninsula day tour with your own driver-guide. Slea Head Drive, beehive huts, Atlantic beaches and Dingle town — relaxed and tailored to you.",
+    "description": "The Dingle Peninsula is, in many travellers' eyes, the most beautiful corner of Ireland — and a private driver-guide is the best way to see it. We drive the Slea Head loop with its ancient beehive huts and ocean views, give you time in Dingle town, and keep the day flexible so you can linger where it matters.",
+    "duration": "Full day (approx. 8–9 hours)",
+    "durationHours": 9,
+    "ticketsIncluded": false,
+    "lunchIncluded": false,
+    "includes": [
+      "Private luxury vehicle with professional driver-guide",
+      "Door-to-door pickup and drop-off in Killarney or Dingle area",
+      "Slea Head Drive and tailored peninsula routing",
+      "Local lunch stop in Dingle (own account)",
+      "Bottled water in vehicle",
+      "Wi‑Fi on board"
+    ],
+    "highlights": [
+      "Slea Head Drive — cliffs, islands and some of Ireland's finest Atlantic views",
+      "Ancient beehive huts and early Christian sites",
+      "Dingle town — harbour, craft shops and a famous pub or two",
+      "Inch Beach or Coumeenoole — sweeping Atlantic strands for photos",
+      "Conor Pass option — Ireland's highest mountain pass, weather permitting"
+    ],
+    "stories": [
+      {
+        "title": "The Gaeltacht",
+        "text": "Dingle (Corca Dhuibhne) is a Gaeltacht — a region where Irish is still the everyday language. Listen in the shops and pubs and you'll hear it; your driver can teach you a phrase or two for the road."
+      },
+      {
+        "title": "Beehive huts",
+        "text": "The clocháin — dry-stone beehive huts dotting Slea Head — have stood for over a thousand years without mortar. Monks and farmers built them to last, and they have."
+      }
+    ],
+    "itinerary": [
+      { "time": "Pickup", "label": "Pickup at your location", "description": "Killarney or Dingle-area accommodation (others by arrangement)." },
+      { "time": "Morning", "label": "Inch Beach & into Dingle", "description": "Coastal drive with a stop at Inch Beach." },
+      { "time": "Midday", "label": "Slea Head Drive", "description": "Beehive huts, island views and clifftop photo stops." },
+      { "time": "Lunch", "label": "Dingle town", "description": "Time for lunch and a wander around the harbour town." },
+      { "time": "Afternoon", "label": "Conor Pass (optional)", "description": "Ireland's highest pass on the return, weather permitting." },
+      { "time": "Return", "label": "Drop-off", "description": "Return to your pickup point." }
+    ],
+    "whatToBring": [
+      "Layers and a rain jacket",
+      "Comfortable walking shoes",
+      "Camera",
+      "Sunglasses for bright Atlantic days"
+    ],
+    "faqs": [
+      { "question": "Ring of Kerry or Dingle — which should we choose?", "answer": "Both are stunning. The Ring of Kerry is grander and longer; Dingle is more intimate with arguably the best coastal drive. If you have two days, do both — we can plan it." },
+      { "question": "Is the Conor Pass always included?", "answer": "It's an optional highlight depending on weather, time and your comfort with mountain roads. We'll only take it when conditions are good." },
+      { "question": "How much walking is there?", "answer": "Very little is required — most highlights are roadside or short strolls. We tailor it to your group." },
+      { "question": "Can you pick up from Killarney?", "answer": "Yes. Killarney is our usual pickup for Dingle days; other pickups can be arranged when you enquire." },
+      { "question": "Is it good for photography?", "answer": "Exceptional. Slea Head is one of the most photogenic drives in Ireland and we time stops for the best light where we can." }
+    ],
+    "images": [
+      { "src": "/gallery/05.jpg", "alt": "Slea Head Drive Atlantic coastline, Dingle Peninsula", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/06.jpg", "alt": "Dingle Peninsula cliffs and ocean views", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/07.jpg", "alt": "Atlantic beach on the Dingle Peninsula", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/ring-of-kerry.jpg", "alt": "Atlantic coastal scenery in the south-west of Ireland", "credit": "Atlantic Drive Tours" }
+    ],
+    "testimonials": [
+      { "name": "Patrick & Mary", "location": "Boston, USA", "quote": "Slea Head took our breath away. Our guide's stories about the Gaeltacht made it so much more than a drive.", "date": "August 2024" },
+      { "name": "The Nguyen family", "location": "Australia", "quote": "Relaxed, beautiful and great with our kids. Inch Beach and Dingle town were highlights.", "date": "June 2024" }
+    ]
+  },
+  {
+    "slug": "cork-blarney-kinsale-cobh-private-tour",
+    "relatedCountySlugs": ["cork"],
+    "relatedGuideSlugs": ["cobh-cruise-port-shore-day-guide"],
+    "relatedPillarSlugs": ["cobh-cruise-excursions"],
+    "title": "Private Cork Day Tour — Blarney, Kinsale & Cobh",
+    "shortDescription": "Private Cork day tour with your own driver-guide. Kiss the Blarney Stone, explore colourful Kinsale and Titanic-era Cobh — ideal for cruise guests and Cork stays.",
+    "description": "A relaxed private day through the best of County Cork: Blarney Castle and its famous stone, the gourmet harbour town of Kinsale, and Cobh — the Titanic's last port of call. Perfectly suited to cruise passengers arriving at Cobh or Ringaskiddy, or to guests basing themselves in Cork, with timing built around you.",
+    "duration": "Full day (approx. 7–9 hours)",
+    "durationHours": 8,
+    "ticketsIncluded": false,
+    "lunchIncluded": false,
+    "includes": [
+      "Private luxury vehicle with professional driver-guide",
+      "Door-to-door or cruise-port pickup (Cobh / Ringaskiddy / Cork)",
+      "Tailored routing of Blarney, Kinsale and Cobh",
+      "Guaranteed timing around your cruise schedule where applicable",
+      "Bottled water in vehicle",
+      "Wi‑Fi on board"
+    ],
+    "highlights": [
+      "Blarney Castle & Gardens — kiss the Blarney Stone and explore the grounds",
+      "Kinsale — colourful streets, harbour views and Ireland's gourmet capital",
+      "Cobh — Titanic heritage, the cathedral and the deepwater harbour",
+      "Cork city panorama and the English Market (time permitting)",
+      "Cruise-friendly timing with guaranteed return to your ship"
+    ],
+    "stories": [
+      {
+        "title": "Cobh and the Titanic",
+        "text": "Cobh — then Queenstown — was the Titanic's final port of call in April 1912. 123 passengers boarded here by tender. The town wears that story quietly, and your driver will show you where it happened."
+      },
+      {
+        "title": "The Blarney Stone",
+        "text": "Legend says kissing the Blarney Stone gives you the gift of eloquence. It's set high in the castle wall, so you lean back to reach it — we'll tell you the trick before you go up."
+      }
+    ],
+    "itinerary": [
+      { "time": "Pickup", "label": "Pickup / cruise-port meet", "description": "Cobh or Ringaskiddy cruise terminal, hotel or Cork city." },
+      { "time": "Morning", "label": "Blarney Castle & Gardens", "description": "Kiss the stone and explore the grounds at your pace." },
+      { "time": "Midday", "label": "Kinsale", "description": "Harbour town wander and lunch in the gourmet capital." },
+      { "time": "Afternoon", "label": "Cobh", "description": "Titanic heritage, the cathedral and harbour views." },
+      { "time": "Return", "label": "Drop-off / return to ship", "description": "Back to your accommodation or your cruise ship in good time." }
+    ],
+    "whatToBring": [
+      "Comfortable walking shoes",
+      "Light rain jacket",
+      "Camera",
+      "Your ship's arrival and departure times (cruise guests)"
+    ],
+    "faqs": [
+      { "question": "Can you collect us from our cruise ship in Cobh?", "answer": "Yes — this is one of our specialties. We meet you at the Cobh or Ringaskiddy terminal, plan the day around your shore window, and guarantee you're back in good time for departure." },
+      { "question": "Will we make it back before the ship leaves?", "answer": "Always our first priority. We monitor your schedule and build the route around your all-aboard time, keeping a comfortable buffer." },
+      { "question": "Can we customise the stops?", "answer": "Yes. Prefer more time in Kinsale, or to add Cork city and the English Market? Just tell us — it's your private day." },
+      { "question": "Is Blarney Castle a lot of walking?", "answer": "There are steps up to the stone and grounds to explore, but you can take it at your own pace or skip the climb and enjoy the gardens." },
+      { "question": "How many people can you take?", "answer": "Up to 7–8 guests in one vehicle; larger groups by arrangement with notice." }
+    ],
+    "images": [
+      { "src": "/images/cobh.jpeg", "alt": "Colourful waterfront houses in Cobh, County Cork", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/01.jpg", "alt": "County Cork coastal scenery on a private tour", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/doolan.jpg", "alt": "Harbour town in County Cork", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/05.jpg", "alt": "Irish countryside near Blarney and Kinsale", "credit": "Atlantic Drive Tours" }
+    ],
+    "testimonials": [
+      { "name": "Robert & Susan", "location": "Florida, USA", "quote": "Off our cruise in Cobh and back with time to spare. Blarney, Kinsale and the Titanic story — a brilliant shore day.", "date": "September 2024" },
+      { "name": "The Wilsons", "location": "Canada", "quote": "Our guide tailored the whole day to us. Kinsale for lunch was a highlight and we never worried about the ship.", "date": "May 2024" }
+    ]
+  },
+  {
+    "slug": "connemara-kylemore-private-tour",
+    "relatedCountySlugs": ["galway"],
+    "relatedGuideSlugs": ["best-time-to-visit-ireland"],
+    "relatedPillarSlugs": ["wild-atlantic-way"],
+    "title": "Private Connemara & Kylemore Abbey Tour from Galway",
+    "shortDescription": "Private day tour of Connemara from Galway with your own driver-guide. Kylemore Abbey, the Twelve Bens, Killary Fjord and the wild coast road — at your own pace.",
+    "description": "A flowing private day through the wild heart of the west. From Galway city you'll travel into Connemara — a landscape of mountains, bogland, lakes and Atlantic coast — taking in the romantic Kylemore Abbey, the Twelve Bens, Killary Harbour (Ireland's only fjord) and quiet coastal villages. Door-to-door, unrushed, and shaped around what you'd most like to see.",
+    "duration": "Full day (approx. 8–9 hours)",
+    "durationHours": 9,
+    "ticketsIncluded": false,
+    "lunchIncluded": false,
+    "includes": [
+      "Private luxury vehicle with professional driver-guide",
+      "Door-to-door pickup and drop-off in Galway city and surrounds",
+      "Tailored routing through Connemara at your pace",
+      "Local lunch stop (own account) in a Connemara village",
+      "Bottled water in vehicle",
+      "Wi‑Fi on board"
+    ],
+    "highlights": [
+      "Kylemore Abbey & Victorian Walled Garden — a romantic lakeside landmark (entry on own account)",
+      "The Twelve Bens — Connemara's dramatic mountain range",
+      "Killary Harbour — Ireland's only true fjord",
+      "Coastal Connemara — Roundstone, Clifden and the Sky Road (time permitting)",
+      "Wild bogland, lakes and the Gaeltacht heartland"
+    ],
+    "stories": [
+      {
+        "title": "Kylemore's love story",
+        "text": "Kylemore Abbey was built by Mitchell Henry as a gift for his wife Margaret in the 1860s — a castle in the wilds of Connemara. After tragedy it became a Benedictine abbey, and the nuns ran a renowned girls' school here for decades. Your driver will tell you the full story on the lakeshore."
+      },
+      {
+        "title": "Connemara green",
+        "text": "Connemara marble — a deep green stone found only here — has been quarried for centuries and set into floors, jewellery and even parts of Westminster. Keep an eye out for it in the village shops along the way."
+      }
+    ],
+    "itinerary": [
+      { "time": "Pickup", "label": "Galway city pickup", "description": "Door-to-door from your Galway hotel or accommodation." },
+      { "time": "Morning", "label": "Into Connemara", "description": "Through Oughterard and the bogland toward the mountains, with photo stops." },
+      { "time": "Midday", "label": "Kylemore Abbey", "description": "Time at the abbey, lake and walled garden (entry on own account)." },
+      { "time": "Afternoon", "label": "Killary Fjord & the coast", "description": "Killary Harbour and the coastal road through Connemara villages." },
+      { "time": "Return", "label": "Return to Galway", "description": "Back to your accommodation in the evening." }
+    ],
+    "whatToBring": [
+      "Comfortable walking shoes",
+      "Warm layers and a rain jacket",
+      "Camera",
+      "Cash or card for lunch and any attraction entry"
+    ],
+    "faqs": [
+      { "question": "Is Kylemore Abbey entry included?", "answer": "Entry is on your own account so you can decide on the day, but we'll plan the timing around it and help you make the most of the abbey, lake and walled garden." },
+      { "question": "Can we combine Connemara with Galway city?", "answer": "Yes. We can add a short Galway city orientation at the start or end of the day, or focus entirely on Connemara — it's your private tour." },
+      { "question": "How much walking is involved?", "answer": "As much or as little as you like. Most stops are short strolls or roadside viewpoints, with optional walks at Kylemore and along the coast." },
+      { "question": "Where do you pick up?", "answer": "Door-to-door from Galway city hotels and accommodation, with other points by arrangement." },
+      { "question": "How many people can you take?", "answer": "Up to 7–8 guests in one vehicle; larger groups by arrangement with notice." }
+    ],
+    "images": [
+      { "src": "/gallery/02.jpg", "alt": "Connemara mountain and lake scenery in the west of Ireland", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/04.jpg", "alt": "Wild Connemara landscape near Kylemore", "credit": "Atlantic Drive Tours" },
+      { "src": "/gallery/06.jpg", "alt": "Coastal road through Connemara, County Galway", "credit": "Atlantic Drive Tours" },
+      { "src": "/images/ring-of-kerry.jpg", "alt": "Atlantic coastal scenery in the west of Ireland", "credit": "Atlantic Drive Tours" }
+    ],
+    "testimonials": [
+      { "name": "Emma & Tom", "location": "London, UK", "quote": "Connemara was the surprise of our trip — Kylemore Abbey and the fjord were stunning, and having our own driver made it effortless.", "date": "July 2024" },
+      { "name": "The Becker family", "location": "Germany", "quote": "A beautiful, relaxed day out of Galway. Our guide knew exactly where to stop for photos and stories.", "date": "September 2024" }
     ]
   }
 ]

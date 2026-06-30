@@ -1,184 +1,230 @@
-'use client';
+import Image from "next/image";
+import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
 
-import Link from 'next/link';
-import { useTranslation } from '@/contexts/TranslationContext';
+type Experience = {
+  id: string;
+  title: string;
+  duration: string;
+  description: string;
+  highlights: string[];
+  href: string;
+  image: string;
+  imageAlt: string;
+};
+
+const experiences: Experience[] = [
+  {
+    id: "wild-atlantic-way",
+    title: "The Wild Atlantic Way",
+    duration: "Multi-day",
+    description:
+      "A flowing private journey along Ireland's spectacular western seaboard — cliffs, peninsulas and harbour villages, at your own pace.",
+    highlights: [
+      "Cliffs of Moher and the Burren",
+      "Ring of Kerry and Dingle Peninsula",
+      "Connemara and the Galway coast",
+      "Hotels and pace tailored to you",
+    ],
+    href: "/wild-atlantic-way",
+    image: "/images/cliffs-of-moher.jpg",
+    imageAlt: "Cliffs of Moher on the Wild Atlantic Way",
+  },
+  {
+    id: "kerry",
+    title: "Kingdom of Kerry",
+    duration: "1–2 days",
+    description:
+      "The very best of County Kerry — the iconic Ring of Kerry and the wild, intimate Dingle Peninsula, with mountains, beaches and Atlantic views.",
+    highlights: [
+      "Ring of Kerry full loop",
+      "Slea Head Drive on Dingle",
+      "Killarney National Park",
+      "Kerry Cliffs and the Skellig coast",
+    ],
+    href: "/ireland/kerry",
+    image: "/images/ring-of-kerry.jpg",
+    imageAlt: "Ring of Kerry scenery in County Kerry",
+  },
+  {
+    id: "cork-cobh",
+    title: "Cork Harbour & Cobh",
+    duration: "Day / cruise shore day",
+    description:
+      "Blarney Castle, gourmet Kinsale and the Titanic heritage of Cobh — perfect for cruise guests and Cork stays, timed around your day.",
+    highlights: [
+      "Blarney Castle & the Blarney Stone",
+      "Kinsale harbour town",
+      "Cobh and the Titanic story",
+      "Guaranteed return for cruise guests",
+    ],
+    href: "/cobh-cruise-excursions",
+    image: "/images/cobh.jpeg",
+    imageAlt: "The harbour town of Cobh in County Cork",
+  },
+  {
+    id: "golf",
+    title: "Golf escapes",
+    duration: "Tailored",
+    description:
+      "Premium golf transfers and itineraries across the south-west's great links courses, with tee-time scheduling and room for the clubs.",
+    highlights: [
+      "Ballybunion, Lahinch and Tralee",
+      "Old Head of Kinsale and Waterville",
+      "Adare Manor — 2027 Ryder Cup host",
+      "Rest-day sightseeing for the group",
+    ],
+    href: "/golf-transfers-ireland",
+    image: "/images/transfers/Journal5_GolfTravel_82f90905-3f34-4cdd-82db-03a195eb23ba_1024x1024.webp",
+    imageAlt: "Golf travel transfer in Ireland",
+  },
+  {
+    id: "adare-ryder-cup",
+    title: "Adare Manor & the 2027 Ryder Cup",
+    duration: "Tailored / event week",
+    description:
+      "Seamless private transport for the 2027 Ryder Cup at Adare Manor — airport transfers, daily course shuttles and tailored sightseeing. Demand will be exceptional; plan early.",
+    highlights: [
+      "Airport transfers from Shannon, Cork and Kerry",
+      "Daily transport to and from Adare Manor",
+      "Group and corporate itineraries",
+      "Rest-day sightseeing along the Wild Atlantic Way",
+    ],
+    href: "/adare-manor-ryder-cup-2027",
+    image: "/images/transfers/large.jpg",
+    imageAlt: "Executive private transport for the 2027 Ryder Cup at Adare Manor",
+  },
+];
+
+const whyChoose = [
+  {
+    title: "Comfortable vehicles",
+    description: "Well-maintained, spacious vehicles with room for luggage and golf bags.",
+  },
+  {
+    title: "Local driver-guides",
+    description: "Genuine knowledge, great stories, and honest local recommendations.",
+  },
+  {
+    title: "Personalised service",
+    description: "Everything tailored to you — your pace, your interests, your party only.",
+  },
+];
 
 export default function ExperiencesPage() {
-  const { t } = useTranslation();
-
-  const experiences = [
-    {
-      id: 'emerald',
-      title: t('experiences.emerald.title'),
-      description: t('experiences.emerald.description'),
-      duration: t('experiences.emerald.duration'),
-      highlights: [
-        t('experiences.emerald.highlights.0'),
-        t('experiences.emerald.highlights.1'),
-        t('experiences.emerald.highlights.2'),
-        t('experiences.emerald.highlights.3'),
-      ],
-    },
-    {
-      id: 'shamrock',
-      title: t('experiences.shamrock.title'),
-      description: t('experiences.shamrock.description'),
-      duration: t('experiences.shamrock.duration'),
-      highlights: [
-        t('experiences.shamrock.highlights.0'),
-        t('experiences.shamrock.highlights.1'),
-        t('experiences.shamrock.highlights.2'),
-        t('experiences.shamrock.highlights.3'),
-      ],
-    },
-    {
-      id: 'harp',
-      title: t('experiences.harp.title'),
-      description: t('experiences.harp.description'),
-      duration: t('experiences.harp.duration'),
-      highlights: [
-        t('experiences.harp.highlights.0'),
-        t('experiences.harp.highlights.1'),
-        t('experiences.harp.highlights.2'),
-        t('experiences.harp.highlights.3'),
-      ],
-    },
-    {
-      id: 'clover',
-      title: t('experiences.clover.title'),
-      description: t('experiences.clover.description'),
-      duration: t('experiences.clover.duration'),
-      highlights: [
-        t('experiences.clover.highlights.0'),
-        t('experiences.clover.highlights.1'),
-        t('experiences.clover.highlights.2'),
-        t('experiences.clover.highlights.3'),
-      ],
-    },
-  ];
-
   return (
-    <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
-            {t('experiences.title')}
-          </h1>
-          <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto">
-            {t('experiences.subtitle')}
-          </p>
-        </div>
+    <>
+      <BreadcrumbJsonLd crumbs={[{ name: "Experiences", path: "/experiences" }]} />
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <Reveal>
+          <header className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">
+              Experiences
+            </p>
+            <h1 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)]">
+              Curated private experiences in Ireland
+            </h1>
+            <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
+              A starting point, not a fixed menu. Every experience is private
+              and fully tailored — tell us what inspires you and we&apos;ll build
+              the perfect itinerary.
+            </p>
+          </header>
+        </Reveal>
 
-        {/* Experiences Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {experiences.map((experience) => (
-            <div
-              key={experience.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-            >
-              {/* Experience Image */}
-              <div 
-                className="h-64 bg-cover bg-center relative"
-                style={{
-                  backgroundImage: experience.id === 'emerald'
-                    ? 'url(https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80)'
-                    : experience.id === 'shamrock'
-                    ? 'url(https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=800&q=80)'
-                    : experience.id === 'harp'
-                    ? 'url(https://images.unsplash.com/photo-1539650116574-75c0c6d73a6e?w=800&q=80)'
-                    : 'url(https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80)',
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <div className="absolute inset-0 bg-black opacity-0 hover:opacity-10 transition-opacity"></div>
-              </div>
-
-              {/* Experience Content */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
-                    {experience.title}
-                  </h2>
-                  <span className="bg-[var(--primary)] text-white px-3 py-1 rounded text-sm font-medium">
-                    {experience.duration}
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
+          {experiences.map((exp) => (
+            <Reveal key={exp.id}>
+              <article className="flex h-full flex-col overflow-hidden rounded-xl border border-[var(--color-line)] bg-white shadow-sm">
+                <div className="relative h-60 w-full overflow-hidden">
+                  <Image
+                    src={exp.image}
+                    alt={exp.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <span className="absolute right-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-medium text-[var(--text-primary)]">
+                    {exp.duration}
                   </span>
                 </div>
-                <p className="text-[var(--text-secondary)] mb-6 leading-relaxed">
-                  {experience.description}
-                </p>
-                <ul className="mb-6 space-y-2">
-                  {experience.highlights.map((highlight, index) => (
-                    <li key={index} className="flex items-start text-sm text-[var(--text-secondary)]">
-                      <span className="text-[var(--primary)] mr-2 mt-1">✓</span>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/reservation"
-                  className="inline-block w-full text-center bg-[var(--primary)] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[var(--primary-dark)] transition-colors"
-                >
-                  {t('experiences.bookNow')}
-                </Link>
-              </div>
-            </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <h2 className="text-2xl font-semibold text-[var(--text-primary)]">
+                    {exp.title}
+                  </h2>
+                  <p className="mt-3 text-[var(--text-secondary)] leading-relaxed">
+                    {exp.description}
+                  </p>
+                  <ul className="mt-4 space-y-2">
+                    {exp.highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-2 text-sm text-[var(--text-secondary)]"
+                      >
+                        <span className="mt-0.5 text-[var(--color-accent)]">✓</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-1 flex-wrap items-end gap-3">
+                    <Link
+                      href={exp.href}
+                      className="text-sm font-medium text-[var(--color-accent)] hover:underline"
+                    >
+                      Explore this experience →
+                    </Link>
+                    <Link
+                      href="/reservation"
+                      className="btn btn-primary ml-auto"
+                    >
+                      Book now free
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
 
-        {/* Additional Info Section */}
-        <div className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] rounded-lg p-8 md:p-12 text-white mb-12">
-          <h2 className="text-3xl font-bold mb-6 text-center">
-            {t('experiences.whyChoose')}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">🚗</div>
-              <h3 className="text-xl font-semibold mb-3">
-                {t('experiences.comfortableVehicles')}
-              </h3>
-              <p className="text-blue-100 text-sm">
-                {t('experiences.comfortableVehiclesDesc')}
-              </p>
+        {/* Why choose */}
+        <Reveal>
+          <section className="mt-20 md:mt-28 section-warm rounded-xl border border-[var(--color-line)] px-6 py-10 md:px-10 md:py-12">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-primary)] accent-rule">
+              Why travel with us
+            </h2>
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {whyChoose.map((item) => (
+                <div key={item.title}>
+                  <h3 className="text-lg font-semibold text-[var(--text-primary)]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-[var(--text-secondary)] leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
             </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">👨‍✈️</div>
-              <h3 className="text-xl font-semibold mb-3">
-                {t('experiences.experiencedGuides')}
-              </h3>
-              <p className="text-blue-100 text-sm">
-                {t('experiences.experiencedGuidesDesc')}
-              </p>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center">
-              <div className="text-4xl mb-4">⭐</div>
-              <h3 className="text-xl font-semibold mb-3">
-                {t('experiences.personalizedService')}
-              </h3>
-              <p className="text-blue-100 text-sm">
-                {t('experiences.personalizedServiceDesc')}
-              </p>
-            </div>
-          </div>
-        </div>
+          </section>
+        </Reveal>
 
-        {/* CTA Section */}
-        <div className="text-center">
-          <h2 className="text-3xl font-semibold mb-4 text-[var(--text-primary)]">
-            {t('experiences.readyToExplore')}
-          </h2>
-          <p className="text-xl text-[var(--text-secondary)] mb-8">
-            {t('experiences.readyToExploreDesc')}
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block bg-[var(--primary)] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[var(--primary-dark)] transition-colors"
-          >
-            {t('common.contact')}
-          </Link>
-        </div>
+        {/* CTA */}
+        <Reveal>
+          <section className="mt-16 md:mt-24 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-primary)]">
+              Ready to explore Ireland?
+            </h2>
+            <p className="mt-4 text-[var(--text-secondary)] max-w-xl mx-auto">
+              Tell us your dates and interests and we&apos;ll craft a private
+              experience around you. No payment today.
+            </p>
+            <Link href="/reservation" className="btn btn-primary mt-8 inline-flex">
+              Book now free
+            </Link>
+          </section>
+        </Reveal>
       </div>
-    </div>
+    </>
   );
 }
-

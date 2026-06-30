@@ -16,9 +16,10 @@ function StarIcon({ className }: { className?: string }) {
   );
 }
 
-export default function Reviews() {
+export default function Reviews({ limit }: { limit?: number }) {
+  const shown = typeof limit === "number" ? reviews.slice(0, limit) : reviews;
   const [index, setIndex] = useState(0);
-  const total = reviews.length;
+  const total = shown.length;
 
   const prev = () => setIndex((current) => (current - 1 + total) % total);
   const next = () => setIndex((current) => (current + 1) % total);
@@ -26,7 +27,7 @@ export default function Reviews() {
   return (
     <div className="space-y-6">
       <div className="hidden gap-6 md:grid md:grid-cols-3">
-        {reviews.map((review) => (
+        {shown.map((review) => (
           <div
             key={`${review.name}-${review.country}`}
             className="rounded-xl border border-[var(--color-line)] bg-white/95 p-6 shadow-sm"
@@ -51,9 +52,9 @@ export default function Reviews() {
               <StarIcon key={i} className="h-4 w-4" />
             ))}
           </div>
-          <p className="text-[var(--text-primary)] leading-relaxed">&ldquo;{reviews[index].quote}&rdquo;</p>
+          <p className="text-[var(--text-primary)] leading-relaxed">&ldquo;{shown[index].quote}&rdquo;</p>
           <p className="mt-4 text-xs tracking-wide text-[var(--text-secondary)]">
-            {reviews[index].name} · {reviews[index].country}
+            {shown[index].name} · {shown[index].country}
           </p>
         </div>
         <div className="mt-4 flex items-center justify-between">

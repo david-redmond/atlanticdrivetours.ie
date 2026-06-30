@@ -1,4 +1,5 @@
 import { socialLinks } from "@/lib/constants";
+import TrackedLink from "@/components/TrackedLink";
 
 const iconClass = "w-[18px] h-[18px] shrink-0";
 const linkClass =
@@ -8,37 +9,46 @@ export default function SocialLinks() {
   return (
     <ul className="flex flex-wrap items-center gap-2" role="list">
       <li>
-        <a
+        <TrackedLink
           href={socialLinks.facebook}
+          external
+          event="social_click"
+          eventParams={{ network: "facebook", location: "footer" }}
           target="_blank"
           rel="noopener noreferrer"
           className={linkClass}
-          aria-label="Facebook"
+          ariaLabel="Facebook"
         >
           <FacebookIcon className={iconClass} />
-        </a>
+        </TrackedLink>
       </li>
       <li>
-        <a
+        <TrackedLink
           href={socialLinks.instagram}
+          external
+          event="social_click"
+          eventParams={{ network: "instagram", location: "footer" }}
           target="_blank"
           rel="noopener noreferrer"
           className={linkClass}
-          aria-label="Instagram"
+          ariaLabel="Instagram"
         >
           <InstagramIcon className={iconClass} />
-        </a>
+        </TrackedLink>
       </li>
       <li>
-        <a
+        <TrackedLink
           href={socialLinks.whatsapp}
+          external
+          event="whatsapp_click"
+          eventParams={{ location: "footer_social" }}
           target="_blank"
           rel="noopener noreferrer"
           className={linkClass}
-          aria-label="WhatsApp"
+          ariaLabel="WhatsApp"
         >
           <WhatsAppIcon className={iconClass} />
-        </a>
+        </TrackedLink>
       </li>
     </ul>
   );

@@ -3,7 +3,7 @@ export const baseUrl = "https://www.atlanticdrivetours.ie";
 export const phone = "+353 87 986 3470";
 export const whatsappNumber = "+353 87 986 3470";
 export const serviceArea =
-  "Cork, Kerry, Clare, Limerick, Galway and Dublin";
+  "Cork, Kerry, Clare, Limerick and Galway";
 export const primaryAudience = "International leisure tourists";
 
 export const whatsappPrefill =
@@ -31,9 +31,7 @@ export const socialLinks = {
 export const navLinks = [
   { href: "/tours", label: "Tours" },
   { href: "/transfers", label: "Transfers" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/ireland", label: "Ireland" },
   { href: "/about", label: "About" },
-  { href: "/reviews", label: "Reviews" },
-  { href: "/experiences", label: "Experiences" },
   { href: "/contact", label: "Contact" },
 ];

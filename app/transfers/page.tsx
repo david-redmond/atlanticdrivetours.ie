@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/JsonLd";
 import {
   baseUrl,
   getTransfersWhatsAppMessage,
@@ -9,20 +10,20 @@ import {
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Transfers & Executive Transport | Atlantic Drive Tours",
+  title: { absolute: "Transfers & Executive Transport | Atlantic Drive Tours" },
   description:
-    "High-end private transfers across Ireland — airport, cruise, city-to-city, golf, and events. Cork, Kerry, Clare, Limerick, Galway, Dublin.",
+    "High-end private transfers in the south-west of Ireland — airport, cruise, city-to-city, golf, and events. Cork, Kerry, Clare, Limerick and Galway.",
   alternates: { canonical: `${baseUrl}/transfers` },
   openGraph: {
     title: "Transfers & Executive Transport | Atlantic Drive Tours",
     description:
-      "High-end private transfers across Ireland — calm, punctual, discreet.",
+      "High-end private transfers in the south-west of Ireland — calm, punctual, discreet.",
     url: `${baseUrl}/transfers`,
     type: "website",
   },
 };
 
-const regionsLine = "Cork · Kerry · Clare · Limerick · Galway · Dublin";
+const regionsLine = "Cork · Kerry · Clare · Limerick · Galway";
 
 function buildWhatsAppLink(): string {
   const base = whatsappNumber.replace(/\D/g, "");
@@ -42,10 +43,24 @@ const transferImages = [
 ];
 
 /** Service type values must match EnquiryForm dropdown exactly for prefill. */
-const transferOptions = [
+type TransferOption = {
+  title: string;
+  serviceParam:
+    | "Golf Transfers"
+    | "Airport Transfer"
+    | "Cruise Transfer"
+    | "Executive / Corporate";
+  /** Optional deep link to a related commercial pillar page. */
+  pillarHref?: string;
+  description: string;
+  bullets: string[];
+};
+
+const transferOptions: TransferOption[] = [
   {
     title: "Golf transfers",
-    serviceParam: "Golf Transfers" as const,
+    serviceParam: "Golf Transfers",
+    pillarHref: "/golf-transfers-ireland",
     description:
       "A core specialty. We cater to tee times, clubs, and multi-course itineraries. Corporate golf days and society outings welcome.",
     bullets: [
@@ -56,21 +71,21 @@ const transferOptions = [
     ],
   },
   {
-    title: "Airport transfers (all Irish airports)",
-    serviceParam: "Airport Transfer" as const,
+    title: "Airport transfers (all western & southern Irish airports)",
+    serviceParam: "Airport Transfer",
     description:
-      "Meet-and-greet or kerbside pickup at Dublin, Cork, Shannon, Kerry, and Knock. We track your flight and adjust for delays so you are never left waiting.",
+      "Meet-and-greet or kerbside pickup at Shannon, Cork, Kerry, and Knock. We track your flight and adjust for delays so you are never left waiting.",
     bullets: [
-      "Dublin Airport (DUB)",
-      "Cork Airport (ORK)",
       "Shannon Airport (SNN)",
+      "Cork Airport (ORK)",
       "Kerry Airport (KIR)",
       "Ireland West Airport Knock (NOC)",
     ],
   },
   {
     title: "Cruise ship transfers (Cork / Cobh)",
-    serviceParam: "Private Tour" as const,
+    serviceParam: "Cruise Transfer",
+    pillarHref: "/cobh-cruise-excursions",
     description:
       "Port of Cork and Cobh cruise terminal. We work around your ship's arrival and departure times so you make your sailing without stress.",
     bullets: [
@@ -82,12 +97,12 @@ const transferOptions = [
   },
   {
     title: "City-to-city transfers",
-    serviceParam: "Executive / Corporate" as const,
+    serviceParam: "Executive / Corporate",
     description:
       "Comfortable point-to-point journeys between major cities and towns. Ideal for business, relocation, or a relaxed way to move between bases.",
     bullets: [
-      "Dublin ↔ Galway",
-      "Dublin ↔ Cork",
+      "Cork ↔ Galway",
+      "Shannon ↔ Killarney",
       "Cork ↔ Killarney",
       "Shannon ↔ Limerick",
       "Custom routes on request",
@@ -95,7 +110,7 @@ const transferOptions = [
   },
   {
     title: "Hotel-to-hotel transfers & events",
-    serviceParam: "Executive / Corporate" as const,
+    serviceParam: "Executive / Corporate",
     description:
       "Weddings, conferences, and group travel. One vehicle or a small fleet — we coordinate pickups, drop-offs, and timing so your day runs smoothly.",
     bullets: [
@@ -161,7 +176,7 @@ const faqs: { question: string; answer: string }[] = [
   {
     question: "What areas do you cover?",
     answer:
-      "We cover Cork, Kerry, Clare, Limerick, Galway, Dublin, and the regions between. Airport and port transfers connect to all of Ireland.",
+      "We cover Cork, Kerry, Clare, Limerick, Galway, and the regions between. Airport and port transfers connect across the west and south of Ireland.",
   },
 ];
 
@@ -181,6 +196,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export default function TransfersPage() {
   return (
     <article className="min-h-screen">
+      <BreadcrumbJsonLd crumbs={[{ name: "Transfers", path: "/transfers" }]} />
+      <FaqJsonLd faqs={faqs} />
       {/* Hero */}
       <section className="relative">
         <div className="relative h-[50vh] min-h-[360px] w-full">
@@ -204,8 +221,8 @@ export default function TransfersPage() {
                 Transfers & Executive Transport
               </h1>
               <p className="mt-4 max-w-2xl text-base text-ink-muted">
-                High-end private transfers across Ireland — calm, punctual,
-                discreet.
+                High-end private transfers in the south-west of Ireland — calm,
+                punctual, discreet.
               </p>
               <p className="mt-2 text-sm text-ink-muted">{regionsLine}</p>
               <div className="mt-8 flex flex-wrap gap-4">
@@ -244,7 +261,7 @@ export default function TransfersPage() {
             </h2>
             <p className="mt-3 text-[var(--text-secondary)] max-w-2xl">
               Comfortable, well-maintained vehicles for groups and individuals
-              across Ireland.
+              across the south-west of Ireland.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -298,12 +315,22 @@ export default function TransfersPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  href={`/reservation?service=${encodeURIComponent(option.serviceParam)}`}
-                  className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2 rounded"
-                >
-                  Book now free →
-                </Link>
+                <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2">
+                  <Link
+                    href={`/reservation?service=${encodeURIComponent(option.serviceParam)}`}
+                    className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2 rounded"
+                  >
+                    Book now free →
+                  </Link>
+                  {option.pillarHref && (
+                    <Link
+                      href={option.pillarHref}
+                      className="inline-flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--color-accent)] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2 rounded"
+                    >
+                      Learn more →
+                    </Link>
+                  )}
+                </div>
               </article>
             </Reveal>
           ))}

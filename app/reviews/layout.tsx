@@ -1,19 +1,12 @@
 import type { Metadata } from "next";
-import { baseUrl } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Reviews",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Guest Reviews & Testimonials | Atlantic Drive Tours",
   description:
-    "Guest reviews and testimonials for Atlantic Drive Tours — private tours and transfers in Ireland.",
-  alternates: { canonical: `${baseUrl}/reviews` },
-  openGraph: {
-    title: "Reviews | Atlantic Drive Tours",
-    description:
-      "Guest reviews and testimonials for Atlantic Drive Tours — private tours and transfers in Ireland.",
-    url: `${baseUrl}/reviews`,
-    type: "website",
-  },
-};
+    "What international guests say about their private tours and executive transfers with Atlantic Drive Tours across Cork, Kerry, Clare, Limerick and Galway.",
+  path: "/reviews",
+});
 
 export default function ReviewsLayout({
   children,

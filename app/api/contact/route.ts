@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { z } from "zod";
 import { emailLog } from "@/lib/email-log";
 import { escapeHtml, formatTimestamp } from "@/lib/email-utils";
+import { companyName, phone, whatsappNumber } from "@/lib/constants";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Please enter your name."),
@@ -70,6 +71,58 @@ function buildContactEmailHtml(params: {
           <tr>
             <td style="padding: 12px 24px 20px; border-top: 1px solid #e2e8f0;">
               <p style="margin:0; font-size: 11px; color: #94a3b8;">Submitted ${safeTime} · IP ${safeIp}</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}
+
+function buildContactGuestHtml(name: string): string {
+  const safeName = escapeHtml(name.trim());
+  const firstName = safeName.split(" ")[0] || safeName;
+  const waHref = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;
+  const telHref = `tel:${phone.replace(/\s/g, "")}`;
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We've received your message — ${escapeHtml(companyName)}</title>
+</head>
+<body style="margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #1a1a1a; background-color: #eef5ef;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color: #eef5ef; padding: 24px 16px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width: 560px; background-color: #ffffff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden;">
+          <tr>
+            <td style="padding: 24px 24px 16px; border-bottom: 3px solid #0F2A1D;">
+              <h1 style="margin:0; font-size: 20px; font-weight: 600; color: #0F2A1D;">Thank you, ${firstName} — we've got your message</h1>
+              <p style="margin: 6px 0 0; font-size: 13px; color: #64748b;">${escapeHtml(companyName)}</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 20px 24px;">
+              <p style="margin:0 0 12px; font-size: 15px; color: #334155;">We'll personally reply as soon as we can — usually <strong>within 24 hours, often the same day</strong>.</p>
+              <div style="padding: 16px; background-color: #f0f5f1; border-radius: 6px; border-left: 4px solid #0F2A1D;">
+                <p style="margin:0 0 6px; font-size: 14px; color: #334155;">Need a faster reply? Message or call us:</p>
+                <p style="margin:0; font-size: 15px;">
+                  <a href="${waHref}" style="color: #0F2A1D; font-weight: 600; text-decoration: none;">WhatsApp us</a>
+                  &nbsp;·&nbsp;
+                  <a href="${telHref}" style="color: #0F2A1D; font-weight: 600; text-decoration: none;">${escapeHtml(phone)}</a>
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 24px 24px; border-top: 1px solid #e2e8f0;">
+              <p style="margin:12px 0 0; font-size: 11px; color: #94a3b8;">This is an automated confirmation. Please don't share payment details by email — we never ask for them.</p>
             </td>
           </tr>
         </table>
@@ -160,6 +213,16 @@ export async function POST(req: NextRequest) {
 
     if (missingEnv.length > 0) {
       emailLog.envMissing("contact", missingEnv);
+      // In production a missing email config means messages are silently lost.
+      if (process.env.NODE_ENV === "production") {
+        console.error(
+          `Contact email NOT sent — missing required env in production: ${missingEnv.join(", ")}`
+        );
+        return NextResponse.json(
+          { ok: false, error: "Something went wrong. Please try again." },
+          { status: 500 }
+        );
+      }
       console.log("Contact payload (dev fallback):", { name, email, phone, message, timestamp });
       return NextResponse.json({ ok: true });
     }
@@ -182,6 +245,7 @@ export async function POST(req: NextRequest) {
     const result = await resend.emails.send({
       from: fromAddress,
       to: toAddress,
+      replyTo: email,
       subject: `Contact: ${name.trim()} — Atlantic Drive Tours`,
       text: [
         `Name: ${name}`,
@@ -205,6 +269,39 @@ export async function POST(req: NextRequest) {
     }
 
     emailLog.sendOk("contact", result.data?.id);
+
+    // Guest auto-confirmation — best-effort; never fail the request if it errors.
+    try {
+      const guestResult = await resend.emails.send({
+        from: fromAddress,
+        to: email,
+        replyTo: toAddress,
+        subject: `We've received your message — ${companyName}`,
+        text: [
+          `Hi ${name.trim()},`,
+          "",
+          "Thank you for getting in touch. We'll personally reply as soon as we can, usually within 24 hours (often the same day).",
+          "",
+          `Prefer a faster reply? WhatsApp https://wa.me/${whatsappNumber.replace(/\D/g, "")} or call ${phone}.`,
+          "",
+          `${companyName}`,
+        ].join("\n"),
+        html: buildContactGuestHtml(name),
+      });
+      if (guestResult.error) {
+        emailLog.sendError(
+          "contact",
+          `guest confirmation failed: ${guestResult.error.message ?? String(guestResult.error)}`
+        );
+      } else {
+        emailLog.sendOk("contact", guestResult.data?.id);
+      }
+    } catch (guestErr) {
+      emailLog.sendError(
+        "contact",
+        `guest confirmation threw: ${guestErr instanceof Error ? guestErr.message : String(guestErr)}`
+      );
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {

@@ -6,14 +6,14 @@ import { baseUrl } from "@/lib/constants";
 import { allTours } from "@/data/tours";
 
 export const metadata: Metadata = {
-  title: "Private Day Tours | Atlantic Drive Tours",
+  title: { absolute: "Private Day Tours | Atlantic Drive Tours" },
   description:
-    "Premium private day tours across Ireland. Door-to-door pickup, tickets and lunch included. Cliffs of Moher, Bunratty Castle, and more.",
+    "Premium private day tours in the south-west of Ireland. Door-to-door pickup, with entry tickets and lunch included where noted. Cliffs of Moher, Bunratty Castle, Ring of Kerry, Dingle and Cork.",
   alternates: { canonical: `${baseUrl}/tours` },
   openGraph: {
     title: "Private Day Tours | Atlantic Drive Tours",
     description:
-      "Premium private day tours across Ireland. Door-to-door pickup, tickets and lunch included.",
+      "Premium private day tours in the south-west of Ireland. Door-to-door pickup, tailored to you.",
     url: `${baseUrl}/tours`,
     type: "website",
   },
@@ -63,12 +63,16 @@ export default function ToursListingPage() {
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-[var(--text-muted)]">
                     <span>{tour.duration}</span>
-                    {tour.startingFrom && (
-                      <>
-                        <span aria-hidden>·</span>
-                        <span>{tour.startingFrom}</span>
-                      </>
-                    )}
+                    <span aria-hidden>·</span>
+                    <span>
+                      {tour.ticketsIncluded && tour.lunchIncluded
+                        ? "Tickets & lunch included"
+                        : tour.ticketsIncluded
+                          ? "Entry tickets included"
+                          : tour.lunchIncluded
+                            ? "Lunch included"
+                            : "Private · door-to-door"}
+                    </span>
                   </div>
                   <span className="mt-4 inline-flex items-center text-sm font-medium text-[var(--color-accent)] group-hover:underline">
                     View tour details →

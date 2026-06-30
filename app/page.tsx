@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import EnquiryForm from "@/components/EnquiryForm";
+import TrackedLink from "@/components/TrackedLink";
 import Reviews from "@/components/Reviews";
 import GalleryGrid from "@/components/GalleryGrid";
 import Reveal from "@/components/Reveal";
+import HeroVideo from "@/components/HeroVideo";
 import { galleryImages } from "@/lib/gallery";
+import { allTours } from "@/data/tours";
+import { defaultOgImage } from "@/lib/seo";
 import {
   baseUrl,
   companyName,
@@ -17,16 +21,29 @@ import {
 } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Private Tours & Executive Transport in Ireland | Atlantic Drive Tours",
+  title: {
+    absolute:
+      "Private Tours & Executive Transport in Ireland | Atlantic Drive Tours",
+  },
   description:
-    "Premium private tours Ireland, luxury tours Ireland, executive transport and airport transfers. Private driver tours from Cork, Kerry, Galway, Dublin. Golf transfers, cruise ship transfers Cork Cobh.",
+    "Premium private driver tours and executive transfers in Cork, Kerry, Clare, Limerick & Galway. Door-to-door pickup, tickets & lunch included. Golf transfers, airport transfers and Cobh cruise excursions. Enquire free — no payment today.",
   alternates: { canonical: baseUrl },
   openGraph: {
     title: "Private Tours & Executive Transport in Ireland | Atlantic Drive Tours",
     description:
-      "Premium private tours, executive transport, and airport transfers across Ireland. Cork, Kerry, Clare, Limerick, Galway and Dublin.",
+      "Premium private tours, executive transport, and airport transfers in the south-west of Ireland. Cork, Kerry, Clare, Limerick and Galway.",
     url: baseUrl,
+    siteName: companyName,
+    locale: "en_IE",
     type: "website",
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Private Tours & Executive Transport in Ireland | Atlantic Drive Tours",
+    description:
+      "Premium private tours, executive transport, and airport transfers in the south-west of Ireland.",
+    images: [defaultOgImage.url],
   },
 };
 
@@ -35,22 +52,47 @@ const whatsappLink = `https://wa.me/${whatsappNumber.replace(
   ""
 )}?text=${encodeURIComponent(whatsappPrefill)}`;
 
+const serviceTypes = [
+  "Private day tours",
+  "Multi-day private tours",
+  "Golf transfers",
+  "Airport transfers",
+  "Cruise ship transfers",
+  "Executive transport",
+];
+
+const organizationId = `${baseUrl}/#organization`;
+
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "TouristTrip", "TransportationService"],
-  name: companyName,
-  url: baseUrl,
-  areaServed: "Ireland",
-  telephone: phone,
-  serviceType: [
-    "Private tours",
-    "Multi-day private tours",
-    "Golf transfers",
-    "Airport transfers",
-    "Executive transport",
-    "Cruise ship transfers",
+  "@graph": [
+    {
+      "@type": ["TravelAgency", "LocalBusiness"],
+      "@id": organizationId,
+      name: companyName,
+      url: baseUrl,
+      image: `${baseUrl}/hero.jpg`,
+      logo: `${baseUrl}/logo.png`,
+      telephone: phone,
+      priceRange: "$$$",
+      knowsLanguage: ["en"],
+      areaServed: ["Cork", "Kerry", "Clare", "Limerick", "Galway"].map(
+        (name) => ({ "@type": "AdministrativeArea", name })
+      ),
+      makesOffer: serviceTypes.map((name) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name },
+      })),
+      sameAs: [socialLinks.facebook, socialLinks.instagram],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${baseUrl}/#website`,
+      url: baseUrl,
+      name: companyName,
+      publisher: { "@id": organizationId },
+    },
   ],
-  sameAs: [socialLinks.facebook, socialLinks.instagram],
 };
 
 function WhatsAppIcon({ className }: { className?: string }) {
@@ -70,28 +112,28 @@ const signatureServices = [
   {
     title: "Private day tours in Ireland",
     description:
-      "Door-to-door private driver tours with tickets and lunch included. From Cork, Kerry, Galway and Dublin.",
+      "Door-to-door private driver tours with tickets and lunch included. From Cork, Kerry, Clare, Limerick and Galway.",
     href: "/tours",
     anchor: "View private day tours",
   },
   {
     title: "Multi-day private tours",
     description:
-      "Tailored multi-day itineraries with your own chauffeur. One vehicle, one pace, your schedule.",
-    href: "/tours",
-    anchor: "View private tours",
+      "Tailored multi-day itineraries with your own chauffeur along the Wild Atlantic Way. One vehicle, one pace, your schedule.",
+    href: "/wild-atlantic-way",
+    anchor: "Wild Atlantic Way tours",
   },
   {
     title: "Golf transfers & itineraries",
     description:
       "Golf transfers Ireland: Lahinch, Ballybunion, Old Head, Adare Manor. Bags and tee times handled.",
-    href: "/transfers",
-    anchor: "Golf transfers",
+    href: "/golf-transfers-ireland",
+    anchor: "Golf transfers Ireland",
   },
   {
     title: "Airport transfers",
     description:
-      "Dublin, Cork, Shannon, Kerry and Knock airports. Meet & greet, luggage space, punctual pickups.",
+      "Shannon, Cork, Kerry and Knock airports. Meet & greet, luggage space, punctual pickups.",
     href: "/transfers",
     anchor: "Airport transfers",
   },
@@ -99,8 +141,8 @@ const signatureServices = [
     title: "Cruise ship transfers (Cork / Cobh)",
     description:
       "Cruise ship transfers from Cobh to Kinsale, Blarney, Cork and beyond. Timed to your docking.",
-    href: "/transfers",
-    anchor: "Cruise transfers",
+    href: "/cobh-cruise-excursions",
+    anchor: "Cobh cruise excursions",
   },
   {
     title: "Executive / corporate transport",
@@ -111,27 +153,51 @@ const signatureServices = [
   },
 ];
 
-const popularRoutes = [
-  "Dublin Airport to Galway private transfer",
-  "Cork Airport to Killarney",
-  "Shannon Airport to Limerick and Clare",
-  "Cruise ship pickup from Cobh to Kinsale, Blarney or Cork",
-  "Golf transfers to Lahinch, Ballybunion, Old Head, Adare Manor",
+const popularRoutes: { label: string; href?: string }[] = [
+  {
+    label: "Shannon Airport to Cliffs of Moher private tour",
+    href: "/tours/cliffs-of-moher-bunratty",
+  },
+  { label: "Cork Airport to Killarney", href: "/ireland/kerry" },
+  { label: "Shannon Airport to Limerick and Clare", href: "/ireland/clare" },
+  {
+    label: "Cruise ship pickup from Cobh to Kinsale, Blarney or Cork",
+    href: "/cobh-cruise-excursions",
+  },
+  {
+    label: "Golf transfers to Lahinch, Ballybunion, Old Head, Adare Manor",
+    href: "/golf-transfers-ireland",
+  },
 ];
+
+const exploreCounties = [
+  { name: "Cork", slug: "cork" },
+  { name: "Kerry", slug: "kerry" },
+  { name: "Clare", slug: "clare" },
+  { name: "Limerick", slug: "limerick" },
+  { name: "Galway", slug: "galway" },
+];
+
+const featuredTourSlugs = [
+  "cliffs-of-moher-bunratty",
+  "ring-of-kerry-private-tour",
+  "dingle-peninsula-private-tour",
+];
+
+const featuredTours = featuredTourSlugs
+  .map((slug) => allTours.find((t) => t.slug === slug))
+  .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
 export default function HomePage() {
   return (
     <>
       {/* 1. Hero — warm, premium, SEO H1 */}
       <section className="relative" aria-label="Welcome">
-        <div className="relative h-[72vh] min-h-[520px] w-full">
-          <Image
-            src="/hero.jpg"
+        <div className="relative h-[72vh] min-h-[520px] w-full overflow-hidden">
+          <HeroVideo
+            src="/gallery/15114493_3840_2160_30fps.mp4"
+            poster="/hero.jpg"
             alt="Scenic Irish landscape: green hills and coastline, typical of private tour routes in Cork, Kerry and the Wild Atlantic Way"
-            fill
-            priority
-            className="object-cover"
-            sizes="100vw"
           />
           <div className="absolute inset-0 bg-[#0F2A1D]/25" />
         </div>
@@ -151,25 +217,35 @@ export default function HomePage() {
                 {serviceArea.replace(/ and /g, " · ")}
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <Link href="#enquiry" className="btn btn-primary">
+                <TrackedLink
+                  href="#enquiry"
+                  event="cta_click"
+                  eventParams={{ location: "home_hero" }}
+                  className="btn btn-primary"
+                >
                   Book now free
-                </Link>
-                <Link
+                </TrackedLink>
+                <TrackedLink
                   href="/tours"
+                  event="cta_click"
+                  eventParams={{ location: "home_hero_tours" }}
                   className="btn btn-outline"
                 >
                   Explore private tours
-                </Link>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href={whatsappLink}
+                  external
+                  event="whatsapp_click"
+                  eventParams={{ location: "home_hero" }}
                   className="btn btn-ghost inline-flex items-center gap-2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Get more info on WhatsApp"
+                  ariaLabel="Get more info on WhatsApp"
                 >
                   <WhatsAppIcon className="h-5 w-5 shrink-0" />
                   Get more info
-                </a>
+                </TrackedLink>
               </div>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-[var(--color-line)] pt-6 text-xs text-[var(--text-secondary)]">
                 <span>Professional drivers</span>
@@ -182,8 +258,93 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 1b. Featured tours — visual, tour-led entry point */}
+      <section
+        className="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-20"
+        aria-labelledby="featured-tours-heading"
+      >
+        <Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <p className="text-xs uppercase tracking-[0.3em] text-accent">
+                Most loved
+              </p>
+              <h2
+                id="featured-tours-heading"
+                className="mt-3 text-2xl font-semibold text-[var(--text-primary)] md:text-3xl"
+              >
+                Featured private tours
+              </h2>
+              <p className="mt-3 text-sm text-[var(--text-secondary)]">
+                Our most-booked days out — door-to-door, at your pace, with your
+                own driver-guide.
+              </p>
+            </div>
+            <Link
+              href="/tours"
+              className="hidden text-sm font-medium text-[var(--color-accent)] hover:underline sm:inline-block"
+            >
+              View all tours →
+            </Link>
+          </div>
+        </Reveal>
+
+        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredTours.map((tour) => (
+            <Reveal key={tour.slug}>
+              <Link
+                href={`/tours/${tour.slug}`}
+                className="group flex h-full flex-col overflow-hidden rounded-xl border border-[var(--color-line)] bg-white transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] focus-visible:ring-offset-2"
+              >
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={tour.images[0]?.src ?? "/hero.jpg"}
+                    alt={tour.images[0]?.alt ?? tour.title}
+                    fill
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--text-secondary)]">
+                    <span className="inline-flex items-center rounded-full bg-[var(--color-line)]/40 px-2.5 py-1 font-medium">
+                      {tour.duration}
+                    </span>
+                    {tour.ticketsIncluded && (
+                      <span className="inline-flex items-center rounded-full bg-[var(--color-line)]/40 px-2.5 py-1 font-medium">
+                        Tickets included
+                      </span>
+                    )}
+                    {tour.lunchIncluded && (
+                      <span className="inline-flex items-center rounded-full bg-[var(--color-line)]/40 px-2.5 py-1 font-medium">
+                        Lunch included
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-3 text-lg font-semibold text-[var(--text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
+                    {tour.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    {tour.shortDescription}
+                  </p>
+                  <span className="mt-4 inline-block text-sm font-medium text-[var(--color-accent)] group-hover:underline">
+                    View tour →
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-8 sm:hidden">
+          <Link href="/tours" className="btn btn-outline">
+            View all tours
+          </Link>
+        </div>
+      </section>
+
       {/* 2. Choose your experience — intent routing */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-20" aria-labelledby="choose-experience-heading">
+      <section className="mx-auto max-w-6xl px-4 sm:px-6 pb-16 md:pb-20" aria-labelledby="choose-experience-heading">
         <Reveal>
           <h2 id="choose-experience-heading" className="text-2xl font-semibold text-[var(--text-primary)] md:text-3xl">
             Choose your experience
@@ -204,7 +365,7 @@ export default function HomePage() {
               <ul className="mt-4 space-y-2 text-sm text-[var(--text-secondary)]">
                 <li className="flex items-center gap-2">
                   <span className="text-[var(--color-accent)]">✓</span>
-                  Tickets included
+                  Tickets included where noted
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="text-[var(--color-accent)]">✓</span>
@@ -229,7 +390,7 @@ export default function HomePage() {
                 Transfers & executive transport
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                Airport transfers, cruise ship pickups from Cork and Cobh, golf transfers, and corporate chauffeur travel across Ireland.
+                Airport transfers, cruise ship pickups from Cork and Cobh, golf transfers, and corporate chauffeur travel across the south-west of Ireland.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-[var(--text-secondary)]">
                 <li className="flex items-center gap-2">
@@ -253,6 +414,56 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 2b. Explore by county + guides — internal linking / discovery */}
+      <section
+        className="mx-auto max-w-6xl px-4 sm:px-6 pb-4 md:pb-8"
+        aria-labelledby="explore-heading"
+      >
+        <Reveal>
+          <h2
+            id="explore-heading"
+            className="text-2xl font-semibold text-[var(--text-primary)] md:text-3xl"
+          >
+            Explore Ireland by county
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm text-[var(--text-secondary)]">
+            Private day tours and a personal driver-guide across the south-west.
+            Pick a county, or read our travel guides to plan your trip.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {exploreCounties.map((county) => (
+              <Link
+                key={county.slug}
+                href={`/ireland/${county.slug}`}
+                className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--color-accent)]"
+              >
+                County {county.name}
+              </Link>
+            ))}
+            <Link
+              href="/ireland"
+              className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--text-primary)] transition hover:border-[var(--color-accent)]"
+            >
+              All counties →
+            </Link>
+            <Link
+              href="/guides"
+              className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-accent)] transition hover:border-[var(--color-accent)]"
+            >
+              Travel guides →
+            </Link>
+            <Link
+              href="/experiences"
+              className="inline-flex items-center rounded-full border border-[var(--color-line)] bg-white px-4 py-2 text-sm font-medium text-[var(--color-accent)] transition hover:border-[var(--color-accent)]"
+            >
+              Experiences →
+            </Link>
+          </div>
+        </Reveal>
+      </section>
+
       {/* 3. Signature services — SEO + conversion grid */}
       <section className="section-warm" aria-labelledby="signature-heading">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-16 md:py-20">
@@ -261,7 +472,7 @@ export default function HomePage() {
               Signature private tours & transfers
             </h2>
             <p className="mt-3 max-w-2xl text-sm text-[var(--text-secondary)]">
-              Private chauffeur-led travel across Cork, Kerry, Clare, Limerick, Galway and Dublin. Luxury tours Ireland and executive transport, tailored to you.
+              Private chauffeur-led travel across Cork, Kerry, Clare, Limerick and Galway. Luxury tours Ireland and executive transport, tailored to you.
             </p>
           </Reveal>
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -342,9 +553,18 @@ export default function HomePage() {
             </p>
             <ul className="mt-6 space-y-2 text-sm text-[var(--text-secondary)]">
               {popularRoutes.map((route) => (
-                <li key={route} className="flex gap-3">
+                <li key={route.label} className="flex gap-3">
                   <span className="text-[var(--color-accent)] shrink-0">·</span>
-                  {route}
+                  {route.href ? (
+                    <Link
+                      href={route.href}
+                      className="hover:text-[var(--color-accent)] hover:underline"
+                    >
+                      {route.label}
+                    </Link>
+                  ) : (
+                    route.label
+                  )}
                 </li>
               ))}
             </ul>
@@ -364,7 +584,14 @@ export default function HomePage() {
         </Reveal>
         <Reveal>
           <div className="mt-10">
-            <Reviews />
+            <Reviews limit={3} />
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="mt-8">
+            <Link href="/reviews" className="btn btn-outline">
+              Read more reviews
+            </Link>
           </div>
         </Reveal>
       </section>

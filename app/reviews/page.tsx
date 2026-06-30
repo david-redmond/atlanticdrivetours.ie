@@ -1,171 +1,79 @@
-'use client';
+import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import { BreadcrumbJsonLd } from "@/components/JsonLd";
+import { reviews } from "@/lib/reviews";
 
-import Link from 'next/link';
-import { useTranslation } from '@/contexts/TranslationContext';
+function Stars() {
+  return (
+    <div className="mb-3 flex gap-0.5 text-[var(--color-accent)]" aria-hidden>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <svg key={i} className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
 
 export default function ReviewsPage() {
-  const { t } = useTranslation();
-
-  const reviews = [
-    {
-      id: 1,
-      name: t('reviews.review1.name'),
-      location: t('reviews.review1.location'),
-      rating: 5,
-      date: t('reviews.review1.date'),
-      comment: t('reviews.review1.comment'),
-      service: t('reviews.review1.service'),
-    },
-    {
-      id: 2,
-      name: t('reviews.review2.name'),
-      location: t('reviews.review2.location'),
-      rating: 5,
-      date: t('reviews.review2.date'),
-      comment: t('reviews.review2.comment'),
-      service: t('reviews.review2.service'),
-    },
-    {
-      id: 3,
-      name: t('reviews.review3.name'),
-      location: t('reviews.review3.location'),
-      rating: 5,
-      date: t('reviews.review3.date'),
-      comment: t('reviews.review3.comment'),
-      service: t('reviews.review3.service'),
-    },
-    {
-      id: 4,
-      name: t('reviews.review4.name'),
-      location: t('reviews.review4.location'),
-      rating: 5,
-      date: t('reviews.review4.date'),
-      comment: t('reviews.review4.comment'),
-      service: t('reviews.review4.service'),
-    },
-    {
-      id: 5,
-      name: t('reviews.review5.name'),
-      location: t('reviews.review5.location'),
-      rating: 5,
-      date: t('reviews.review5.date'),
-      comment: t('reviews.review5.comment'),
-      service: t('reviews.review5.service'),
-    },
-    {
-      id: 6,
-      name: t('reviews.review6.name'),
-      location: t('reviews.review6.location'),
-      rating: 5,
-      date: t('reviews.review6.date'),
-      comment: t('reviews.review6.comment'),
-      service: t('reviews.review6.service'),
-    },
-  ];
-
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }).map((_, index) => (
-      <span
-        key={index}
-        className={`text-2xl ${
-          index < rating ? 'text-yellow-400' : 'text-gray-300'
-        }`}
-      >
-        ★
-      </span>
-    ));
-  };
-
   return (
-    <div className="w-full py-12 px-4 sm:px-6 lg:px-8">
-      <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[var(--text-primary)]">
-            {t('reviews.title')}
-          </h1>
-          <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto">
-            {t('reviews.subtitle')}
-          </p>
-        </div>
+    <>
+      <BreadcrumbJsonLd crumbs={[{ name: "Reviews", path: "/reviews" }]} />
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <Reveal>
+          <header className="max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.3em] text-accent">
+              Guest reviews
+            </p>
+            <h1 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--text-primary)]">
+              What our guests say
+            </h1>
+            <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
+              Quietly five-star and consistently personal. Here&apos;s a
+              selection of feedback from international guests who&apos;ve
+              travelled with us across the south-west of Ireland.
+            </p>
+          </header>
+        </Reveal>
 
-        {/* Overall Rating */}
-        <div className="bg-gradient-to-r from-[var(--primary)] to-[var(--primary-dark)] rounded-lg p-8 text-center text-white mb-12">
-          <div className="flex items-center justify-center mb-4">
-            {renderStars(5)}
-          </div>
-          <h2 className="text-4xl font-bold mb-2">
-            {t('reviews.averageRating')}
-          </h2>
-          <p className="text-xl text-blue-100">
-            {t('reviews.basedOnReviews', { count: reviews.length })}
-          </p>
-        </div>
-
-        {/* Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {reviews.map((review) => (
-            <div
-              key={review.id}
-              className="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow"
-            >
-              {/* Review Header */}
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-1">
-                    {review.name}
-                  </h3>
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    {review.location}
-                  </p>
-                </div>
-                <div className="flex flex-col items-end">
-                  <div className="flex mb-1">{renderStars(review.rating)}</div>
-                  <span className="text-xs text-[var(--text-secondary)]">
-                    {review.date}
-                  </span>
-                </div>
-              </div>
-
-              {/* Service Tag */}
-              <div className="mb-4">
-                <span className="inline-block bg-[var(--primary)]/10 text-[var(--primary)] px-3 py-1 rounded text-xs font-medium">
-                  {review.service}
-                </span>
-              </div>
-
-              {/* Review Comment */}
-              <p className="text-[var(--text-secondary)] leading-relaxed italic">
-                &ldquo;{review.comment}&rdquo;
-              </p>
-            </div>
+            <Reveal key={`${review.name}-${review.country}`}>
+              <blockquote className="flex h-full flex-col rounded-xl border border-[var(--color-line)] bg-white/95 p-6 shadow-sm">
+                <Stars />
+                <p className="flex-1 text-[var(--text-primary)] leading-relaxed">
+                  &ldquo;{review.quote}&rdquo;
+                </p>
+                <footer className="mt-4 text-xs tracking-wide text-[var(--text-secondary)]">
+                  {review.name} · {review.country}
+                </footer>
+              </blockquote>
+            </Reveal>
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="bg-white rounded-lg shadow-md p-8 md:p-12 text-center">
-          <h2 className="text-3xl font-semibold mb-4 text-[var(--text-primary)]">
-            {t('reviews.shareExperience')}
-          </h2>
-          <p className="text-xl text-[var(--text-secondary)] mb-8">
-            {t('reviews.shareExperienceDesc')}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="inline-block bg-[var(--primary)] text-white px-8 py-3 rounded-lg font-semibold hover:bg-[var(--primary-dark)] transition-colors"
-            >
-              {t('reviews.leaveReview')}
-            </Link>
-            <Link
-              href="/tours"
-              className="inline-block bg-transparent border-2 border-[var(--primary)] text-[var(--primary)] px-8 py-3 rounded-lg font-semibold hover:bg-[var(--primary)] hover:text-white transition-colors"
-            >
-              {t('reviews.viewServices')}
-            </Link>
-          </div>
-        </div>
+        {/* CTA */}
+        <Reveal>
+          <section className="mt-16 md:mt-24 section-warm rounded-xl border border-[var(--color-line)] px-6 py-10 md:px-10 md:py-12 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[var(--text-primary)]">
+              Travelled with us?
+            </h2>
+            <p className="mt-4 text-[var(--text-secondary)] max-w-xl mx-auto">
+              We&apos;d love to hear about your trip — and if you&apos;re still
+              planning, we&apos;d love to help. Tell us your dates and
+              we&apos;ll do the rest.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Link href="/reservation" className="btn btn-primary">
+                Book now free
+              </Link>
+              <Link href="/tours" className="btn btn-outline">
+                View private tours
+              </Link>
+            </div>
+          </section>
+        </Reveal>
       </div>
-    </div>
+    </>
   );
 }

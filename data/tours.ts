@@ -35,7 +35,10 @@ export type TourData = {
   description: string;
   duration: string;
   durationHours?: number;
-  startingFrom?: string;
+  /** Whether all attraction entry tickets are included in the private rate. */
+  ticketsIncluded?: boolean;
+  /** Whether a lunch is included (vs. a lunch stop on own account). */
+  lunchIncluded?: boolean;
   includes: string[];
   highlights: string[];
   itinerary: TourItineraryStep[];
@@ -44,6 +47,12 @@ export type TourData = {
   images: TourImage[];
   testimonials?: { name: string; location?: string; quote: string; date?: string }[];
   stories?: TourStory[];
+  /** County slugs (data/locations.ts) for "keep exploring" internal links. */
+  relatedCountySlugs?: string[];
+  /** Guide slugs (data/guides.ts) for "keep exploring" internal links. */
+  relatedGuideSlugs?: string[];
+  /** Pillar slugs (data/pillars.ts) for "keep exploring" internal links. */
+  relatedPillarSlugs?: string[];
 };
 
 /** All tours from data/tours.json. Add new tour objects to that file. */
