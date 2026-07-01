@@ -93,7 +93,7 @@ export default function AboutPage() {
               <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
                 We focus on the south-west — {serviceArea} — the most
                 spectacular corner of the country, and the region we know best.
-                From the Cliffs of Moher to the Ring of Kerry, from Cork's
+                From the Cliffs of Moher to the Ring of Kerry, from Cork&apos;s
                 harbour towns to the courses of the Wild Atlantic Way, we share
                 it the way it deserves to be seen.
               </p>
@@ -110,15 +110,15 @@ export default function AboutPage() {
                 <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
                   Born and raised in the south-west, your driver-guide combines
                   a professional, safety-first approach with a genuine
-                  storyteller's love of the region. You'll travel with someone
+                  storyteller&apos;s love of the region. You&apos;ll travel with someone
                   who knows which viewpoint catches the morning light, where to
                   stop for the best lunch, and how to stay a step ahead of the
                   tour buses.
                 </p>
                 <p className="mt-4 text-[var(--text-secondary)] leading-relaxed">
-                  Whether it's a once-in-a-lifetime day at the Cliffs of Moher,
+                  Whether it&apos;s a once-in-a-lifetime day at the Cliffs of Moher,
                   a multi-day journey along the coast, or a golf or cruise
-                  transfer that has to run like clockwork, you're in safe,
+                  transfer that has to run like clockwork, you&apos;re in safe,
                   experienced hands.
                 </p>
               </div>

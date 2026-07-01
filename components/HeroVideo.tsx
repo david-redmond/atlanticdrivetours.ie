@@ -1,7 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeToMotionPreference(onChange: () => void) {
+  const mql = window.matchMedia(REDUCED_MOTION_QUERY);
+  mql.addEventListener("change", onChange);
+  return () => mql.removeEventListener("change", onChange);
+}
+
+/** Client: show the video only when the user has not requested reduced motion. */
+function getMotionAllowed() {
+  return !window.matchMedia(REDUCED_MOTION_QUERY).matches;
+}
+
+/** Server/hydration: keep the still poster until the client confirms preference. */
+function getMotionAllowedServer() {
+  return false;
+}
 
 type HeroVideoProps = {
   /** Path to the looping background video (e.g. /gallery/clip.mp4). */
@@ -19,13 +37,12 @@ type HeroVideoProps = {
  * users keep the still poster and the video is never loaded.
  */
 export default function HeroVideo({ src, poster, alt }: HeroVideoProps) {
-  const [showVideo, setShowVideo] = useState(false);
+  const showVideo = useSyncExternalStore(
+    subscribeToMotionPreference,
+    getMotionAllowed,
+    getMotionAllowedServer
+  );
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    setShowVideo(true);
-  }, []);
 
   useEffect(() => {
     if (showVideo) {
